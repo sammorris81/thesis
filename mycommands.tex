@@ -1,0 +1,106 @@
+\newcommand{\btheta}{ \mbox{\boldmath $\theta$}}
+\newcommand{\bmu}{ \mbox{\boldmath $\mu$}}
+\newcommand{\balpha}{ \mbox{\boldmath $\alpha$}}
+\newcommand{\bbeta}{ \mbox{\boldmath $\beta$}}
+\newcommand{\bdelta}{ \mbox{\boldmath $\delta$}}
+\newcommand{\blambda}{ \mbox{\boldmath $\lambda$}}
+\newcommand{\bgamma}{ \mbox{\boldmath $\gamma$}}
+\newcommand{\brho}{ \mbox{\boldmath $\rho$}}
+\newcommand{\bpsi}{ \mbox{\boldmath $\psi$}}
+\newcommand{\bepsilon}{ \mbox{\boldmath $\epsilon$}}
+\newcommand{\bomega}{ \mbox{\boldmath $\omega$}}
+\newcommand{\bOmega}{ \mbox{\boldmath $\Omega$}}
+\newcommand{\bDelta}{ \mbox{\boldmath $\Delta$}}
+\newcommand{\bSigma}{ \mbox{\boldmath $\Sigma$}}
+\newcommand{\bPsi}{\ensuremath{\mathbf{\Psi}}}
+\newcommand{\bOne}{\ensuremath{\mathbf{1}}}
+
+\newcommand{\omu}{\overline{\mu}}
+\newcommand{\oSigma}{\overline{\Sigma}}
+\newcommand{\Yt}{{\tilde Y}}
+\newcommand{\alphahat}{\hat{\alpha}}
+
+\newcommand{\bA}{\ensuremath{\mathbf{A}}}
+\newcommand{\bB}{\ensuremath{\mathbf{B}}}
+\newcommand{\bb}{\ensuremath{\mathbf{b}}}
+\newcommand{\bfe}{\ensuremath{\mathbf{e}}}
+\newcommand{\bG}{\ensuremath{\mathbf{G}}}
+\newcommand{\bH}{\ensuremath{\mathbf{H}}}
+\newcommand{\bh}{\ensuremath{\mathbf{h}}}
+\newcommand{\bL}{\ensuremath{\mathbf{L}}}
+\renewcommand{\bm}{\ensuremath{\mathbf{m}}}
+\newcommand{\bo}{\ensuremath{\mathbf{o}}}
+\newcommand{\bP}{\ensuremath{\mathbf{P}}}
+\newcommand{\br}{\ensuremath{\mathbf{r}}}
+\newcommand{\bs}{\ensuremath{\mathbf{s}}}
+\newcommand{\bt}{\ensuremath{\mathbf{t}}}
+\newcommand{\bu}{\ensuremath{\mathbf{u}}}
+\newcommand{\bV}{\ensuremath{\mathbf{V}}}
+\newcommand{\bv}{\ensuremath{\mathbf{v}}}
+\newcommand{\bW}{\ensuremath{\mathbf{W}}}
+\newcommand{\bw}{\ensuremath{\mathbf{w}}}
+\newcommand{\bX}{\ensuremath{\mathbf{X}}}
+\newcommand{\bx}{\ensuremath{\mathbf{x}}}
+\newcommand{\bY}{\ensuremath{\mathbf{Y}}}
+\newcommand{\by}{\ensuremath{\mathbf{y}}}
+\newcommand{\bZ}{\ensuremath{\mathbf{Z}}}
+\newcommand{\bz}{\ensuremath{\mathbf{z}}}
+
+\newcommand{\iid}{\stackrel{iid}{\sim}}
+\newcommand{\ind}{\stackrel{ind}{\sim}}
+\newcommand{\dd}{\; \text{d} }
+\newcommand{\ddd}{\text{d} }
+\newcommand{\indep}{\stackrel{indep}{\sim}}
+\newcommand{\converged}{\stackrel{d}{\rightarrow}}
+\newcommand{\calR}{{\cal R}}
+\newcommand{\calG}{{\cal G}}
+\newcommand{\calD}{{\cal D}}
+\newcommand{\calS}{{\cal S}}
+\newcommand{\calB}{{\cal B}}
+\newcommand{\calA}{{\cal A}}
+\newcommand{\calT}{{\cal T}}
+\newcommand{\calO}{{\cal O}}
+\newcommand{\argmax}{{\mathop{\rm arg\, max}}}
+\newcommand{\argmin}{{\mathop{\rm arg\, min}}}
+\newcommand{\Frechet}{\mbox{Fr$\acute{\mbox{e}}$chet }}
+\newcommand{\Matern}{\mbox{Mat$\acute{\mbox{e}}$rn }}
+\newcommand{\ballunion}{B_a(\bs_1) \cup B_b(\bs_2) }
+
+
+\newcommand{\beq}{ \begin{equation}}
+\newcommand{\eeq}{ \end{equation}}
+\newcommand{\beqn}{ \begin{eqnarray}}
+\newcommand{\eeqn}{ \end{eqnarray}}
+
+\newcommand{\eref}[1]{(\ref{#1})}
+\newcommand{\fref}[1]{Figure~\ref{#1}}
+\newcommand{\tref}[1]{Table~\ref{#1}}
+\newcommand{\sref}[1]{Section~\ref{#1}}
+\newcommand{\aref}[1]{Appendix~\ref{#1}}
+
+\newcommand*\patchAmsMathEnvironmentForLineno[1]{%
+  \expandafter\let\csname old#1\expandafter\endcsname\csname #1\endcsname
+  \expandafter\let\csname oldend#1\expandafter\endcsname\csname end#1\endcsname
+  \renewenvironment{#1}%
+     {\linenomath\csname old#1\endcsname}%
+     {\csname oldend#1\endcsname\endlinenomath}}%
+\newcommand*\patchBothAmsMathEnvironmentsForLineno[1]{%
+  \patchAmsMathEnvironmentForLineno{#1}%
+  \patchAmsMathEnvironmentForLineno{#1*}}%
+\AtBeginDocument{%
+\patchBothAmsMathEnvironmentsForLineno{equation}%
+\patchBothAmsMathEnvironmentsForLineno{align}%
+\patchBothAmsMathEnvironmentsForLineno{flalign}%
+\patchBothAmsMathEnvironmentsForLineno{alignat}%
+\patchBothAmsMathEnvironmentsForLineno{gather}%
+\patchBothAmsMathEnvironmentsForLineno{multline}%
+}
+
+\newenvironment{response}{%
+  \list{}{%
+  	\setlength{\topmargin}{-1em}
+  	\setlength{\leftmargin}{2em}
+	\setlength{\rightmargin}{\leftmargin}
+	\item[]
+  }%
+}{\vspace{1em}\endlist}
