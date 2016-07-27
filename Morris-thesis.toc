@@ -82,62 +82,56 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {.1.2}Derivation of the $\chi $ statistic}{33}{subsection.Alph0.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{APPENDICES}{34}{appendix*.19}
+\contentsline {chapter}{\numberline {A}Empirical Basis Functions for Max-Stable Spatial Dependence}{34}{appendix.A}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.1}Introduction}{34}{section.A.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.2}Model}{34}{section.A.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.3}Estimating the spatial dependence function}{36}{section.A.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.4}Bayesian implementation details}{37}{section.A.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.5}Data analysis}{38}{section.A.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {A.5.1}Analysis of extreme Georgia fires}{39}{subsection.A.5.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {A.5.2}Results for fire analysis}{41}{subsection.A.5.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {A.5.3}Model checking and sensitivity analysis}{44}{subsection.A.5.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {A.5.4}Analysis of annual precipitation}{44}{subsection.A.5.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {A.5.5}Results for precipitation analysis}{44}{subsection.A.5.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.6}Conclusions}{44}{section.A.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{{\uppercase {Bibliography}}}{48}{section.A.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{APPENDICES}{50}{appendix*.29}
 \defcounter {refsection}{0}\relax 
  \renewcommand {\cftchappresnum }{Appendix } \renewcommand {\cftchapnumwidth }{\appendixwidth } \renewcommand {\cftchapfont }{\cftsecfont } \setlength {\cftbeforechapskip }{\cftbeforesecskip } \setlength {\cftchapindent }{\cftsecindent } \renewcommand {\cftchappagefont }{\cftchapfont } \setlength {\cftsecindent }{\cftsubsecindent } \addtolength {\cftsubsecindent }{\cftsecnumwidth } \setcounter {tocdepth}{\c@ncsu@appendixtocdepth } 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {.1}Simulation study pairwise difference results}{35}{section.Alph0.1}
+\contentsline {chapter}{\numberline {A}Space-time skew-$t$ model}{51}{appendix.A}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {A}Empirical Basis Functions for Max-Stable Spatial Dependence}{36}{appendix.A}
+\contentsline {section}{\numberline {A.1}MCMC details}{51}{section.A.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.1}Introduction}{36}{section.A.1}
+\contentsline {section}{\numberline {A.2}Posterior distributions}{53}{section.A.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.2}Model}{36}{section.A.2}
+\contentsline {section}{\numberline {A.3}Proof that $\qopname \relax m{lim}_{h \rightarrow \infty } \pi (h) = 0$}{56}{section.A.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.3}Estimating the spatial dependence function}{38}{section.A.3}
+\contentsline {section}{\numberline {A.4}Skew-$t$ distribution}{57}{section.A.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.4}Bayesian implementation details}{39}{section.A.4}
+\contentsline {section}{\numberline {A.5}Other parameterizations}{58}{section.A.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.5}Data analysis}{40}{section.A.5}
+\contentsline {section}{\numberline {A.6}Simulation study results}{59}{section.A.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.5.1}Analysis of extreme Georgia fires}{41}{subsection.A.5.1}
+\contentsline {chapter}{\numberline {B}Rare-binary}{61}{appendix.B}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.5.2}Results for fire analysis}{43}{subsection.A.5.2}
+\contentsline {section}{\numberline {B.1}Simulation study results}{61}{section.B.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.5.3}Model checking and sensitivity analysis}{46}{subsection.A.5.3}
+\contentsline {chapter}{\numberline {C}Space-time skew-$t$ model}{62}{appendix.C}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.5.4}Analysis of annual precipitation}{46}{subsection.A.5.4}
+\contentsline {section}{\numberline {C.1}Extreme value distributions}{62}{section.C.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.5.5}Results for precipitation analysis}{49}{subsection.A.5.5}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.6}Conclusions}{49}{section.A.6}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{{\uppercase {Bibliography}}}{50}{section.A.6}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{APPENDICES}{52}{appendix*.31}
-\defcounter {refsection}{0}\relax 
- \renewcommand {\cftchappresnum }{Appendix } \renewcommand {\cftchapnumwidth }{\appendixwidth } \renewcommand {\cftchapfont }{\cftsecfont } \setlength {\cftbeforechapskip }{\cftbeforesecskip } \setlength {\cftchapindent }{\cftsecindent } \renewcommand {\cftchappagefont }{\cftchapfont } \setlength {\cftsecindent }{\cftsubsecindent } \addtolength {\cftsubsecindent }{\cftsecnumwidth } \setcounter {tocdepth}{\c@ncsu@appendixtocdepth } 
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {A}Space-time skew-$t$ model}{53}{appendix.A}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.1}MCMC details}{53}{section.A.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.2}Posterior distributions}{55}{section.A.2}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.3}Proof that $\qopname \relax m{lim}_{h \rightarrow \infty } \pi (h) = 0$}{58}{section.A.3}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.4}Skew-$t$ distribution}{59}{section.A.4}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.5}Other parameterizations}{60}{section.A.5}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.6}Simulation study results}{61}{section.A.6}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {B}Rare-binary}{63}{appendix.B}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {B.1}Simulation study results}{63}{section.B.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {C}Space-time skew-$t$ model}{64}{appendix.C}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {C.1}Extreme value distributions}{64}{section.C.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {C.2}Gradient for $\beta $}{64}{section.C.2}
+\contentsline {section}{\numberline {C.2}Gradient for $\beta $}{62}{section.C.2}
