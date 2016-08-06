@@ -109,24 +109,24 @@ A brief review of the additive process \citep[p. 129]{Azzalini2014} by which a \
 
 \subsection{\Skewt process} \label{sts:skewt}
 \subsectionmark{\Skewt process}
-Let $Y(\bs)$ be a spatial process defined for spatial location $\bs$ in a spatial domain of interest $\calD \in \calR^2$.
+Let $Y(\bs)$ be a spatial process defined for spatial location $\bs$ in a spatial domain of interest $\calD \in \mathbb{R}^2$.
 The spatial \skewt process can be written as
 \begin{align}
   Y(\bs) = \bX(\bs)^\top \bbeta + \lambda \sigma |z| + \sigma v(\bs) \label{steq:fullmodel}
 \end{align}
-where $\bX(\bs)$ is the observed covariate vector at site $\bs$, $\bbeta$ is the $p$-vector of regression parameters, $\lambda \in \calR$ is a parameter controlling skewness, $z \sim N(0, 1)$, $\sigma^2 \sim \text{IG}(a / 2, b / 2)$ is random scale parameter, IG is the distribution function of an inverse gamma random variable, $a$ is the degrees of freedom, $b$ controls the precision of the process, and $v(\bs)$ is a standard Gaussian process with positive definite correlation function $\text{Cor} \left[Y(\bs_1), Y(\bs_2)\right] = \rho(\bs_1, \bs_2)$.
+where $\bX(\bs)$ is the observed covariate vector at site $\bs$, $\bbeta$ is the $p$-vector of regression parameters, $\lambda \in \mathbb{R}$ is a parameter controlling skewness, $z \sim N(0, 1)$, $\sigma^2 \sim \text{IG}(a / 2, b / 2)$ is random scale parameter, IG is the distribution function of an inverse gamma random variable, $a$ is the degrees of freedom, $b$ controls the precision of the process, and $v(\bs)$ is a standard Gaussian process with positive definite correlation function $\text{Cor} \left[Y(\bs_1), Y(\bs_2)\right] = \rho(\bs_1, \bs_2)$.
 Although any positive definite correlation function could be used, we choose to use the stationary isotropic \Matern correlation with
 \begin{align}
   \rho(h) = (1 - \gamma) I(h = 0) + \gamma \frac{ 1 }{ \Gamma(\nu) 2^{ \nu - 1}} \left( \sqrt{2\nu} \frac{ h }{ \varphi } \right)^{\nu} K_{\nu} \left( \sqrt{2\nu} \frac{ h }{ \varphi } \right) \label{steq:matern}
 \end{align}
 where $I(\cdot)$ is an indicator function, $\varphi > 0$ is the spatial range, $\nu > 0$ is the smoothness, $\gamma \in [0, 1]$ is the proportion of variance accounted for by the spatial variation, $K_\nu$ is a modified Bessel function of the second kind, and $h = || \bs_1 - \bs_2 ||$ is the Euclidean distance between sites $\bs_1$ and $\bs_2$.
 
-For a finite collection of locations $\bs_1, \ldots, \bs_n$, denote the vector of observations $\bY = [Y(\bs_1), \ldots, Y(\bs_n)]^\top$, and the covariate matrix $\bX_{n \times p} = [\bX(\bs_1), \ldots, \bX(\bs_n)]^\top$.
+For a finite collection of locations $\bs_1, \ldots, \bs_n$, we denote by $\bY = [Y(\bs_1), \ldots, Y(\bs_n)]^\top$ the vector of observations, and the covariate matrix $\bX_{n \times p} = [\bX(\bs_1), \ldots, \bX(\bs_n)]^\top$.
 After marginalizing over both $z$ and $\sigma$, using the notation from \citet[p. 176]{Azzalini2014},
 \begin{align} \label{steq:stazzalini}
   \bY \sim \text{ST}_n(\bX \bbeta, \bOmega, \balpha, a),
 \end{align}
-that is, $\bY$ follows an $n$-dimensional \skewt distribution with location $\bX \bbeta \in \calR^n$; covariance matrix $\bOmega_{n \times n} = \bomega \left[ \frac{1}{1 + \lambda^2}(\bSigma + \lambda^2 \bOne \bOne^\top) \right] \bomega$, $\bSigma_{n \times n}$ is the positive definite correlation matrix which is obtained from $\rho(h)$, and $\bomega_{n \times n} = \text{diag}\left(\sqrt{\frac{ b }{a(1 + \lambda^2)}}, \ldots, \sqrt{\frac{ b }{a(1 + \lambda^2)}} \right)$; slant parameters $\balpha \in \calR^n = \lambda (1 + \lambda^2)^{1 / 2} (1 + \lambda^2 \bOne^\top \bSigma^{-1} \bOne)^{-1/2} \bSigma^{-1} \bOne$, and degrees of freedom $a$.
+that is, $\bY$ follows an $n$-dimensional \skewt distribution with location $\bX \bbeta \in \mathbb{R}^n$; covariance matrix $\bOmega_{n \times n} = \bomega \left[ \frac{1}{1 + \lambda^2}(\bSigma + \lambda^2 \bOne \bOne^\top) \right] \bomega$, $\bSigma_{n \times n}$ is the positive definite correlation matrix which is obtained from $\rho(h)$, and $\bomega_{n \times n} = \text{diag}\left(\sqrt{\frac{ b }{a(1 + \lambda^2)}}, \ldots, \sqrt{\frac{ b }{a(1 + \lambda^2)}} \right)$; slant parameters $\balpha \in \mathbb{R}^n = \lambda (1 + \lambda^2)^{1 / 2} (1 + \lambda^2 \bOne^\top \bSigma^{-1} \bOne)^{-1/2} \bSigma^{-1} \bOne$, and degrees of freedom $a$.
 Furthermore, the marginal distributions at each location also follow a univariate \skewt distribution \citep{Azzalini2014}.
 This process is desirable because it is heavy tailed with tail index $a$, and the shape of the distribution is controlled by the skewness parameter.
 % One major difference between the parameterization given in \eref{steq:fullmodel} and other parameterizations is that we characterize the skewnewss using $\lambda$ instead of the slant parameters $\balpha$.
@@ -146,7 +146,7 @@ where $c^*$ is the upper limit of the support of $Y$; for the \skewt distributio
 If $\chi(h) = 0$, then observations are asymptotically independent at distance $h$.
 For Gaussian processes, $\chi(h) = 0$ regardless of the distance $h$, so they are not suitable for modeling asymptotically dependent extremes.
 Unlike the Gaussian process, the \skewt process is asymptotically dependent (the explicit expression for $\chi(h)$ is given in \aref{sta:skewt}).
-However, one problem with the spatial \skewt process is that $\lim_{h \rightarrow \infty} \chi(h) > 0$.
+However, one problem with the spatial \skewt process is that $\displaystyle \lim_{h \rightarrow \infty} \chi(h) > 0$.
 This occurs because all observations, both near and far, share the same $z$ and $\sigma$ terms.
 Therefore, this long-range dependence feature of the \skewt process is not desirable for spatial analysis of large geographic regions where we expect only local spatial dependence.
 We propose a solution to this in \sref{sts:part}.
@@ -188,7 +188,7 @@ The model becomes
 \begin{align} \label{steq:partition}
   Y(\bs) &= \bX(\bs)^\top \bbeta + \lambda \sigma(\bs) |z(\bs)| + \sigma(\bs) v(\bs).
 \end{align}
-To model spatial variation, consider a set of spatial knots $\bw_1, \ldots, \bw_K$ from a homogeneous Poisson process over spatial domain $\calD \in \calR^2$.
+To model spatial variation, consider a set of spatial knots $\bw_1, \ldots, \bw_K$ from a homogeneous Poisson process over spatial domain $\calD \in \mathbb{R}^2$.
 The knots define a random partition of $\calD$ by subregions $P_{1}, \ldots, P_{K}$ defined as
 \begin{align} \label{steq:subregions}
   P_{k} = \{ \bs : k = \argmin_\ell || \bs - \bw_{\ell} || \}.
@@ -206,7 +206,7 @@ Conditional on knots $\bw_1, \ldots, \bw_K$, the $\chi$ statistic for two sites 
 \end{align}
 where $\chi_{\text{skew-}t}(h)$ is the $\chi$ statistic for a \skewt process given in equation \eref{steq:chiskew-t} of \aref{sta:skewt}, and $h = ||\bs_1 - \bs_2||$.
 Marginally, over the knots, $\chi(h) = \pi(h) \chi_{\text{skew}-t}(h)$, where \mbox{$\pi(h) = \Pr(k_1 = k_2)$} is the probability that two sites separated by distance $h$ are in the same partition.
-In \aref{sta:proofsamepartition}, we show that assuming the knots follow a homogeneous Poisson process, $\lim_{h \rightarrow \infty} \pi(h) = 0$, and thus long-range dependence is removed.
+In \aref{sta:proofsamepartition}, we show that assuming the knots follow a homogeneous Poisson process, $\displaystyle \lim_{h \rightarrow \infty} \pi(h) = 0$, and thus long-range dependence is removed.
 % In \aref{sta:proofsamepartition}, we show that $\lim_{h \rightarrow \infty} \pi(h) = 0$, assuming that the knots follow a homogeneous Poisson process.
 % This implies that $\lim_{h \rightarrow \infty} \chi(h) = 0$.
 In practice we fix $K$ at a finite value and use a uniform distribution for the knots $\bw_1, \ldots, \bw_K$.
@@ -243,13 +243,13 @@ We allow the partition structure to vary from day to day in order to account for
 We use an AR(1) time series model for $\bw_{tk}$, $z_{tk}$, and $\sigma_{tk}$.
 The time series model must be specified after a transformation to preserve the \skewt process at each time point.
 For each time-varying parameter, we transform the parameter to obtain a standard normal marginal distribution, place a Gaussian prior with autocorrelation on the transformed parameter, and then transform back to the appropriate marginal distribution for the \skewt process.
-We first transform the spatial knots from $\calD$ to $\calR^2$ as follows.
+We first transform the spatial knots from $\calD$ to $\mathbb{R}^2$ as follows.
 Let
 \begin{align} \label{steq:wstar}
   w^*_{tki} = \Phi^{-1}\left[ \frac{ w_{tki} - \min(\bs_i)}{ \max(\bs_i) - \min(\bs_i) } \right], \quad i = 1, 2
 \end{align}
 where $\Phi$ is a univariate standard normal density function and $\bs_i = [s_{1i}, \ldots, s_{ni}]$.
-Then the transformed knots $\bw^*_{tk} \in \calR^2$.
+Then the transformed knots $\bw^*_{tk} \in \mathbb{R}^2$.
 We use a transformation of a Gaussian random variable on $z_{t}(\bs)$ to ensure that the marginal distributions of $z_t(\bs)$ are half-normal.
 Let
 \begin{align} \label{steq:zstar}
@@ -506,7 +506,7 @@ For a map of Brier scores for the 99th quantile between Gaussian and the fourth 
   \label{stfig:bs-ozone}
 \end{figure}
 \begin{table}
-  \footnotesize
+  \scriptsize
   \caption{Top two performing models for predicting ozone exceedance of level $L$ with Relative Brier score}
   \label{sttbl:ozoneresults}
   \centering
