@@ -1,21 +1,109 @@
-\chapter{Rare-binary}
-\section{Simulation study results} \label{a:pdiffs}
-The following tables show the methods that have significantly different Brier scores when using a Wilcoxon-Nemenyi-McDonald-Thompson test.
-In each column, different letters signify that the methods have significantly different Brier scores.
+\chapter{Spatial Model for Rare Binary Events}
 
-\begin{table}[htbp]
-  \centering
-  \caption{Pairwise BS comparisons}
-  \label{tbl:pwbssim}
-  \begin{tabular}{|l|cc|cc|c|ccc|cc|cc|}
-  \cline{2-13}
-  \multicolumn{1}{c}{} & \multicolumn{2}{|c}{Setting 1} & \multicolumn{2}{|c}{Setting 2} & \multicolumn{1}{|c}{Setting 3} & \multicolumn{3}{|c}{Setting 4} & \multicolumn{2}{|c}{Setting 5} & \multicolumn{2}{|c|}{Setting 6}\\
-  \hline
-  Method 1 & A &   & A &   & A &   &   & C &   & B &   & B \\
-  \hline
-  Method 2 & A & B &   & B & A &   & B &   & A &   & A &   \\
-  \hline
-  Method 3 &   & B &   & B & A & A &   &   & A & B & A &   \\
-  \hline
-  \end{tabular}
-\end{table}
+\section{Binary regression using the GEV link} \label{rba:rarebinary}
+Here, we provide a brief review of the the GEV link of \citet{Wang2010}.
+Let $Y_i \in \{0, 1\}, i = 1, \ldots, n$ be a collection of i.i.d. binary responses.
+It is assumed that $Y_i = I(z_i > 0)$ where $I(\cdot)$ is an indicator function, $z_i = [1 - \xi \bX_i \bbeta]^{1 / \xi}$ is a latent variable following a GEV$(1, 1, 1)$ distribution, $\bX_i$ is the associated $p$-vector of covariates with first element equal to one for the intercept, and $\bbeta$ is a $p$-vector of regression coefficients.
+Then, $Y_i \ind$ Bern$(\pi_i)$ where $\pi_i= 1 - \exp \left( -\frac{ 1 }{ z_i } \right)$.
+
+
+\section{Derivation of the likelihood} \label{rba:likelihoodderivation}
+We use the hierarchical max-stable spatial model given by \citet{Reich2012}. If at each margin, $Z_i \sim $ GEV$(1,1,1)$, then $Z_i | \theta_i \indep $ GEV$(\theta, \alpha \theta, \alpha)$. We reorder the data such that $Y_1=\ldots=Y_K=1$, and $Y_{K+1} = \ldots = Y_n = 0$. Then the joint likelihood conditional on the random effect $\theta$ is
+
+\begin{align} \label{rbeq:joint_cond}
+  P(Y_1=y_1,\ldots,Y_n=y_n) =& \prod_{ i \le K } \left\{ 1 - \exp \left[ - \left( \frac{ \theta_i }{ z_i } \right)^{ 1/\alpha} \right] \right \} \prod_{ i > K } \exp \left[ -\left( \frac{ \theta_i }{ z_i } \right)^{1/\alpha} \right] \nonumber \\[0.5em]
+    =& \exp \left[ -\sum_{ i = K+1}^{ n }\left( \frac{ \theta_i }{ z_i } \right)^{1/\alpha} \right] - \exp \left[ -\sum_{ i = K+1}^{ n }\left( \frac{ \theta_i }{ z_i } \right)^{1/\alpha} \right] \sum_{ i = 1}^{K} \exp\left[ -\left( \frac{ \theta_i }{ z_i } \right)^{ 1/\alpha} \right] \nonumber\\
+    &  + \exp \left[ -\sum_{ i = K+1}^{ n }\left( \frac{ \theta_i }{ z_i } \right)^{1/\alpha} \right] \sum_{ 1 < i < j \le K } \left\{ \exp \left[ - \left( \frac{ \theta_i }{ z_i } \right)^{ 1/\alpha} - \left( \frac{ \theta_j }{ z_j } \right)^{ 1/\alpha } \right] \right \} \nonumber \\[0.5em]
+    & + \cdots + (-1)^K \exp\left[ - \sum_{ i = 1 }^{ n }\left( \frac{ \theta_i }{ z_i } \right)^{ 1/\alpha} \right]
+\end{align}
+
+Finally marginalizing over the random effect, we obtain
+
+\begin{align} \label{rbeq:joint}
+    P(Y_1=y_1,\ldots,Y_n=y_n) =&\int G(\bz | \bA) p( \bA | \alpha) d\bA. \nonumber\\[0.5em]
+      =& \int \exp \left[ -\sum_{ i = K+1}^{ n }\left( \frac{ \theta_i }{ z_i } \right)^{1/\alpha} \right] - \exp \left[ -\sum_{ i = K+1}^{ n }\left( \frac{ \theta_i }{ z_i } \right)^{1/\alpha} \right] \sum_{ i = 1}^{K} \exp\left[ -\left( \frac{ \theta_i }{ z_i } \right)^{ 1/\alpha} \right] \nonumber\\
+    &  + \exp \left[ -\sum_{ i = K+1}^{ n }\left( \frac{ \theta_i }{ z_i } \right)^{1/\alpha} \right] \sum_{ 1 < i < j \le K } \left\{ \exp \left[ - \left( \frac{ \theta_i }{ z_i } \right)^{ 1/\alpha} - \left( \frac{ \theta_j }{ z_j } \right)^{ 1/\alpha } \right] \right \} \nonumber \\[0.5em]
+    & + \cdots + (-1)^K \exp\left[ - \sum_{ i = 1 }^{ n }\left( \frac{ \theta_i }{ z_i } \right)^{ 1/\alpha} \right] p( \bA | \alpha) d\bA.
+\end{align}
+
+Consider the first term in the summation,
+
+\begin{align}
+  \int \exp \left\{ -\sum_{ i = K+1}^{ n }\left( \frac{ \theta_i }{ z_i } \right)^{1/\alpha} \right\} p( \bA | \alpha) d\bA &= \int \exp \left\{ - \sum_{ i = K + 1 }^n \left( \frac{ \left[ \sum_{ l = 1 }^L  A_l w_{l}(\bs_i)^{1/\alpha} \right)^\alpha }{ z_i} \right]^{ 1/\alpha } \right \} p( \bA | \alpha) d\bA \nonumber \\[0.5em]
+   &= \int \exp \left\{ -\sum_{ i = K + 1}^n \sum_{ l = 1}^L A_l \left( \frac{ w_l (\bs_i) }{ z_i } \right)^{1/\alpha} \right \} p( \bA | \alpha) d\bA \nonumber \\[0.5em]
+   &=\exp\left\{-\sum_{ l = 1}^L \left[ \sum_{ i = K + 1 }^n \left( \frac{ w_l(\bs_i)}{ z_i} \right)^{1/\alpha} \right]^\alpha \right\}.
+\end{align}
+
+The remaining terms in equation \eref{rbeq:joint} are straightforward to obtain, and after integrating out the random effect, the joint density for $K = 0, 1, 2$ is given by
+\begin{align}\label{rbeq:pmf}
+  P(Y_1=y_1,\ldots,Y_n=y_n) =  \left\{
+    \begin{array}{ll}
+      G(\bz) & K=0 \\
+      G(\bz_{(1)})-G(\bz) & K=1 \\
+      G(\bz_{(12)})-G(\bz_{(1)})-G(\bz_{(2)})+G(\bz) & K=2
+    \end{array}
+  \right.
+\end{align}
+where
+\begin{align*}
+  G[\bz_{(1)}] &= P[Z(\bs_2)<z(\bs_2),\ldots,Z(\bs_n)<z(\bs_n)] \\
+  G[\bz_{(2)}] &= P[Z(\bs_1)<z(\bs_1),Z(\bs_3)<z(\bs_3),\ldots,Z(\bs_n)<z(\bs_n)]\\
+  G[\bz_{(12)}] &= P[Z(\bs_3)<z(\bs_3),\ldots,Z(\bs_n)<z(\bs_n)].
+\end{align*}
+Similar expressions can be derived for all $K$, but become cumbersome for large $K$.
+
+% \subsection{Proof that $\lim_{\beta \rightarrow \infty} \kappa(\beta) = \chi$} \label{rba:chi}
+% Assume that $Z_1$ and $Z_2$ are both GEV$(\beta, 1, 1)$ so that the probability of $Y_i$ decreases to zero as $\beta$ increases.
+% Recall from \sref{rbs:spatdep} that
+% \begin{align*}
+%   P_A(\beta) &= 1 - 2 \exp\left\{ -\frac{1}{\beta} \right\} + 2 \exp\left\{-\frac{\vartheta(\bs_1, \bs_2)}{\beta}  \right\} \\
+%   P_E(\beta) &= 1 - 2 \exp \left\{ -\frac{1}{\beta} \right\} + 2 \exp \left\{ -\frac{2}{\beta} \right\}.
+% \end{align*}
+% Then
+% \begin{align} \label{rbeq:kappabeta}
+%   \kappa(\beta) &= \frac{P_A(\beta) - P_E(\beta)}{1 - P_E(\beta)} = \frac{\exp\left\{-\frac{\vartheta(\bs_1, \bs_2) - 1}{\beta}  \right\} - \exp \left\{ -\frac{1}{\beta} \right\}}{1 - \exp \left\{ -\frac{1}{\beta} \right\}}.
+% \end{align}
+% where $\vartheta(\bs_1, \bs_2)$ is defined as in \sref{rbs:spatdep}.
+% So,
+% \begin{align}
+%   \kappa =
+% \end{align}
+
+% \subsection{Simulation study pairwise difference results} \label{rba:pdiffs}
+% \hl{Needs updating}
+
+% The following tables show the methods that have significantly different Brier scores when using a Wilcoxon-Nemenyi-McDonald-Thompson test.
+% In each column, different letters signify that the methods have significantly different Brier scores.
+
+% \begin{table}[htbp]
+%   \centering
+%   \caption{Pairwise BS comparisons}
+%   \label{rbtbl:pwbssim}
+%   \begin{tabular}{|l|cc|cc|c|ccc|cc|cc|}
+%   \cline{2-13}
+%   \multicolumn{1}{c}{} & \multicolumn{2}{|c}{Setting 1} & \multicolumn{2}{|c}{Setting 2} & \multicolumn{1}{|c}{Setting 3} & \multicolumn{3}{|c}{Setting 4} & \multicolumn{2}{|c}{Setting 5} & \multicolumn{2}{|c|}{Setting 6}\\
+%   \hline
+%   Method 1 & A &   & A &   & A &   &   & C &   & B &   & B \\
+%   \hline
+%   Method 2 & A & B &   & B & A &   & B &   & A &   & A &   \\
+%   \hline
+%   Method 3 &   & B &   & B & A & A &   &   & A & B & A &   \\
+%   \hline
+%   \end{tabular}
+% \end{table}
+
+% \begin{table}[htbp]
+%   \centering
+%   \caption{Pairwise AUC comparisons}
+%   \label{rbtbl:pwaucsim}
+%   \begin{tabular}{|l|cc|}
+%   \multicolumn{1}{c}{} & \multicolumn{2}{|c}{Setting 1} \\
+%   \hline
+%   Method 1 & A &   & A &   \\
+%   \hline
+%   Method 2 & A & B & A & B \\
+%   \hline
+%   Method 3 &   & B &   & B \\
+%   \hline
+%   \end{tabular}
+% \end{table}

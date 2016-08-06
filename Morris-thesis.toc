@@ -6,7 +6,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {1}INTRODUCTION}{1}{chapter.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {2}A Spatial-time Skew-$t$ Model for \penalty -\@M Threshold Exceedances}{2}{chapter.2}
+\contentsline {chapter}{\numberline {2}A Space-time Skew-$t$ Model for Threshold Exceedances}{2}{chapter.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.1}Introduction}{2}{section.2.1}
 \defcounter {refsection}{0}\relax 
@@ -16,9 +16,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.2.2}Extremal dependence}{6}{subsection.2.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.3}Spatiotemporal skew-$t$ model \penalty -\@M for threshold exceedances}{7}{section.2.3}
+\contentsline {section}{\numberline {2.3}Extending the model}{6}{section.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3.1}Censoring to focus on the tails}{7}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.1}Censoring to focus on the tail}{6}{subsection.2.3.1}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.3.2}Partitioning to remove long-range asymptotic dependence}{7}{subsection.2.3.2}
 \defcounter {refsection}{0}\relax 
@@ -30,7 +30,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.5}Simulation study}{11}{section.2.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.5.1}Design}{12}{subsection.2.5.1}
+\contentsline {subsection}{\numberline {2.5.1}Design}{11}{subsection.2.5.1}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.5.2}Cross validation}{13}{subsection.2.5.2}
 \defcounter {refsection}{0}\relax 
@@ -42,96 +42,62 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.6.2}Results}{17}{subsection.2.6.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.7}Discussion}{20}{section.2.7}
+\contentsline {section}{\numberline {2.7}Discussion}{18}{section.2.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}A Spatial Model for Rare Binary Events}{21}{chapter.3}
+\contentsline {chapter}{\numberline {3}Empirical Basis Functions for Max-Stable Spatial Dependence}{21}{chapter.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.1}Introduction}{21}{section.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Binary regression using the GEV link}{22}{section.3.2}
+\contentsline {section}{\numberline {3.2}Model}{22}{section.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.3}Spatial dependence for binary regression}{22}{section.3.3}
+\contentsline {section}{\numberline {3.3}Estimating the spatial dependence function}{24}{section.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.4}Joint distribution}{24}{section.3.4}
+\contentsline {section}{\numberline {3.4}Bayesian implementation details}{26}{section.3.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.4.1}Bivariate distribution}{24}{subsection.3.4.1}
+\contentsline {section}{\numberline {3.5}Data analysis}{27}{section.3.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.5}Quantifying spatial dependence}{24}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Gaussian kernel basis functions}{28}{subsection.3.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.6}Computation}{25}{section.3.6}
+\contentsline {subsection}{\numberline {3.5.2}Analysis of extreme Georgia fires}{28}{subsection.3.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.7}Simulation study}{25}{section.3.7}
+\contentsline {subsection}{\numberline {3.5.3}Results for fire analysis}{31}{subsection.3.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.7.1}Spatial logistic and probit methods}{26}{subsection.3.7.1}
+\contentsline {subsection}{\numberline {3.5.4}Analysis of annual precipitation}{33}{subsection.3.5.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.7.2}Cross validation}{26}{subsection.3.7.2}
+\contentsline {subsection}{\numberline {3.5.5}Results for precipitation analysis}{33}{subsection.3.5.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.7.3}Results}{27}{subsection.3.7.3}
+\contentsline {section}{\numberline {3.6}Discussion}{37}{section.3.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.8}Data analysis}{28}{section.3.8}
+\contentsline {chapter}{{\uppercase {Bibliography}}}{40}{figure.caption.23}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.9}Conclusions}{29}{section.3.9}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{APPENDICES}{30}{chapter*.18}
+\contentsline {chapter}{APPENDICES}{43}{chapter*.25}
 \defcounter {refsection}{0}\relax 
  \renewcommand {\cftchappresnum }{Appendix } \renewcommand {\cftchapnumwidth }{\appendixwidth } \renewcommand {\cftchapfont }{\cftsecfont } \setlength {\cftbeforechapskip }{\cftbeforesecskip } \setlength {\cftchapindent }{\cftsecindent } \renewcommand {\cftchappagefont }{\cftchapfont } \setlength {\cftsecindent }{\cftsubsecindent } \addtolength {\cftsubsecindent }{\cftsecnumwidth } \setcounter {tocdepth}{\c@ncsu@appendixtocdepth } 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {.1}Appendices}{31}{section.Alph0.1}
+\contentsline {chapter}{\numberline {A}A Space-time Skew-$t$ Model for Threshold Exceedances}{44}{appendix.A}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {.1.1}Derivation of the likelihood}{31}{subsection.Alph0.1.1}
+\contentsline {section}{\numberline {A.1}MCMC details}{44}{section.A.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {.1.2}Derivation of the $\chi $ statistic}{33}{subsection.Alph0.1.2}
+\contentsline {section}{\numberline {A.2}Posterior distributions}{46}{section.A.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {A}Empirical Basis Functions for Max-Stable Spatial Dependence}{34}{appendix.A}
+\contentsline {section}{\numberline {A.3}Proof that $\qopname \relax m{lim}_{h \rightarrow \infty } \pi (h) = 0$}{49}{section.A.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.1}Introduction}{34}{section.A.1}
+\contentsline {section}{\numberline {A.4}Skew-$t$ distribution}{50}{section.A.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.2}Model}{34}{section.A.2}
+\contentsline {section}{\numberline {A.5}Comparisons with other parameterizations}{51}{section.A.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.3}Estimating the spatial dependence function}{36}{section.A.3}
+\contentsline {section}{\numberline {A.6}Temporal dependence}{52}{section.A.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.4}Bayesian implementation details}{37}{section.A.4}
+\contentsline {section}{\numberline {A.7}Brier scores for ozone prediction}{53}{section.A.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.5}Data analysis}{38}{section.A.5}
+\contentsline {section}{\numberline {A.8}Simulation study results}{53}{section.A.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.5.1}Analysis of extreme Georgia fires}{39}{subsection.A.5.1}
+\contentsline {chapter}{\numberline {B}Empirical Basis Functions for Max-stable Spatial Dependence}{57}{appendix.B}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.5.2}Results for fire analysis}{41}{subsection.A.5.2}
+\contentsline {section}{\numberline {B.1}Extreme value distributions}{57}{section.B.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.5.3}Model checking and sensitivity analysis}{44}{subsection.A.5.3}
+\contentsline {section}{\numberline {B.2}Grid approximation to PS density}{58}{section.B.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.5.4}Analysis of annual precipitation}{44}{subsection.A.5.4}
+\contentsline {section}{\numberline {B.3}Standardized Gaussian kernel functions}{58}{section.B.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.5.5}Results for precipitation analysis}{44}{subsection.A.5.5}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.6}Conclusions}{44}{section.A.6}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{{\uppercase {Bibliography}}}{48}{section.A.6}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{APPENDICES}{50}{appendix*.29}
-\defcounter {refsection}{0}\relax 
- \renewcommand {\cftchappresnum }{Appendix } \renewcommand {\cftchapnumwidth }{\appendixwidth } \renewcommand {\cftchapfont }{\cftsecfont } \setlength {\cftbeforechapskip }{\cftbeforesecskip } \setlength {\cftchapindent }{\cftsecindent } \renewcommand {\cftchappagefont }{\cftchapfont } \setlength {\cftsecindent }{\cftsubsecindent } \addtolength {\cftsubsecindent }{\cftsecnumwidth } \setcounter {tocdepth}{\c@ncsu@appendixtocdepth } 
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {A}Space-time skew-$t$ model}{51}{appendix.A}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.1}MCMC details}{51}{section.A.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.2}Posterior distributions}{53}{section.A.2}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.3}Proof that $\qopname \relax m{lim}_{h \rightarrow \infty } \pi (h) = 0$}{56}{section.A.3}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.4}Skew-$t$ distribution}{57}{section.A.4}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.5}Other parameterizations}{58}{section.A.5}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.6}Simulation study results}{59}{section.A.6}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {B}Rare-binary}{61}{appendix.B}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {B.1}Simulation study results}{61}{section.B.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {C}Space-time skew-$t$ model}{62}{appendix.C}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {C.1}Extreme value distributions}{62}{section.C.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {C.2}Gradient for $\beta $}{62}{section.C.2}
+\contentsline {section}{\numberline {B.4}Principal components}{59}{section.B.4}
