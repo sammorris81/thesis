@@ -16,7 +16,7 @@ where ${\bw^*_k}^{(r - 1)}$ is the location for the transformed knot at MCMC ite
 Let $\bY_t = [Y(\bs_1), \ldots, Y(\bs_n)]$ be the vector of observed responses at each site for day $t$.
 After candidates have been generated for all $K$ knots, the acceptance ratio is
 \begin{align*}
-  R = \left\{ \frac{ l[ \bY_t | \bw_1^{(c)}, \ldots, \bw_K^{(c)}, \ldots] }{l[ \bY_t | \bw_1^{(r - 1)}, \ldots, \bw_K^{(r - 1)}, \ldots]} \right\} \times \left\{ \frac{ \prod_{k = 1}^{K}\phi(\bw_k^{(c)})}{ \prod_{k = 1}^{K}\phi(\bw_k^{(r - 1)})} \right\} \times \left\{ \frac{ \prod_{k = 1}^{K} p({\bw^*_k}^{(c)})}{ \prod_{k = 1}^{K} p({\bw^*_k}^{(r - 1)})}\right\}
+  R = \left\{ \frac{ l\left[ \bY_t | \bw_1^{(c)}, \ldots, \bw_K^{(c)}, \ldots\right] }{l\left[ \bY_t | \bw_1^{(r - 1)}, \ldots, \bw_K^{(r - 1)}, \ldots\right]} \right\} \times \left\{ \frac{ \prod_{k = 1}^{K}\phi\left(\bw_k^{(c)}\right)}{ \prod_{k = 1}^{K}\phi\left(\bw_k^{(r - 1)}\right)} \right\} \times \left\{ \frac{ \prod_{k = 1}^{K} p\left({\bw^*_k}^{(c)}\right)}{ \prod_{k = 1}^{K} p\left({\bw^*_k}^{(r - 1)}\right)}\right\}
 \end{align*}
 where $l$ is the likelihood given in \eref{steq:hier}, and $p(\cdot)$ is the prior either taken from the time series (see \sref{sts:temporal}) or assumed to be uniform over $\calD$.
 The candidate knots are accepted with probability $\min\{R, 1\}$.
@@ -31,28 +31,28 @@ Because this model uses $|z_{tk}|$, we generate candidate random effects using t
 where ${z^*_{tk}}^{(r-1)}$ is the value at MCMC iteration $r - 1$, and $s$ is a tuning parameter.
 The acceptance ratio is
 \begin{align*}
-  R = \left\{ \frac{ l[\bY_t | z_{tk}^{(c)}, \ldots] }{ l[\bY_t | z_{tk}^{(r - 1)}]} \right\} \times \left\{ \frac{ p[ z_{tk}^{(c)} ] }{ p[ z_{tk}^{(r - 1)}]}\right\}
+  R = \left\{ \frac{ l\left[\bY_t | z_{tk}^{(c)}, \ldots\right] }{ l\left[\bY_t | z_{tk}^{(r - 1)}\right]} \right\} \times \left\{ \frac{ p\left[ z_{tk}^{(c)} \right] }{ p\left[ z_{tk}^{(r - 1)}\right]}\right\}
 \end{align*}
 where $p[\cdot]$ is the prior taken from the time series given in \sref{sts:temporal}.
 The candidate is accepted with probability $\min\{R, 1\}$.
 
 \subsection*{Variance terms}
 When there is more than one site in a partition, then we update $\sigma^2_{tk}$ using a Metropolis-Hastings update.
-First, we generate a candidate for $\sigma^2_{tk}$ using an IG$(a^*/s, b^*/s)$ candidate distribution in an independence Metropolis-Hastings update where $a^* = (n_{tk} + 1) / 2 + a$, $b^* = [\bY_{tk}^\top \Sigma^{-1}_{tk} \bY_{tk} + z_{tk}^2] / 2 + b$, $n_{tk}$ is the number of sites in partition $k$ on day $t$, and $\bY_{tk}$ and $\Sigma^{-1}_{tk}$ are the observations and precision matrix for partition $k$ on day $t$.
+First, we generate a candidate for $\sigma^2_{tk}$ using an IG$(a^*/s, b^*/s)$ candidate distribution in an independence Metropolis-Hastings update where $a^* = (n_{tk} + 1) / 2 + a$, $b^* = \left[\bY_{tk}^\top \Sigma^{-1}_{tk} \bY_{tk} + z_{tk}^2\right] / 2 + b$, $n_{tk}$ is the number of sites in partition $k$ on day $t$, and $\bY_{tk}$ and $\Sigma^{-1}_{tk}$ are the observations and precision matrix for partition $k$ on day $t$.
 The acceptance ratio is
 \begin{align*}
   R = \left\{
-    \frac{ l[\bY_t | {\sigma^2_{tk}}^{(c)}, \ldots] }
-         { l[\bY_t | {\sigma^2_{tk}}^{(r - 1)}]}
+    \frac{ l\left[\bY_t | {\sigma^2_{tk}}^{(c)}, \ldots\right] }
+         { l\left[\bY_t | {\sigma^2_{tk}}^{(r - 1)}\right]}
     \right\} \times \left\{
-    \frac{ l[z_{tk} | {\sigma^2_{tk}}^{(c)}, \ldots] }
-         { l[z_{tk} | {\sigma^2_{tk}}^{(r - 1)}, \ldots] }
+    \frac{ l\left[z_{tk} | {\sigma^2_{tk}}^{(c)}, \ldots\right] }
+         { l\left[z_{tk} | {\sigma^2_{tk}}^{(r - 1)}, \ldots\right] }
     \right\} \times \left\{
-    \frac{ p[ {\sigma^2_{tk}}^{(c)} ] }
-         { p[ {\sigma^2_{tk}}^{(r - 1)}] }
+    \frac{ p\left[ {\sigma^2_{tk}}^{(c)} \right] }
+         { p\left[ {\sigma^2_{tk}}^{(r - 1)}\right] }
     \right\} \times \left\{
-    \frac{ c[ {\sigma^2_{tk}}^{(r - 1)}] }
-         { c[ {\sigma^2_{tk}}^{(c)}]}
+    \frac{ c\left[ {\sigma^2_{tk}}^{(r - 1)}\right] }
+         { c\left[ {\sigma^2_{tk}}^{(c)}\right]}
     \right\}
 \end{align*}
 where $p[\cdot]$ is the prior either taken from the time series given in \sref{sts:temporal} or assumed to be IG$(a, b)$, and $c[\cdot]$ is the candidate distribution.
@@ -62,13 +62,13 @@ The candidate is accepted with probability $\min\{R, 1\}$.
 We update the three spatial covariance parameters, $\log(\rho)$, $\log(\nu)$, $\gamma$, using a Metropolis-Hastings block update step.
 First, we generate a candidate using a random walk Gaussian candidate distribution
 \begin{align*}
-  \log(\rho)^{(c)} \sim \text{N}(\log(\rho)^{(r - 1)}, s^2)
+  \log(\rho)^{(c)} \sim \text{N}\left(\log(\rho)^{(r - 1)}, s^2\right)
 \end{align*}
 where $\log(\rho)^{(r-1)}$ is the value at MCMC iteration $r - 1$, and $s$ is a tuning parameter.
 Candidates are generated for $\log(\nu)$ and $\gamma$ in a similar fashion.
 The acceptance ratio is
 \begin{align*}
-  R = \left\{ \frac{ \prod_{t = 1}^{n_t} l[Y_t(\bs) | \rho^{(c)}, \nu^{(c)}, \gamma^{(c)}, \ldots] }{\prod_{t = 1}^{n_t} l[Y_t(\bs) | \rho^{(r-1)}, \nu^{(r-1)}, \gamma^{(r-1)}, \ldots] } \right\} \times \left\{ \frac{ p[\rho^{(c)}] }{ p[\rho^{(r - 1)] } } \right\} \times \left\{ \frac{ p[\nu^{(c)}] }{ p[\nu^{(r - 1)}] } \right\} \times \left\{ \frac{ p[ \gamma^{(c)} ] }{ p[\gamma^{(r - 1)} ] } \right\}.
+  R = \left\{ \frac{ \prod_{t = 1}^{n_t} l \left[Y_t(\bs) | \rho^{(c)}, \nu^{(c)}, \gamma^{(c)}, \ldots \right] }{\prod_{t = 1}^{n_t} l \left[Y_t(\bs) | \rho^{(r-1)}, \nu^{(r-1)}, \gamma^{(r-1)}, \ldots \right] } \right\} \times \left\{ \frac{ p \left[\rho^{(c)} \right] }{ p \left[\rho^{(r - 1)}\right] } \right\} \times \left\{ \frac{ p \left[\nu^{(c)} \right] }{ p \left[\nu^{(r - 1)} \right] } \right\} \times \left\{ \frac{ p \left[ \gamma^{(c)} \right] }{ p \left[\gamma^{(r - 1)} \right] } \right\}.
 \end{align*}
 All three candidates are accepted with probability $\min\{R, 1\}$.
 
@@ -107,15 +107,15 @@ Then
             \bR_2
         \end{array} \right)
         +  \frac{ {\tilde{z}_k}^2 }{ \sigma_k^2 }\right]
-    \right\} I(z_k > 0) \\
+    \right\} I \left(z_k > 0 \right) \\
         &\propto \exp \left\{ -\frac{ 1 }{ 2 } \left[ \Lambda_k {\tilde{z}_k}^2 - 2 \mu_k \tilde{z}_k \right] \right\}
 \end{align*}
 where
 \begin{align*}
-    \mu_k &= \lambda ( \bR_1^\top \Omega_{11} + \bR_2^\top \Omega_{21} )\bOne\\
+    \mu_k &= \lambda \left( \bR_1^\top \Omega_{11} + \bR_2^\top \Omega_{21} \right)\bOne\\
     \Lambda_k &= \lambda^2 \bOne^\top \Omega_{11} \bOne + \frac{ 1 }{ \sigma^2_k }.
 \end{align*}
-Then $\tilde{z}_k | \ldots \sim N_{(0, \infty)} (\Lambda_k^{-1} \mu_k, \Lambda_k^{-1})$
+Then $\tilde{z}_k | \ldots \sim N_{(0, \infty)} \left(\Lambda_k^{-1} \mu_k, \Lambda_k^{-1} \right)$
 
 \subsection*{Conditional posterior of $\bbeta, \lambda \mid \ldots$}\label{sts:betapost}
 For models that do not include a skewness parameter, we update $\bbeta$ as follows.
@@ -123,7 +123,7 @@ Let $\bbeta \sim \mbox{N}_{p}(0, \Lambda_0)$ where $\Lambda_0$ is a precision ma
 Then
 \begin{align*}
     \pi(\bbeta \mid \ldots) & \propto \exp \left\{ - \frac{ 1 }{ 2 } \bbeta^\top \Lambda_0 \bbeta - \frac{ 1 }{ 2 } \sum_{t = 1}^{n_t} [\bY_t -\bX_t \bbeta]^\top \Omega [\bY_t - \bX_t \bbeta] \right\} \\
-     & \propto \exp \left\{ -\frac{ 1 }{ 2 } \left[ \bbeta^\top \Lambda_\beta \bbeta  - 2 \sum_{t = 1}^{n_t} (\bbeta^\top \bX_t^\top \Omega \bY_t) \right] \right\} \\
+     & \propto \exp \left\{ -\frac{ 1 }{ 2 } \left[ \bbeta^\top \Lambda_\beta \bbeta  - 2 \sum_{t = 1}^{n_t} \left(\bbeta^\top \bX_t^\top \Omega \bY_t \right) \right] \right\} \\
      & \propto \mbox{N} ( \Lambda_\beta^{-1} \mu_\beta , \Lambda_\beta^{-1})
 \end{align*}
 where
@@ -157,12 +157,12 @@ where
 \end{align*}
 In the case that $K > 1$, a random walk Metropolis Hastings step will be used to update $\sigma^2_{kt}$.
 
-\section{Proof that $\lim_{h \rightarrow \infty} \pi(h) = 0$} \label{sta:proofsamepartition}
+\section{Proof that $\displaystyle \lim_{h \rightarrow \infty} \pi(h) = 0$} \label{sta:proofsamepartition}
 Let $c$ be the midpoint of $\bs_1$ and $\bs_2$.
 Define $A$ as the circle centered at $c$ with radius $h / 2$ where $h = ||\bs_1 - \bs_2||$ is the distance between sites $\bs_1$ and $\bs_2$.
-Consider a homogeneous spatial Poisson process over $A$ with intensity $\lambda_{PP}$, so that
+Consider a homogeneous spatial Poisson process over $A$ with intensity $\lambda_{\mathrm{PP}}$, so that
 \begin{align*}
-  \mu_{PP}(A) = \lambda_{PP} |A| = \lambda_{PP} \pi \left(\frac{h}{2}\right)^2 = \lambda_{PPA}^* h^2.
+  \mu_{\mathrm{PP}}(A) = \lambda_{\mathrm{PP}} |A| = \lambda_{\mathrm{PP}} \pi \left(\frac{h}{2}\right)^2 = \lambda_{\mathrm{PPA}}^* h^2.
 \end{align*}
 Consider a partition of $A$ into four regions, $B_1$, $B_2$, $R_1$, $R_2$ as seen in \fref{stfig:hpp}.
 \begin{figure}
@@ -178,12 +178,12 @@ Then
 since knots in both $B_1$ and $B_2$ is sufficient, but not necessary, to ensure that $\bs_1$ and $\bs_2$ are in different partition sets.
 By definition of a Poission process, $N_1$ and $N_2$ are independent and thus \mbox{$P(N_1 > 0, N_2 > 0) = P(N_1 > 0)^2$}, and
 \begin{align}
-  \mu_{PP}(B_1) &= \lambda_{PP} |B_1| = \lambda_{PP} \frac{h^2}{4} \left(\frac{2 \pi}{3} - \frac{\sqrt{3}}{2} \right) \nonumber \\
-       &= \lambda^*_{PPB1} h^2.
+  \mu_{\mathrm{PP}}(B_1) &= \lambda_{\mathrm{PP}} |B_1| = \lambda_{\mathrm{PP}} \frac{h^2}{4} \left(\frac{2 \pi}{3} - \frac{\sqrt{3}}{2} \right) \nonumber \\
+       &= \lambda^*_{\mathrm{PPB1}} h^2.
 \end{align}
 So,
 \begin{align}
-  P(L_1 \neq L_2) >= P(N_1 > 0)^2 = [1 - P(N_1 = 0)]^2 = [1 - \exp\left(-\lambda^*_{PPB1} h^2\right)]^2
+  P(L_1 \neq L_2) \ge P(N_1 > 0)^2 = [1 - P(N_1 = 0)]^2 = [1 - \exp\left(-\lambda^*_{\mathrm{PPB1}} h^2\right)]^2
 \end{align}
 which goes to 1 as $h$ goes to infinity.
 
@@ -223,7 +223,7 @@ which goes to 1 as $h$ goes to infinity.
 
 \section{\Skewt distribution} \label{sta:skewt}
 \subsection*{Univariate \skewt distribution}
-We say that $Y$ follows a univariate extended \skewt distribution with location $\xi \in \calR$, scale $\omega > 0$, skew parameter $\alpha \in \calR$, and degrees of freedom $\nu$ if has distribution function
+We say that $Y$ follows a univariate extended \skewt distribution with location $\xi \in \mathbb{R}$, scale $\omega > 0$, skew parameter $\alpha \in \mathbb{R}$, and degrees of freedom $\nu$ if has distribution function
 \begin{align}
   f_{\text{EST}}(y) = 2 f_T (z; \nu) F_T\left[ \alpha z \sqrt{ \frac{ \nu + 1 }{ \nu + z^2}}; \nu + 1 \right]
 \end{align}
@@ -248,22 +248,22 @@ For a bivariate \skewt random variable $\bY = [Y(\bs), Y(\bt)]^\top$, the $\chi(
 \end{align}
 where $\bar{F}_{\text{EST}}$ is the univariate survival extended \skewt function with zero location and unit scale,
 \begin{align*}
-  \varrho(h) &= \text{cor}[y(\bs), y(\bt)]\\
+  \varrho(h) &= \text{Cor}[y(\bs), y(\bt)]\\
   \alpha_j &= \alpha_i \sqrt{1 - \varrho^2}\\
   \tau_j &= \sqrt{\eta + 1}(\alpha_j + \alpha_i \varrho)\\
   x_j &= \displaystyle\frac{F_T(\bar{\alpha}_i \sqrt{\eta + 1}; 0, 1, \eta)}{F_T(\bar{\alpha}_j \sqrt{\eta + 1}; 0, 1, \eta)},
 \end{align*}
 with $j = 1, 2$ and $i = 2, 1$ and where $\bar{\alpha}_j = (\alpha_j + \alpha_i \varrho) / \sqrt{ 1 + \alpha_i^2 [1 - \varrho(h)^2]}$.
 
-\subsection*{Proof that $\lim_{h \rightarrow \infty} \chi(h) > 0$}
+\subsection*{Proof that $\displaystyle \lim_{h \rightarrow \infty} \chi(h) > 0$}
 Consider the bivariate distribution of $\bY = [Y(\bs), Y(\bt)]^\top$, with $\varrho(h)$ given by \eref{steq:matern}.
-So, $\lim_{h \rightarrow \infty} \varrho(h) = 0$.
+So, $\displaystyle \lim_{h \rightarrow \infty} \varrho(h) = 0$.
 Then
 \begin{align}
   \lim_{h \rightarrow \infty} \chi(h) = \bar{F}_{\text{EST}}\left\{ \sqrt{\eta + 1}; 0, 1, \alpha_1, \tau_1, \eta + 1 \right\} + \bar{F}_{\text{EST}}\left\{ \sqrt{\eta + 1}; 0, 1, \alpha_2, \tau_2, \eta + 1 \right\}.
 \end{align}
 Because the extended \skewt distribution is not bounded above, for all $\bar{F}_{\text{EST}}(x) = 1 - F_{\text{EST} (x)} > 0$ for all $x < \infty$.
-Therefore, for a \skewt distribution, $\lim_{h \rightarrow \infty} \chi(h) > 0$.
+Therefore, for a \skewt distribution, $\displaystyle \lim_{h \rightarrow \infty} \chi(h) > 0$.
 
 \sectionmark{Other parameterizations}
 \section{Comparisons with other parameterizations}
@@ -290,7 +290,7 @@ Since we have assumed that both $v(\bs)$ and $z$ have unit scale, the additional
 It is very challenging to derive an analytical expression the temporal extremal dependence at a single site $\bs$.
 However, using simulated data, we have evidence to suggest that the model does exhibits temporal extremal dependence.
 To demonstrate that our model maintains temporal extremal dependence, we generate lag-$m$ observations for $m = 1, 3, 5, 10$ from our model setting $\phi_w = \phi_z = \phi_\sigma = \varphi$, for $\varphi = 0, 0.02, 0.04, \ldots, 1$.
-To estimate the lag-$m$ chi-statistic $\chi(m)$ we first estimate the lag-$m$ $F$-madogram $\nu_F(m)$ \citep{Cooley2006} using $\hat{\nu}_F(m) = \frac{1}{2n} \sum_{i = 1}^n | \hat{F}(y_{0}) - \hat{F}(y_{m})|$ where $\hat{F}(\cdot)$ represents an empirical CDF and $y_m$ is the lag-$m$ observation.
+To estimate the lag-$m$ chi-statistic $\chi(m)$ we first estimate the lag-$m$ $F$-madogram $\nu_F(m)$ \citep{Cooley2006} using $\hat{\nu}_F(m) = \displaystyle \frac{1}{2n} \sum_{i = 1}^n \left| \hat{F}(y_{0}) - \hat{F}(y_{m}) \right|$ where $\hat{F}(\cdot)$ represents an empirical CDF and $y_m$ is the lag-$m$ observation.
 The $F$-madogram is related to the $\chi$ statistic as follows
 \begin{align}
   \chi = 2 - \frac{1 + 2 \nu_F}{1 - 2 \nu_F}.

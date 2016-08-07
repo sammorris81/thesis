@@ -80,7 +80,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {A.2}Posterior distributions}{46}{section.A.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.3}Proof that $\qopname \relax m{lim}_{h \rightarrow \infty } \pi (h) = 0$}{49}{section.A.3}
+\contentsline {section}{\numberline {A.3}Proof that $\displaystyle \qopname \relax m{lim}_{h \rightarrow \infty } \pi (h) = 0$}{49}{section.A.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {A.4}Skew-$t$ distribution}{50}{section.A.4}
 \defcounter {refsection}{0}\relax 

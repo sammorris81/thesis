@@ -15,7 +15,7 @@ The probability density function for the GEV is given by $f(y) = \frac{1}{\sigma
 The PS($\alpha$) density can be challenging to use because it does not have a closed form.
 From Section 2 of \citep{Stephenson2009}, the density can be expressed as
 \begin{align}
-  g_1(A) = \int_0^1 g_1(A, B) dB,
+  g_1(A) = \int_0^1 g_1(A, B) \dd B,
 \end{align}
 where
 \begin{align}
@@ -26,7 +26,7 @@ with
   c(\psi) = \left[\frac{\sin(\alpha \psi)}{\sin(\psi)}\right]^{1 / (1 - \alpha)} \frac{\sin[(1 - \alpha) \psi]}{\sin(\alpha \psi)}.
 \end{align}
 \Citet{Stephenson2009} presents an auxiliary variable technique to deal with the integral in the density function, but we opt to numerically evaluate the integral because it is only one-dimensional.
-To evaluate the integral, we use 50 evenly spaced quantiles of a Beta$(0.5, 0.5)$ distribution as the midpoints $B_1, \ldots, B_{50}$, and then use the midpoint rule to evaluate $\displaystyle \int_0^1 g_1(A, B) dB$.
+To evaluate the integral, we use 50 evenly spaced quantiles of a Beta$(0.5, 0.5)$ distribution as the midpoints $B_1, \ldots, B_{50}$, and then use the midpoint rule to evaluate $\displaystyle \int_0^1 g_1(A, B) \dd B$.
 
 \section{Standardized Gaussian kernel functions} \label{eba:gskfunctions}
 \citet{Reich2012} use standardized Gaussian kernel functions as their spatial basis functions in the low-rank max-stable model.
