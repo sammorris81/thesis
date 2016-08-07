@@ -114,7 +114,7 @@ The spatial \skewt process can be written as
 \begin{align}
   Y(\bs) = \bX(\bs)^\top \bbeta + \lambda \sigma |z| + \sigma v(\bs) \label{steq:fullmodel}
 \end{align}
-where $\bX(\bs)$ is the observed covariate vector at site $\bs$, $\bbeta$ is the $p$-vector of regression parameters, $\lambda \in \mathbb{R}$ is a parameter controlling skewness, $z \sim N(0, 1)$, $\sigma^2 \sim \text{IG}(a / 2, b / 2)$ is random scale parameter, IG is the distribution function of an inverse gamma random variable, $a$ is the degrees of freedom, $b$ controls the precision of the process, and $v(\bs)$ is a standard Gaussian process with positive definite correlation function $\text{Cor} \left[Y(\bs_1), Y(\bs_2)\right] = \rho(\bs_1, \bs_2)$.
+where $\bX(\bs)$ is the observed covariate vector at site $\bs$, $\bbeta$ is the $p$-vector of regression parameters, $\lambda \in \mathbb{R}$ is a parameter controlling skewness, $z \sim N(0, 1)$, $\sigma^2 \sim \mathrm{IG}(a / 2, b / 2)$ is random scale parameter, IG is the distribution function of an inverse gamma random variable, $a$ is the degrees of freedom, $b$ controls the precision of the process, and $v(\bs)$ is a standard Gaussian process with positive definite correlation function $\text{Cor} \left[Y(\bs_1), Y(\bs_2)\right] = \rho(\bs_1, \bs_2)$.
 Although any positive definite correlation function could be used, we choose to use the stationary isotropic \Matern correlation with
 \begin{align}
   \rho(h) = (1 - \gamma) I(h = 0) + \gamma \frac{ 1 }{ \Gamma(\nu) 2^{ \nu - 1}} \left( \sqrt{2\nu} \frac{ h }{ \varphi } \right)^{\nu} K_{\nu} \left( \sqrt{2\nu} \frac{ h }{ \varphi } \right) \label{steq:matern}
@@ -194,7 +194,7 @@ The knots define a random partition of $\calD$ by subregions $P_{1}, \ldots, P_{
   P_{k} = \{ \bs : k = \argmin_\ell || \bs - \bw_{\ell} || \}.
 \end{align}
 In other words, $P_k$ is composed of all sites for which the closest knot is $\bw_k$.
-For all $\bs \in P_k$, with $k = 1, 2, \ldots, K$, the functions $z(\bs)$ and $\sigma(\bs)$ are equal to the constants $z_k$ and $\sigma_k$ respectively, and the $z_k$ and $\sigma^2_k$ are distributed as $z_k \iid N(0, 1)$ and $\sigma^2_k \iid$ IG$(a / 2, b / 2)$.
+For all $\bs \in P_k$, with $k = 1, 2, \ldots, K$, the functions $z(\bs)$ and $\sigma(\bs)$ are equal to the constants $z_k$ and $\sigma_k$ respectively, and the $z_k$ and $\sigma^2_k$ are distributed as $z_k \iid N(0, 1)$ and $\sigma^2_k \iid \mathrm{IG}(a / 2, b / 2)$.
 So, within each partition, $Y(\bs)$ follows the spatial \skewt process defined in \sref{sts:spatialskew}.
 Across partitions, the $Y(\bs)$ remain dependent via the correlation function for $v(\bs)$ because $v(\bs)$ spans all partitions.
 However, the bivariate distribution for sites in different partitions is neither Gaussian nor \skewt and does not have asymptotic dependence.
@@ -270,7 +270,7 @@ The AR(1) process for each tail parameter is $\bw^*_{1k} \sim N_2(\bZero, \bI_2)
 \end{align}
 where $|\phi_w|$, $|\phi_z|$, $|\phi_\sigma| < 1$.
 These are stationary time series models with marginal distributions \hbox{$\bw^*_{k} \sim N_2(\bZero, \bI_2)$} \hbox{$z^*_{k} \sim N(0, 1)$}, and \hbox{$\sigma^{2*}_{k} \sim N(0, 1)$}.
-After transformation back to the original space, $\bw_{tk} \sim \text{Unif}(\calD)$, $z_{tk} \sim $ HN$(0, 1)$, and $\sigma^2_{tk} \sim \text{IG}(a / 2, b / 2)$.
+After transformation back to the original space, $\bw_{tk} \sim \mathrm{Unif}(\calD)$, $z_{tk} \sim \mathrm{HN}(0, 1)$, and $\sigma^2_{tk} \sim \mathrm{IG}(a / 2, b / 2)$.
 We then create the partition for day $t$ using $\bw_{t1}, \ldots, \bw_{tK}$.
 For each day, the model is identical to the spatial-only model in \eref{steq:partition} by construction.
 

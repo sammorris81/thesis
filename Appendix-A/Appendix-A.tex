@@ -124,19 +124,19 @@ Then
 \begin{align*}
     \pi(\bbeta \mid \ldots) & \propto \exp \left\{ - \frac{ 1 }{ 2 } \bbeta^\top \Lambda_0 \bbeta - \frac{ 1 }{ 2 } \sum_{t = 1}^{n_t} [\bY_t -\bX_t \bbeta]^\top \Omega [\bY_t - \bX_t \bbeta] \right\} \\
      & \propto \exp \left\{ -\frac{ 1 }{ 2 } \left[ \bbeta^\top \Lambda_\beta \bbeta  - 2 \sum_{t = 1}^{n_t} \left(\bbeta^\top \bX_t^\top \Omega \bY_t \right) \right] \right\} \\
-     & \propto \mbox{N} ( \Lambda_\beta^{-1} \mu_\beta , \Lambda_\beta^{-1})
+     & \propto N_p ( \Lambda_\beta^{-1} \bmu_\beta , \bLambda_\beta^{-1})
 \end{align*}
 where
 \begin{align*}
-    \mu_\beta &= \sum_{t = 1}^{n_t} \bX_t^\top \Omega \bY_t \\
-    \Lambda_\beta &= \Lambda_0 + \sum_{t = 1}^{n_t} \bX_t^\top \Omega \bX_t.
+    \bmu_\beta &= \sum_{t = 1}^{n_t} \bX_t^\top \Omega \bY_t \\
+    \bLambda_\beta &= \bLambda_0 + \sum_{t = 1}^{n_t} \bX_t^\top \Omega \bX_t.
 \end{align*}
 For models that do include a skewness parameter, a simple augmentation of the covariate matrix $\bX$ and parameter vector $\bbeta$ allows for a block update of both $\bbeta$ and $\lambda$.
 Let $\bX^*_{t} = [\bX_t, |\bz_{t}|]$ where $\bz_t = [z(\bs_1), \ldots, z(\bs_{n})]^\top$ and let $\bbeta^* = (\beta_1, \ldots, \beta_p, \lambda)^\top$.
-So to incorporate the $N(0, \sigma^2_\lambda)$ prior on $\lambda$, let $\bbeta^* \sim \mbox{N}_{p+1}(0, \Lambda^*_0)$ where
+So to incorporate the $N(0, \sigma^2_\lambda)$ prior on $\lambda$, let $\bbeta^* \sim N_{p+1}(0, \Lambda^*_0)$ where
 \begin{align*}
-  \Lambda^*_0 = \left( \begin{array}{cc}
-    \Lambda_0 & 0 \\
+  \bLambda^*_0 = \left( \begin{array}{cc}
+    \bLambda_0 & 0 \\
     0         & \sigma^{-2}_\lambda
   \end{array}\right).
 \end{align*}
