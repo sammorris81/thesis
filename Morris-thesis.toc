@@ -44,60 +44,100 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.7}Discussion}{18}{section.2.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Empirical Basis Functions for Max-Stable Spatial Dependence}{21}{chapter.3}
+\contentsline {chapter}{\numberline {3}A Spatial Model for Rare Binary Events}{21}{chapter.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.1}Introduction}{21}{section.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Model}{22}{section.3.2}
+\contentsline {section}{\numberline {3.2}Spatial dependence for binary regression}{22}{section.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.3}Estimating the spatial dependence function}{24}{section.3.3}
+\contentsline {section}{\numberline {3.3}Joint distribution}{24}{section.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.4}Bayesian implementation details}{26}{section.3.4}
+\contentsline {section}{\numberline {3.4}Quantifying spatial dependence}{24}{section.3.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.5}Data analysis}{27}{section.3.5}
+\contentsline {section}{\numberline {3.5}Computation}{25}{section.3.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.5.1}Gaussian kernel basis functions}{28}{subsection.3.5.1}
+\contentsline {section}{\numberline {3.6}Simulation study}{26}{section.3.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.5.2}Analysis of extreme Georgia fires}{28}{subsection.3.5.2}
+\contentsline {subsection}{\numberline {3.6.1}Latent processes}{26}{subsection.3.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.5.3}Results for fire analysis}{31}{subsection.3.5.3}
+\contentsline {subsection}{\numberline {3.6.2}Methods}{27}{subsection.3.6.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.5.4}Analysis of annual precipitation}{33}{subsection.3.5.4}
+\contentsline {subsection}{\numberline {3.6.3}Sampling technique}{27}{subsection.3.6.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.5.5}Results for precipitation analysis}{33}{subsection.3.5.5}
+\contentsline {subsection}{\numberline {3.6.4}Priors}{28}{subsection.3.6.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.6}Discussion}{37}{section.3.6}
+\contentsline {subsection}{\numberline {3.6.5}Model comparisons}{28}{subsection.3.6.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{{\uppercase {Bibliography}}}{40}{figure.caption.23}
+\contentsline {subsection}{\numberline {3.6.6}Results}{29}{subsection.3.6.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{APPENDICES}{43}{chapter*.25}
+\contentsline {section}{\numberline {3.7}Data analysis}{29}{section.3.7}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.7.1}Methods}{29}{subsection.3.7.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.7.2}Results}{33}{subsection.3.7.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.8}Conclusions}{33}{section.3.8}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {4}Empirical Basis Functions for Max-Stable Spatial Dependence}{35}{chapter.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.1}Introduction}{35}{section.4.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.2}Model}{36}{section.4.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.3}Estimating the spatial dependence function}{38}{section.4.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.4}Bayesian implementation details}{40}{section.4.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.5}Data analysis}{41}{section.4.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.5.1}Gaussian kernel basis functions}{42}{subsection.4.5.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.5.2}Analysis of extreme Georgia fires}{42}{subsection.4.5.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.5.3}Results for fire analysis}{45}{subsection.4.5.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.5.4}Analysis of annual precipitation}{47}{subsection.4.5.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.5.5}Results for precipitation analysis}{47}{subsection.4.5.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.6}Discussion}{51}{section.4.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{{\uppercase {Bibliography}}}{54}{figure.caption.31}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{APPENDICES}{58}{chapter*.33}
 \defcounter {refsection}{0}\relax 
  \renewcommand {\cftchappresnum }{Appendix } \renewcommand {\cftchapnumwidth }{\appendixwidth } \renewcommand {\cftchapfont }{\cftsecfont } \setlength {\cftbeforechapskip }{\cftbeforesecskip } \setlength {\cftchapindent }{\cftsecindent } \renewcommand {\cftchappagefont }{\cftchapfont } \setlength {\cftsecindent }{\cftsubsecindent } \addtolength {\cftsubsecindent }{\cftsecnumwidth } \setcounter {tocdepth}{\c@ncsu@appendixtocdepth } 
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {A}A Space-time Skew-$t$ Model for Threshold Exceedances}{44}{appendix.A}
+\contentsline {chapter}{\numberline {A}A Space-time Skew-$t$ Model for Threshold Exceedances}{59}{appendix.A}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.1}MCMC details}{44}{section.A.1}
+\contentsline {section}{\numberline {A.1}MCMC details}{59}{section.A.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.2}Posterior distributions}{46}{section.A.2}
+\contentsline {section}{\numberline {A.2}Posterior distributions}{61}{section.A.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.3}Proof that $\displaystyle \qopname \relax m{lim}_{h \rightarrow \infty } \pi (h) = 0$}{49}{section.A.3}
+\contentsline {section}{\numberline {A.3}Proof that $\displaystyle \qopname \relax m{lim}_{h \rightarrow \infty } \pi (h) = 0$}{64}{section.A.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.4}Skew-$t$ distribution}{50}{section.A.4}
+\contentsline {section}{\numberline {A.4}Skew-$t$ distribution}{65}{section.A.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.5}Comparisons with other parameterizations}{51}{section.A.5}
+\contentsline {section}{\numberline {A.5}Comparisons with other parameterizations}{66}{section.A.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.6}Temporal dependence}{52}{section.A.6}
+\contentsline {section}{\numberline {A.6}Temporal dependence}{67}{section.A.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.7}Brier scores for ozone prediction}{53}{section.A.7}
+\contentsline {section}{\numberline {A.7}Brier scores for ozone prediction}{68}{section.A.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.8}Simulation study results}{53}{section.A.8}
+\contentsline {section}{\numberline {A.8}Simulation study results}{68}{section.A.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {B}Empirical Basis Functions for Max-stable Spatial Dependence}{57}{appendix.B}
+\contentsline {chapter}{\numberline {B}Spatial Model for Rare Binary Events}{72}{appendix.B}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {B.1}Extreme value distributions}{57}{section.B.1}
+\contentsline {section}{\numberline {B.1}Binary regression using the GEV link}{72}{section.B.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {B.2}Grid approximation to PS density}{58}{section.B.2}
+\contentsline {section}{\numberline {B.2}Derivation of the likelihood}{72}{section.B.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {B.3}Standardized Gaussian kernel functions}{58}{section.B.3}
+\contentsline {chapter}{\numberline {C}Empirical Basis Functions for Max-stable Spatial Dependence}{75}{appendix.C}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {B.4}Principal components}{59}{section.B.4}
+\contentsline {section}{\numberline {C.1}Extreme value distributions}{75}{section.C.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {C.2}Grid approximation to PS density}{76}{section.C.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {C.3}Standardized Gaussian kernel functions}{76}{section.C.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {C.4}Principal components}{77}{section.C.4}
