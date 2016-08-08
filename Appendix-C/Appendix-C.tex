@@ -1,15 +1,17 @@
 \chapter{Empirical Basis Functions for Max-stable Spatial Dependence}
 \chaptermark{Empirical Basis Functions}
+\label{appendix:c}
 
 \section{Extreme value distributions} \label{eba:GEV}
 The cumulative distribution function for the GEV is $F(y) = \exp\{-t(y)\}$ where
 \begin{align} \label{ebeq:gevt}
-  t(y) = \left\{ \begin{array}{ll}
-      \left[1 + \xi \displaystyle \frac{y - \mu}{\sigma}\right]^{-1 / \xi}, \quad &\xi \neq 0 \\ [0.5em]
+  t(y) = \begin{cases}
+      \left[1 + \xi \displaystyle \frac{y - \mu}{\sigma}\right]^{-1 / \xi}, \quad &\xi \neq 0 \\
+      \\
       \exp\left\{- \displaystyle \frac{y - \mu}{\sigma}\right\}, &\xi = 0.
-  \end{array}\right.
+  \end{cases}
 \end{align}
-The probability density function for the GEV is given by $f(y) = \frac{1}{\sigma} t(x)^{\xi + 1} \exp\{-t(y)\}$ where $t(y)$ is defined in \eref{ebeq:gevt}.
+The probability density function for the GEV is given by $f(y) = \displaystyle \frac{1}{\sigma} t(x)^{\xi + 1} \exp\{-t(y)\}$ where $t(y)$ is defined in \eref{ebeq:gevt}.
 
 \section{Grid approximation to PS density} \label{eba:gridapprox}
 The PS($\alpha$) density can be challenging to use because it does not have a closed form.

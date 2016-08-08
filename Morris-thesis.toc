@@ -4,15 +4,15 @@
 \contentsline {chapter}{LIST OF FIGURES}{viii}{section*.6}
 \boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {1}INTRODUCTION}{1}{chapter.1}
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {2}A Space-time Skew-$t$ Model for Threshold Exceedances}{2}{chapter.2}
+\contentsline {chapter}{\numberline {2}A Space-time Skew-\emph {t} Model for Threshold Exceedances}{2}{chapter.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.1}Introduction}{2}{section.2.1}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.2}Spatial skew processes}{5}{section.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.1}Skew-$t$ process}{5}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.1}Skew-\emph {t} process}{5}{subsection.2.2.1}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.2.2}Extremal dependence}{6}{subsection.2.2.2}
 \defcounter {refsection}{0}\relax 
@@ -62,7 +62,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.6.2}Methods}{27}{subsection.3.6.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.6.3}Sampling technique}{27}{subsection.3.6.3}
+\contentsline {subsection}{\numberline {3.6.3}Sampling technique}{28}{subsection.3.6.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.6.4}Priors}{28}{subsection.3.6.4}
 \defcounter {refsection}{0}\relax 
@@ -70,13 +70,13 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.6.6}Results}{29}{subsection.3.6.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.7}Data analysis}{29}{section.3.7}
+\contentsline {section}{\numberline {3.7}Data analysis}{31}{section.3.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.7.1}Methods}{29}{subsection.3.7.1}
+\contentsline {subsection}{\numberline {3.7.1}Methods}{31}{subsection.3.7.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.7.2}Results}{33}{subsection.3.7.2}
+\contentsline {subsection}{\numberline {3.7.2}Results}{32}{subsection.3.7.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.8}Conclusions}{33}{section.3.8}
+\contentsline {section}{\numberline {3.8}Discussion and future research}{32}{section.3.8}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {4}Empirical Basis Functions for Max-Stable Spatial Dependence}{35}{chapter.4}
 \defcounter {refsection}{0}\relax 
@@ -108,7 +108,7 @@
 \defcounter {refsection}{0}\relax 
  \renewcommand {\cftchappresnum }{Appendix } \renewcommand {\cftchapnumwidth }{\appendixwidth } \renewcommand {\cftchapfont }{\cftsecfont } \setlength {\cftbeforechapskip }{\cftbeforesecskip } \setlength {\cftchapindent }{\cftsecindent } \renewcommand {\cftchappagefont }{\cftchapfont } \setlength {\cftsecindent }{\cftsubsecindent } \addtolength {\cftsubsecindent }{\cftsecnumwidth } \setcounter {tocdepth}{\c@ncsu@appendixtocdepth } 
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {A}A Space-time Skew-$t$ Model for Threshold Exceedances}{59}{appendix.A}
+\contentsline {chapter}{\numberline {A}A Space-time Skew-\emph {t} Model for Threshold Exceedances}{59}{appendix.A}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {A.1}MCMC details}{59}{section.A.1}
 \defcounter {refsection}{0}\relax 
@@ -116,7 +116,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {A.3}Proof that $\displaystyle \qopname \relax m{lim}_{h \rightarrow \infty } \pi (h) = 0$}{64}{section.A.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.4}Skew-$t$ distribution}{65}{section.A.4}
+\contentsline {section}{\numberline {A.4}Skew-\emph {t} distribution}{65}{section.A.4}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {A.5}Comparisons with other parameterizations}{66}{section.A.5}
 \defcounter {refsection}{0}\relax 

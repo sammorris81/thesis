@@ -1,4 +1,6 @@
 \chapter{Spatial Model for Rare Binary Events}
+\chaptermark{Spatial Rare Binary}
+\label{appendix:b}
 
 \section{Binary regression using the GEV link} \label{rba:rarebinary}
 Here, we provide a brief review of the the GEV link of \citet{Wang2010}.
@@ -8,7 +10,7 @@ Then, $Y_i \ind$ Bern$(\pi_i)$ where $\pi_i= 1 - \exp \left( -\frac{ 1 }{ z_i } 
 
 
 \section{Derivation of the likelihood} \label{rba:likelihoodderivation}
-We use the hierarchical max-stable spatial model given by \citet{Reich2012}. If at each margin, $Z_i \sim $ GEV$(1,1,1)$, then $Z_i | \theta_i \indep $ GEV$(\theta, \alpha \theta, \alpha)$. We reorder the data such that $Y_1=\ldots=Y_K=1$, and $Y_{K+1} = \ldots = Y_n = 0$. Then the joint likelihood conditional on the random effect $\theta$ is
+We use the hierarchical max-stable spatial model given by \citet{Reich2012}. If at each margin, $Z_i \sim $ GEV$(1,1,1)$, then $Z_i | \theta_i \ind $ GEV$(\theta, \alpha \theta, \alpha)$. We reorder the data such that $Y_1=\cdots=Y_K=1$, and $Y_{K+1} = \cdots = Y_n = 0$. Then the joint likelihood conditional on the random effect $\theta$ is
 
 \begin{align} \label{rbeq:joint_cond}
   P(Y_1=y_1,\ldots,Y_n=y_n) =& \prod_{ i \le K } \left\{ 1 - \exp \left[ - \left( \frac{ \theta_i }{ z_i } \right)^{ 1/\alpha} \right] \right \} \prod_{ i > K } \exp \left[ -\left( \frac{ \theta_i }{ z_i } \right)^{1/\alpha} \right] \nonumber \\[0.5em]
@@ -20,29 +22,27 @@ We use the hierarchical max-stable spatial model given by \citet{Reich2012}. If 
 Finally marginalizing over the random effect, we obtain
 
 \begin{align} \label{rbeq:joint}
-    P(Y_1=y_1,\ldots,Y_n=y_n) =&\int G(\bz | \bA) p( \bA | \alpha) d\bA. \nonumber\\[0.5em]
+    P(Y_1=y_1,\ldots,Y_n=y_n) =&\int G(\bz | \bA) p( \bA | \alpha) \dd \bA. \nonumber\\[0.5em]
       =& \int \exp \left[ -\sum_{ i = K+1}^{ n }\left( \frac{ \theta_i }{ z_i } \right)^{1/\alpha} \right] - \exp \left[ -\sum_{ i = K+1}^{ n }\left( \frac{ \theta_i }{ z_i } \right)^{1/\alpha} \right] \sum_{ i = 1}^{K} \exp\left[ -\left( \frac{ \theta_i }{ z_i } \right)^{ 1/\alpha} \right] \nonumber\\
     &  + \exp \left[ -\sum_{ i = K+1}^{ n }\left( \frac{ \theta_i }{ z_i } \right)^{1/\alpha} \right] \sum_{ 1 < i < j \le K } \left\{ \exp \left[ - \left( \frac{ \theta_i }{ z_i } \right)^{ 1/\alpha} - \left( \frac{ \theta_j }{ z_j } \right)^{ 1/\alpha } \right] \right \} \nonumber \\[0.5em]
-    & + \cdots + (-1)^K \exp\left[ - \sum_{ i = 1 }^{ n }\left( \frac{ \theta_i }{ z_i } \right)^{ 1/\alpha} \right] p( \bA | \alpha) d\bA.
+    & + \cdots + (-1)^K \exp\left[ - \sum_{ i = 1 }^{ n }\left( \frac{ \theta_i }{ z_i } \right)^{ 1/\alpha} \right] p( \bA | \alpha) \dd \bA.
 \end{align}
 
 Consider the first term in the summation,
 
 \begin{align}
-  \int \exp \left\{ -\sum_{ i = K+1}^{ n }\left( \frac{ \theta_i }{ z_i } \right)^{1/\alpha} \right\} p( \bA | \alpha) d\bA &= \int \exp \left\{ - \sum_{ i = K + 1 }^n \left( \frac{ \left[ \sum_{ l = 1 }^L  A_l w_{l}(\bs_i)^{1/\alpha} \right)^\alpha }{ z_i} \right]^{ 1/\alpha } \right \} p( \bA | \alpha) d\bA \nonumber \\[0.5em]
-   &= \int \exp \left\{ -\sum_{ i = K + 1}^n \sum_{ l = 1}^L A_l \left( \frac{ w_l (\bs_i) }{ z_i } \right)^{1/\alpha} \right \} p( \bA | \alpha) d\bA \nonumber \\[0.5em]
+  \int \exp \left\{ -\sum_{ i = K+1}^{ n }\left( \frac{ \theta_i }{ z_i } \right)^{1/\alpha} \right\} p( \bA | \alpha) \dd \bA &= \int \exp \left\{ - \sum_{ i = K + 1 }^n \left( \frac{ \left[ \sum_{ l = 1 }^L  A_l w_{l}(\bs_i)^{1/\alpha} \right)^\alpha }{ z_i} \right]^{ 1/\alpha } \right \} p( \bA | \alpha) \dd \bA \nonumber \\[0.5em]
+   &= \int \exp \left\{ -\sum_{ i = K + 1}^n \sum_{ l = 1}^L A_l \left( \frac{ w_l (\bs_i) }{ z_i } \right)^{1/\alpha} \right \} p( \bA | \alpha) \dd \bA \nonumber \\[0.5em]
    &=\exp\left\{-\sum_{ l = 1}^L \left[ \sum_{ i = K + 1 }^n \left( \frac{ w_l(\bs_i)}{ z_i} \right)^{1/\alpha} \right]^\alpha \right\}.
 \end{align}
 
 The remaining terms in equation \eref{rbeq:joint} are straightforward to obtain, and after integrating out the random effect, the joint density for $K = 0, 1, 2$ is given by
 \begin{align}\label{rbeq:pmf}
-  P(Y_1=y_1,\ldots,Y_n=y_n) =  \left\{
-    \begin{array}{ll}
-      G(\bz) & K=0 \\
-      G(\bz_{(1)})-G(\bz) & K=1 \\
-      G(\bz_{(12)})-G(\bz_{(1)})-G(\bz_{(2)})+G(\bz) & K=2
-    \end{array}
-  \right.
+  P(Y_1=y_1,\ldots,Y_n=y_n) =  \begin{cases}
+      G(\bz), & K=0 \\
+      G(\bz_{(1)})-G(\bz), & K=1 \\
+      G(\bz_{(12)})-G(\bz_{(1)})-G(\bz_{(2)})+G(\bz), & K=2
+    \end{cases}
 \end{align}
 where
 \begin{align*}

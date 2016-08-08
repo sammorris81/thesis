@@ -1,7 +1,9 @@
-\chapter{Empirical Basis Functions for Max-Stable Spatial Dependence} \label{chap:four}
+\chapter{Empirical Basis Functions for Max-Stable Spatial Dependence} 
 \chaptermark{Empirical Basis Functions}
+\label{chap:four}
 
 \section{Introduction}\label{ebs:intro}
+
 The spatial Extreme Value Analysis (EVA) literature is expanding rapidly \citep{Davison2012} to meet the demands of researchers to improve estimates of rare-event probabilities by borrowing information across space and to estimate the probability of extreme events occurring simultaneously at multiple locations.
 Environmental datasets commonly include observations from hundreds or thousands of locations, and advanced tools are required to explore and analyze these data.
 For Gaussian data, Principle Components Analysis \citep[PCA]{Everitt2008}, also known as Empirically Orthogonal Functions \citep[EOF]{Toggweiler2001}, has proven to be a powerful tool to study correlation between spatial locations; understand the most important large-scale spatial features; and reduce the dimension of the problem to allow for simple computation even for massive datasets.
@@ -9,17 +11,15 @@ Computation and exploration are arguably more difficult for EVA than Gaussian da
 
 In EVA, extremes are separated from the bulk of the distribution by either analyzing only points above a threshold or block maximums \citep{Coles2001}, e.g., the annual maximum of the daily precipitation.
 A natural spatial model for block maximum at several spatial locations is the max-stable process, which, under certain conditions, arises as the limit of the location-wise maximum of infinitely-many spatial processes \citep{deHaan2006}.
+Max-stable processes were also used to model spatial exceedances over a high threshold \citep{Thibaud2013,Huser2014}.
 \Citet{deHaan1984} showed that any max-stable process can be represented in terms of a countable number of spatial processes (e.g., stationary log Gaussian processes), and a finite truncation of this representation has been used for conditional simulation \citep{Wang2011}.
-The proposed empirical basis function (EBF) approach also uses a finite truncation of the spectral representation, and develops a method-of-moments estimator for the underlying spatial processes.
-
-In addition to exploratory analysis, we show that the EBFs can be used for Bayesian inference on the marginal parameters at each location and to test for covariate effects.
 Fully-Bayesian analysis using max-stable processes is cumbersome for large data sets \citep{Wadsworth2014,Thibaud2013a}.
 One option is to use non-max-stable models that retain extremal dependence such as the skew-t process in \citep{Morris2016}.
 Alternatively, \citet{Reich2012} propose a low-rank method based on spatial kernel functions, and others have used pairwise \citep{Padoan2010,Huser2014} and trivariate \citep{Genton2011} likelihood methods for parameter estimation.
 
-In this paper we develop methodology to use the spectral representation of a max-stable process to identify a small set of EBFs that capture the most important spatial features of the data.
+In this paper we propose an empirical basis function (EBF) approach that builds on a finite truncation of the spectral representation, and develops a method-of-moments estimator for the underlying spatial processes.
 Unlike PCA/EOFs, but similar to dictionary learning \citep{Mairal2014} and non-negative matrix factorizations \citep{Lee1999}, the EBFs are not orthogonal, nonetheless these spatial functions can be plotted for exploratory analysis to reveal important spatial trends.
-The EBFs can also be used in a second-stage statistical analysis.
+In addition to exploratory analysis, we show that the EBFs can be used for Bayesian inference on the marginal parameters at each location, modeling spatial dependence, and to test for covariate effects.
 By basing the spatial dependence on EBFs, the resulting spatial analysis does not require dubious assumptions such as stationarity.
 In addition, a Bayesian analysis for either block-maximum or point above a threshold is computationally feasible for large datsets because the entire spatial process is represented by a small number of basis functions.
 
@@ -166,11 +166,10 @@ $\sigma_{it}^* = \alpha\sigma_{it}\theta_{it}^\xi$, and $\xi^* = \alpha\xi$.
 Therefore, the conditional likelihood conveniently factors across observations; marginalizing over the random effect $\theta_{it}$ induces extremal spatial dependence.
 To focus on the extreme values above the local threshold $T_i$, we use the censored likelihood
 \begin{align} \label{ebeq:g}
-d(y;\theta_{it},\Theta_{it}, T_i)  =
-\left\{\begin{array}{ll}
+d(y;\theta_{it},\Theta_{it}, T_i)  = \begin{cases}
   F(y;\mu_{it}^*,\sigma_{it}^*,\xi^*) & y \le T_i \\
   f(y;\mu_{it}^*,\sigma_{it}^*,\xi^*) & y>T_i,
-\end{array}\right.
+\end{cases}
 \end{align}
 where $F$ and $f$ are the GEV distribution and density functions, respectively, defined in \aref{eba:GEV}.
 

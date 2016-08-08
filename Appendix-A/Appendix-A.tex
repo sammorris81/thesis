@@ -1,5 +1,6 @@
 \chapter{A Space-time \Skewt Model for Threshold Exceedances}
 \chaptermark{Space-time \Skewt Model}
+\label{appendix:a}
 
 \section{MCMC details} \label{sta:mcmc}
 The MCMC sampling for the model in \sref{sts:hier} is done using {\tt R} (http://www.r-project.org). Whenever possible, we select conjugate priors (see \aref{sta:posterior}); however, for some of the parameters, no conjugate prior distributions exist.
@@ -78,12 +79,10 @@ All three candidates are accepted with probability $\min\{R, 1\}$.
 If knots are independent over days, then the conditional posterior distribution of $|z_{tk}|$ is conjugate.
 For simplicity, drop the subscript $t$, let $\tilde{z}_{k} = |z_{k}|$, $\tilde{\bz}_{k^c}$ be the vector of $[|z(\bs_1)|, \ldots, |z(\bs_n)|]$ for $\bs \notin P_k$, $\bX = [\bX(\bs_1), \ldots, \bX(\bs_n)]^\top$, let $\bY_k$ and $\bX_k$ be the observations and covariate measurements for $\bs \in P_k$, and let $\bY_{k^c}$ and $\bX_{k^c}$ be the observations and covariate measurements for $\bs \notin P_k$ and define
 \begin{align*}
-\bR = \left\{
-    \begin{array}{ll}
-        \bY_k - \bX_k \bbeta & \bs \in P_k\\[1em]
+\bR = \begin{cases}
+        \bY_k - \bX_k \bbeta & \bs \in P_k\\
         \bY_{k^c} - \bX_{k^c} \bbeta - \lambda \tilde{\bz}_{k^c} \qquad & \bs \notin P_k
-    \end{array}
-\right.
+        \end{cases}
 \end{align*}
 Let
 \begin{align*}

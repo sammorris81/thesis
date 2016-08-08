@@ -1,8 +1,24 @@
 %% ------------------------------ Abstract ---------------------------------- %%
 \begin{abstract}
+% Spatial methods are important for extremes
+% Key points to our methods: Bayesian inference, low-rank approximations
 
-\lipsum[1-6]
+In recent years, extreme values analysis (EVA) have started to benefit from methods that allow for dependence between observations.
+In a spatial setting, this is important for many phenomenon (e.g. ozone, rainfall, wildfires) because spatial methods borrow information across space for informing inference and making predictions at unobserved locations.
+When working with dependent extremes, max-stable processes are the analog to Gaussian processes.
+These processes are exceptionally flexible, but they can be computationally challenging to work with for high dimensional data.
 
+Some current methods address the dimensionality issues for max-stable processes using pairwise likelihoods, and others circumvent the computational challenges with low-rank approximations to max-stable processes.
+While these provide feasible solutions, they can still be very slow to fit, and can be sensitive to distributional assumptions.
+We provide contributions to three areas of the analysis of spatial extremes.
+First, we develop a space-time \skewt method for threshold exceedances.
+In this method, we use a local \skewt process to model asymptotic dependence.
+We demonstrate that in most cases the method performs comparably or better than Gaussian processes and max-stable processes.
+
+We develop a max-stable model for modeling rare binary data, and demonstrate its performance relative to spatial probit and logistic methods through a simulation study and data analysis for \emph{Tamarix ramosissima}.
+Lastly, we present empirical basis functions (EBF) as a data-driven way to get a low-rank approximation to max-stable processes.
+We can use the EBFs as an exploratory method to examine important spatial trends as well as for Bayesian inference and predictions as unobserved locations.
+We then demonstrate our method for a data analysis on wildfire data in the state of Georgia as well as precipitation data in the eastern U.S.
 
 \end{abstract}
 
@@ -16,17 +32,21 @@
 
 %% -------------------------------- Dedication ------------------------------ %%
 \begin{dedication}
- \centering To my parents.
+ \centering To Adam
 \end{dedication}
 
 %% -------------------------------- Biography ------------------------------- %%
 \begin{biography}
-The author was born in a small town \ldots
+Sam was born on August 26, 1981 in Jacksonville, North Carolina.
+As the son of a career marine, 
 \end{biography}
 
 %% ----------------------------- Acknowledgements --------------------------- %%
 \begin{acknowledgements}
-I would like to thank my advisor for his help.
+First I would like to thank my partner, Adam for his unwavering support.
+I would also like to thank my advisor Dr. Brian Reich for his guidance on this work.
+I would like to thank Emeric Thibaud and Daniel Cooley for their insight and suggestion on Chapters 2 and 4.
+
 \end{acknowledgements}
 
 
