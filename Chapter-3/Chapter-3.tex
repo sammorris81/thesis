@@ -5,20 +5,18 @@
 \section{Introduction}\label{rbs:intro}
 
 The goals of spatial binary data analysis are often to estimate covariate effects while accounting for spatial dependence and to make predictions at locations without samples.
-A common approach to incorporate spatial dependence in the model for binary data is related to a continuous spatial process $Z(\bs) \in \mathbb{R}$ to the binary response $Y(\bs)$ by thresholding $Y(\bs) = I[Z(\bs) > c]$ where $I[\cdot]$ is an indicator function.
+A common approach to incorporate spatial dependence in the model for binary data is relating a continuous spatial process $Z(\bs) \in \mathbb{R}$ to the binary response $Y(\bs)$ by thresholding, $Y(\bs) = I[Z(\bs) > c]$, where $I[\cdot]$ is an indicator function.
 In many spatial analyses of binary data, a Gaussian process is used to model $Z(\bs)$.
 This is true for both spatial probit and spatial logistic regression.
-
 In this model, spatial dependence is determined by the joint probability that two sites simultaneously exceed the threshold $c$.
-However, when $c$ is large, and thus $Y(\bs) = 1$ is rare, then the asymptotic theory suggests that the Gaussian process will not do well at modeling dependence.
-In fact, even under strong spatial correlation for $Z$, it gives asymptotic independence.
-Therefore, this suggests that for rare binary data, the Gaussian model will not perform very well.
+However, when $c$ is large, and thus $Y(\bs) = 1$ is rare, then the asymptotic theory suggests that the Gaussian process will model dependence poorly.
+In fact, even under strong spatial correlation for $Z$, it gives asymptotic independence \citep{Sibuya1960}, suggesting that for rare binary data, the Gaussian model will not perform very well.
 
-We propose using a latent max-stable process \citep{deHaan1984} because it allows for asymptotic dependence.
+We propose using a latent max-stable process \citep{deHaan1984} for $Z(\bs)$ because it allows for asymptotic dependence.
 The max-stable process arises as the limit of the location-wise maximum of infinitely many spatial processes, and any finite-dimensional representation of a max-stable process has generalized extreme value distribution (GEV) marginal distributions.
 Max-stable processes are extremely flexible, but are often challenging to work with in high dimensions \citep{Wadsworth2014,Thibaud2013a}.
 To address this challenge, methods have been proposed that implement composite likelihood techniques for max-stable processes \citep{Padoan2010,Genton2011,Huser2014}.
-Composite likelihoods have been used to model binary spatial data \citep{Heagerty1998}, but this is not using max-stable processes.
+Composite likelihoods have been used to model binary spatial data \citep{Heagerty1998}, but not using max-stable processes.
 As an alternative to these composite approaches, \citet{Reich2012} present a hierarchical model that implements a low-rank representation for a max-stable process.
 We chose to use this low-rank representation for our rare binary spatial regression model.
 Our model builds on related work by \citet{Wang2010} who use a GEV link for non-spatial binary data.
@@ -50,7 +48,7 @@ The hierarchical model is given by
 \begin{align} \label{rbeq:hiermodel}
   \bZ(\bs_i) | A_1, \ldots, A_L \ind \text{GEV}[\bX(\bs_i)^\top \bbeta + \theta(\bs_i), \alpha \theta(\bs_i), \xi \alpha] \quad \text{and} \quad \theta(\bs_i) = \left[\sum_{l = 1}^L A_l w_l (\bs_i)^{1 / \alpha} \right]^\alpha
 \end{align}
-where $w_{l}(\bs_i) > 0$ are a set of $L$ weights that vary smoothly across space and satisfy $\displaystyle \sum_{l = 1}^L w_l(\bs) = 1$ for all $\bs$, and $\alpha\in(0,1)$ determines the strength of dependence, with $\alpha$ near zero giving strong dependence and $\alpha=1$ giving joint independence.
+where $w_{l}(\bs_i) > 0$ are a set of $L$ weight functions that vary smoothly across space and satisfy $\displaystyle \sum_{l = 1}^L w_l(\bs) = 1$ for all $\bs$, and $\alpha\in(0,1)$ determines the strength of dependence, with $\alpha$ near zero giving strong dependence and $\alpha=1$ giving joint independence.
 
 Because the latent $\bZ(\bs)$ are independent given the random effects $\theta(\bs)$, the binary responses are also conditionally independent.
 This leads to the tractable likelihood
@@ -59,13 +57,14 @@ This leads to the tractable likelihood
 \end{align}
 where
 \begin{align} \label{rbeq:pyeq1cond}
-  \pi(\bs_i) &= 1 - \exp \left\{ -\displaystyle \sum_{ l = 1 }^{L} A_l \left( \frac{ w_{l}(\bs_i) }{ z(\bs_i) } \right)^{ 1/\alpha} \right\}.
+  \pi(\bs_i) &= 1 - \exp \left\{ -\displaystyle \sum_{ l = 1 }^{L} A_l \left( \frac{ w_{l}(\bs_i) }{ z(\bs_i) } \right)^{ 1/\alpha} \right\}
 \end{align}
+and $z(\bs) = [1 + \xi \bX(\bs)^\top \bbeta)]^{1 / \xi}$.
 Marginally over the $A_l$, this gives
 \begin{align}
   Z(\bs) \sim \text{GEV}\left[\bX(\bs)^\top \bbeta, 1, \xi\right],
 \end{align}
-and thus $P[Y(\bs) = 1] = 1 - \exp\left\{-\displaystyle \frac{1}{z(\bs)}\right\}$ where $z(\bs) = \left[1 - \xi \bX(\bs)^\top \bbeta\right]^{1 / \xi}$.
+and thus $P[Y(\bs) = 1] = 1 - \exp\left\{-\displaystyle \frac{1}{z(\bs)}\right\}$.
 
 Many weight functions are possible, but the weights must be constrained so that $\displaystyle \sum_{l=1}^L w_{l}(\bs_i)=1$ for $i=1,\ldots,n$ to preserve the marginal GEV distribution.
 For example, \cite{Reich2012} take the weights to be scaled Gaussian kernels with knots $\bv_l$,
@@ -154,10 +153,12 @@ For each of the underlying processes, we generate complete datasets on a $100 \t
 If a dataset is generated with $K < 50$, it is discarded and a new dataset is generated.
 This is done to guarantee that datasets have no less than $0.5\%$ rarity.
 For model fitting, we select a subsample and use the remaining sites to evaluate predictive performance.
+For all models, we run the MCMC sampler for 25,000 iterations with a burn-in period of 20,000 iterations.
+Convergence is assessed through visual inspection of traceplots.
 
 \subsection{Latent processes} \label{rbs:simsettings}
 The first process is a latent max-stable process that uses the GEV link described in \eref{rbeq:hiermodel} with knots on a $50 \times 50$ regularly spaced grid on $[0, 1] \times [0, 1]$.
-For this process, we set $\alpha = 0.35$, $\rho = 0.1$, and $\beta_0 \approx 2.97$ which gives $K = 500$, on average.
+For this process, we set $\alpha = 0.35$, $\rho = 0.1$, and $\beta_0 \approx 2.97$ which gives $K = 500$ (5\% rarity), on average.
 Because there are no covariates, we set $\xi = 0$.
 We then set $Y(\bs) = I[Z(\bs) > 0]$.
 
@@ -172,7 +173,7 @@ where $\pi(\bs_i) = \displaystyle \frac{ \exp\{z(\bs)\}}{1 + \exp\{z(\bs)\} }$.
 For the third process, we generate data using a hotspot method.
 For this process, we first generate hotspots throughout the space.
 Let $n_\text{hs}$ be the number of hotspots in the space.
-Then $n_\text{hs} - 1 \sim$ Poisson$(2)$.
+Then \mbox{$n_\text{hs} - 1 \sim$ Poisson$(2)$}.
 This generation scheme ensures that every dataset has at least one hotspot.
 We generate the hotspot locations $\bh_1, \ldots, \bh_{n_\text{hs}} \sim$ Unif$(0, 1)^2$.
 Let $B_h$ be a circle of radius of radius $r_h$ around hotspot $h = 1, \ldots, n_\text{hs}$.
@@ -181,18 +182,27 @@ We set $P[Y(\bs_i) = 1] = 0.85$ for all $\bs_i$ in $B_h$, and $P[Y(\bs_i)] = 0.0
 These settings are selected to give an average of approximately $K = 500$ for the datasets.
 \fref{rbfig:simulateddata} gives an example dataset from each of the data settings.
 
-\begin{figure}
+\begin{figure}  % code/analysis/simstudy/combine-tables.R
   \centering
   \includegraphics[width=\linewidth, trim={0em, 1em, 0em, 1em}]{plots/simulateddata}
-  \caption{One simulated dataset from spatial GEV (left), spatial logistic (center), and hotspot (right).}
+  \caption{One simulated dataset from spatial GEV (left), spatial logistic (center), and hotspot (right) designs.}
   \label{rbfig:simulateddata}
 \end{figure}
 
+\subsection{Sampling methods} \label{rbs:simsampling}
+We subsample the generated data using $n_s = 100$, $250$ initial locations for two different sampling designs.
+The first is a two-stage spatially-adaptive cluster technique (CLU) taken from \citet{Pacifici2016}.
+In this design, if an initial location is occupied, we also include the four rook neighbor (north, east, south, and west) sites in the sample.
+For the second design, we use a simple random sample (SRS) with the same number of sites included in the cluster sample.
+For the GEV setting, when $n_s = 100$, there are on average $117$ sites and at most $142$ sites in a sample, and when $n_s = 250$, there are on average $286$ sites and at most $332$ sites in a sample.
+For the logistic setting, when $n_s = 100$, there are on average $118$ sites and at most $147$ sites in a sample, and when $n_s = 250$, there are on average $290$ sites and at most $330$ sites in a sample.
+For the hotspot setting, when $n_s = 100$, there are on average $110$ sites and at most $128$ sites in a sample, and when $n_s = 250$, there are on average $275$ sites and at most $306$ sites in a sample.
+
 \subsection{Methods} \label{rbs:methods}
-For each dataset, we fit the model using three different models, the proposed spatial GEV model, a spatial probit model, and a spatial logistic model.
-Logistic and probit methods represent two of the more common spatial techniques for binary data, we chose to compare our method to them.
-One way these methods differ from our proposed method is that they assume the underlying process is Gaussian.
-In this case, we assume that $Z(\bs)$ follows a Gaussian process with mean $\bX(s)^\top \bbeta$.
+For each dataset, we fit the model using three different models: the proposed spatial GEV model, a spatial probit model, and a spatial logistic model.
+Logistic and probit methods assume the underlying process is Gaussian.
+In this case, we assume that $Z(\bs)$ follows a Gaussian process with mean $\bX(s)^\top \bbeta$ and unit variance.
+For the simulation study, we use an intercept only model.
 The marginal distributions are given by
 \begin{align}
   P\left[Y(\bs) = 1\right] = \begin{cases}
@@ -208,16 +218,6 @@ For the probit model, we use
                  {\sqrt{\displaystyle \sum_{j=1}^L\exp\left[-\left(||\bs_i-\bv_j||/\rho\right)^2\right]^2}}.
 \end{align}
 For the logistic model, the $\bW_l(\bs_i)$ are the default implementation from the \texttt{spGLM}.
-\hl{Timings}
-
-\subsection{Sampling technique} \label{rbs:simsampling}
-We subsample the generated data using $n_s = 100$, $250$ initial locations for two different sampling designs.
-The first is a two-stage spatially-adaptive cluster technique (CLU) taken from \citet{Pacifici2016}.
-In this design, if an initial location is occupied, we also include the four rook neighbor (north, east, south, and west) sites in the sample.
-For the second design, we use a simple random sample (SRS) with the same number of sites included in the cluster sample.
-For the GEV setting, when $n_s = 100$, there are on average $117$ sites and at most $142$ sites in a sample, and when $n_s = 250$, there are on average $286$ sites and at most $332$ sites in a sample.
-For the logistic setting, when $n_s = 100$, there are on average $118$ sites and at most $147$ sites in a sample, and when $n_s = 250$, there are on average $290$ sites and at most $330$ sites in a sample.
-For the hotspot setting, when $n_s = 100$, there are on average $110$ sites and at most $128$ sites in a sample, and when $n_s = 250$, there are on average $275$ sites and at most $306$ sites in a sample.
 
 \subsection{Priors} \label{rbs:simpriors}
 For all models, we only include an intercept term $\beta_0$ in the model, and the prior for the intercept is \mbox{$\beta_0 \sim$ N$(0, 10)$}.
@@ -227,8 +227,6 @@ For the GEV method, the prior for the spatial dependence parameter is $\alpha \s
 We select this prior because it gives greater weight to $\alpha < 0.5$, which is the point at which spatial dependence becomes fairly week, but also avoids values below 0.1 which can lead to numerical problems.
 We fix $\xi = 0$ because we do not include any covariates.
 For both the spatial probit and logistic models, the prior on the variance term for the random effects is IG$(0.1, 0.1)$ where IG$(\cdot)$ is an Inverse Gamma distribution.
-For all models, we run the MCMC sampler for 25,000 iterations with a burn-in period of 20,000 iterations.
-Convergence is assessed through visual inspection of traceplots.
 
 \subsection{Model comparisons}\label{rbs:cv}
 For each dataset, we fit the model using the $n_s$ observations as a training set, and validate the model's predictive power at the remaining grid points.
@@ -248,10 +246,10 @@ We then average AUROC across all datasets for each method and setting to obtain 
 Overall, we find that the spatial probit model actually performs quite well in all cases.
 \tref{rbtbl:simbsresults} gives the Brier scores and AUROC for each of the methods.
 Looking at Brier scores, we see that our model is outperformed by the probit model in all cases, by the logistic models in many settings.
-For AUROC methods, in a few of the settings, we do demonstrate a very small improvement over the probit and logistic models.
+For AUROC, in a few of the settings, we do demonstrate a small improvement over the probit and logistic models.
 Because these results are somewhat surprising, we also considered the performance metrics by rareness of the data.
-We plot the Brier scores and AUROC for a few different sampling methods using the GEV and logistic links in \fref{rbfig:simsmooth-gevclu250} -- \fref{rbfig:simsmooth-logclu250} using a Loess smoother from \texttt{ggplot}.
-Although not conclusive, these plots give evidence to suggest that as rareness increases, the spatial GEV method has potential to outperform the spatial probit and logistic models based on AUROC.
+We plot the Brier scores and AUROC for a few different sampling methods using the GEV and logistic links in \fref{rbfig:simsmooth-gevclu250} -- \fref{rbfig:simsmooth-logclu250} using a Loess smoother.
+These plots give evidence to suggest that as rareness increases, the spatial GEV method has potential to outperform the spatial probit and logistic models based on AUROC.
 
 \begin{table}
   \caption{Brier scores ($\times 100$) [SE] and AUROC [SE] for GEV, Probit, and Logistic methods from the simulation study.}
@@ -376,15 +374,16 @@ Although not conclusive, these plots give evidence to suggest that as rareness i
 
 \section{Data analysis}\label{rbs:dataanalysis}
 
-We compare our method to the spatial probit and logit for mapping the probability of the occurrence of \emph{Tamarix ramosissima}, a plant species, for a 1-km$^2$ study region of PR China \citep{Smith2012}.
+We compare our method to the spatial probit and logit for mapping the probability of the occurrence of \emph{Tamarix ramosissima} (TR) and \emph{Hedysarum scoparium} (HS), two  plant species, for a 1-km$^2$ study region of PR China \citep{Smith2012}.
 The Chinese Academy of Forestry conducted a full census of the area, and the true occupancy of the species are plotted in \fref{rbfig:occupancy}.
 \begin{figure}
   \centering
-  \includegraphics[width=0.5\linewidth, trim=0 10em 0 10em]{plots/tamarix-census.pdf}
-  \caption{True occupancy of \emph{Tamarix ramosissima} from a 1-km$^2$ study region of PR China.}
+  \includegraphics[width=\linewidth, trim=0 10em 0 10em]{plots/plant-census.pdf}
+  \caption{True occupancy of \emph{Tamarix ramosissima} (left) and \emph{Hedysarum scoparium} (right) from a 1-km$^2$ study region of PR China.}
   \label{rbfig:occupancy}
 \end{figure}
-The region is split into $10$-m $\times$ $10$-m grid cells, and \emph{Tamarix ramosissima} can be found in approximately $6\%$ of the grid cells.
+The region is split into $10$-m $\times$ $10$-m grid cells.
+\emph{Tamarix ramosissima} can be found in approximately $6\%$ of the grid cells, and \emph{Hedysarum scoparium} can be found in approximately $0.54\%$ of the grid cells.
 
 \subsection{Methods} \label{rbs:datamethods}
 For the data analysis, we generate 100 subsamples using the CLU and SRS sampling methods with $n_s = 100$, $250$ initial locations.

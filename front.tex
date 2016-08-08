@@ -6,19 +6,33 @@
 In recent years, extreme values analysis (EVA) have started to benefit from methods that allow for dependence between observations.
 In a spatial setting, this is important for many phenomenon (e.g. ozone, rainfall, wildfires) because spatial methods borrow information across space for informing inference and making predictions at unobserved locations.
 When working with dependent extremes, max-stable processes are the analog to Gaussian processes.
+Max-stable processes have generalized extreme value (GEV) marginal distributions.
 These processes are exceptionally flexible, but they can be computationally challenging to work with for high dimensional data.
 
 Some current methods address the dimensionality issues for max-stable processes using pairwise likelihoods, and others circumvent the computational challenges with low-rank approximations to max-stable processes.
 While these provide feasible solutions, they can still be very slow to fit, and can be sensitive to distributional assumptions.
-We provide contributions to three areas of the analysis of spatial extremes.
-First, we develop a space-time \skewt method for threshold exceedances.
-In this method, we use a local \skewt process to model asymptotic dependence.
-We demonstrate that in most cases the method performs comparably or better than Gaussian processes and max-stable processes.
+Despite these limitations, it is important to use models that are designed to handle dependence in the tail of the distribution.
+Our contributions to the literature on spatial extremes are threefold. 
 
-We develop a max-stable model for modeling rare binary data, and demonstrate its performance relative to spatial probit and logistic methods through a simulation study and data analysis for \emph{Tamarix ramosissima}.
-Lastly, we present empirical basis functions (EBF) as a data-driven way to get a low-rank approximation to max-stable processes.
-We can use the EBFs as an exploratory method to examine important spatial trends as well as for Bayesian inference and predictions as unobserved locations.
-We then demonstrate our method for a data analysis on wildfire data in the state of Georgia as well as precipitation data in the eastern U.S.
+First, we develop a space-time \skewt method for threshold exceedances.
+In this method, we use a censored, local \skewt process to model asymptotic dependence.
+We use censoring so as not to allow the bulk of the data to influence the fit of the model in the extremes.
+We introduce a partitioning to alleviate long-range asymptotic dependence.
+We compare our method to Gaussian and max-stable processes with a simulation study.
+We also conduct a data analysis of ozone measurements throughout the U.S. in July 2005.
+We find that in most cases the method performs comparably or better than Gaussian processes and max-stable processes.
+
+Second, we extend the GEV link for modeling binary data with a max-stable spatial dependence structure.
+Traditionally, spatial methods for binary data use a latent Gaussian process to model dependence, but this may not be appropriate for rare data due to the lack of asymptotic dependence for Gaussian processes.
+We compare our model to spatial probit and logistic methods through a simulation study.
+We also conduct a data analysis of \emph{Tamarix ramosissima} and \emph{Hedysarum scoparium}.
+We find some evidence to suggest that for very rare data, under certain sampling strategies, the max-stable extension provides an improvement in area under the receiver operating characteristic curve (AUROC).
+
+Lastly, we present a method to construct empirical basis functions (EBF) as a low-rank approximation for max-stable processes.
+Similar to principal component analysis (PCA), these EBFs provide an exploratory method to examine important spatial trends as well as for Bayesian inference and predictions as unobserved locations.
+One notable distinction from PCA is that these EBFs are not orthogonal due to the fact that they are restricted to be positive.
+We demonstrate our method for a data analysis on wildfire data in the state of Georgia as well as precipitation data in the eastern U.S.
+The results show that in the presence of spatial dependence, the EBF method demonstrates an improvement in quantile scores over a more traditional approach of using spatial knots with Gaussian weights.
 
 \end{abstract}
 
@@ -32,20 +46,41 @@ We then demonstrate our method for a data analysis on wildfire data in the state
 
 %% -------------------------------- Dedication ------------------------------ %%
 \begin{dedication}
- \centering To Adam
+ \centering To Zoe, Catherine, Stella, Benjamin, and Alice. 
+ 
+ May you always have the courage and the support to achieve your dreams.
 \end{dedication}
 
 %% -------------------------------- Biography ------------------------------- %%
 \begin{biography}
-Sam was born on August 26, 1981 in Jacksonville, North Carolina.
-As the son of a career marine, 
+Sam graduated from Jacksonville High School, Jacksonville, North Carolina in 1999.
+He graduated magna cum laude with his Bachelor of Music in Clarinet Performance, Piano, and French from the University of North Carolina at Greensboro in 2005.
+In 2007, he received his Master of Education in Student Affairs Administration from North Carolina State University.
+He then worked for three years as the Systems Administrator and Assessment Coordinator for the Study Abroad Office at North Carolina State University at which point he decided to pursue graduate studies in statistics.
+In 2012, he received his Master of Statistics from North Carolina State University.
+During his graduate work in statistics, he has served as a Lecturer on the faculty at the University of Wisconsin--La Crosse. 
 \end{biography}
 
 %% ----------------------------- Acknowledgements --------------------------- %%
 \begin{acknowledgements}
-First I would like to thank my partner, Adam for his unwavering support.
-I would also like to thank my advisor Dr. Brian Reich for his guidance on this work.
-I would like to thank Emeric Thibaud and Daniel Cooley for their insight and suggestion on Chapters 2 and 4.
+First and foremost, I would like to acknowledge my partner, Adam Van Liere.
+Your constant support and encouragement to persevere through my studies have meant so much to me.
+
+I am deeply grateful to my advisor Dr. Brian Reich, for his guidance, teaching, and mentoring. 
+His advice, assistance, and encouragement in the preparation of this dissertation were invaluable.
+I would like to thank my committee, Dr. Alyson Wilson, Dr. Arnab Maity, and Dr. Adam Terando.
+Your comments and feedback were invaluable. 
+I am also grateful to Dr. Emeric Thibaud and Dr. Daniel Cooley from Colorado State University for their insight and feedback on Chapters 2 and 4.
+
+I am truly grateful to my professors and the staff of the Statistics Department at North Carolina State University for providing me with a strong basis for my statistical education and helping me make sure I met all the requirements to graduate.
+In particular, I would like to recognize Alison McCoy for the emotional support she provided, and Dr. Roger Woodard and Dr. Herle McGowan for the mentoring they provided me. 
+I would like acknowledge the Statistics Department, the EPA, and STATMOS for the funding they have provided during my studies.
+
+I could not have made it through my graduate studies without some amazing friends.
+Many thanks go out to Vickie Weber, Susheela Singh, Neal Grantham, Matt Austin, Andrew Wilcox, Luke Smith, Ryan Parker, Robert Allen, and Doug Baumann, to name a few.
+
+Lastly, I also could not have finished this without the love and support from my family.
+To them, I am forever grateful.
 
 \end{acknowledgements}
 
