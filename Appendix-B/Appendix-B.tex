@@ -3,6 +3,7 @@
 \label{appendix:b}
 
 \section{Binary regression using the GEV link} \label{rba:rarebinary}
+
 Here, we provide a brief review of the the GEV link of \citet{Wang2010}.
 Let $Y_i \in \{0, 1\}, i = 1, \ldots, n$ be a collection of i.i.d. binary responses.
 It is assumed that $Y_i = I(z_i > 0)$ where $I(\cdot)$ is an indicator function, $z_i = [1 - \xi \bX_i \bbeta]^{1 / \xi}$ is a latent variable following a GEV$(1, 1, 1)$ distribution, $\bX_i$ is the associated $p$-vector of covariates with first element equal to one for the intercept, and $\bbeta$ is a $p$-vector of regression coefficients.
@@ -10,6 +11,7 @@ Then, $Y_i \ind$ Bern$(\pi_i)$ where $\pi_i= 1 - \exp \left( -\frac{ 1 }{ z_i } 
 
 
 \section{Derivation of the likelihood} \label{rba:likelihoodderivation}
+
 We use the hierarchical max-stable spatial model given by \citet{Reich2012}. If at each margin, $Z_i \sim $ GEV$(1,1,1)$, then $Z_i | \theta_i \ind $ GEV$(\theta, \alpha \theta, \alpha)$. We reorder the data such that $Y_1=\cdots=Y_K=1$, and $Y_{K+1} = \cdots = Y_n = 0$. Then the joint likelihood conditional on the random effect $\theta$ is
 
 \begin{align} \label{rbeq:joint_cond}

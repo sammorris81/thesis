@@ -69,9 +69,7 @@ For the PS random effects model the EC has the form
 \end{align}
 In particular, $\vartheta(\bs,\bs) = 2^{\alpha}$ for all $\bs$.
 
-\sectionmark{Spatial dependence functions}
-\section{Estimating the spatial dependence function}\label{ebs:estimation}
-\sectionmark{Spatial dependence functions}
+\section{Estimating the basis functions} \label{ebs:estimation}
 
 To estimate the extremal coefficient function, we consider the process at $n_s$ spatial locations $\bs_1,\ldots,\bs_{n_s}$ and $n_t$ times $t=1,\ldots,n_t$.
 The basis functions are fixed over time, but the random effects and errors are independent over time.
@@ -142,6 +140,7 @@ Therefore, terms with large $v_l$ are the most important.
 The order of the terms is arbitrary, and so we reorder the terms so that $v_1\ge \cdots \ge v_L$.
 
 \section{Bayesian implementation details}\label{ebs:MCMC}
+
 For our data analysis in \sref{ebs:analysis} we allow the GEV location and scale parameters, denoted $\mu_t(\bs)$ and scale $\sigma_t(\bs)$ respectively, to vary with space and time.
 The model we choose is as follows
 \begin{align}\label{ebeq:GPprior}
@@ -194,18 +193,21 @@ The second-stage Bayesian analysis requires selecting thresholds $T_i,\ldots,T_{
 That is, we set $T_i$ to the 0.95 quantile of the $Y_{it}$ and its five nearest neighbors.
 
 \section{Data analysis}\label{ebs:analysis}
+
 In this section, we illustrate our method with two data analyses.
 In \sref{ebs:georgia}, we present a points above a threshold analysis using annual acreage burned due to wildfires in Georgia from 1965 -- 2014.
 This is followed in \sref{ebs:precip} by an analysis of block maxima precipitation data in the eastern U.S.
 We compare our method with another method that uses standardized Gaussian kernels for the spatial basis functions.
 
 \subsection{Gaussian kernel basis functions}
+
 To provide a comparison of our model with another approach, we also fit a model that uses standardized Gaussian kernels for the spatial basis functions \citep{Reich2012}.
 In this method, \citeauthor{Reich2012} introduce a set of $\bk_1, \ldots, \bk_L$ spatial knots and use standardized Gaussian kernel functions (GSK; see \aref{eba:gskfunctions}) instead of using EBFs for the $\hat{B_l}(\bs)$.
 For the comparison between EBF and GSK methods, we use the same number of basis functions.
 We obtain estimates of the kernel bandwidth $\hat{\rho}$ and spatial dependence $\hat{\alpha}$, using the same least squares minimization as with the EBF method, and treat these as fixed in the MCMC.
 
 \subsection{Analysis of extreme Georgia fires}\label{ebs:georgia}
+
 The dataset used for our application is composed of yearly acreage burned due to wildfires for each county in Georgia from 1965 -- 2014 (\url{http://weather.gfc.state.ga.us/FireData/}).
 \fref{ebfig:firets25} shows the time series of $\log$(acres burned) for 25 randomly selected counties.
 Based on this plot and other exploratory analysis, we see no evidence of non-linear trends and proceed with linear time trends for the GEV location and scale parameters.
@@ -266,6 +268,7 @@ Timing for each setting of $L$ for 1,000 iterations is given in \tref{ebtbl:fire
 These timings come from a single core of an Intel Core i7-5820K Haswell-E processor, using the OpenBLAS optimized BLAS library (\url{http://www.openblas.net}).
 
 \subsection{Results for fire analysis}\label{ebs:results-fire}
+
 We use 10-fold cross-validation to assess the predictive performance of a model.
 For each method, we randomly select 90\% of the observations across counties and years to be used as a training set to fit the model.
 The remaining 10\% of sites and years are withheld for testing model predictions.
@@ -421,6 +424,7 @@ This suggests that the 10-year return level for wildfires in regions with larger
 % \end{figure}
 
 \subsection{Analysis of annual precipitation}\label{ebs:precip}
+
 We also conduct an analysis of the precipitation data presented in \citet{Reich2012}.
 The data are climate model output from the North American Regional Climate Change Assessment Program (NARCCAP).
 This data consists of $n_s = 697$ grid cells at a 50km resolution in the eastern US, and includes historical data (1969 -- 2000) as well as future conditions (2039 -- 2070).
@@ -448,7 +452,8 @@ We consider models fit with both EBF and GSK, and fit the model using $L = 5, 10
 Timing for each setting of $L$ is given in \tref{ebtbl:precip-scores} for 1,000.
 The timings are obtained using the same machine as for the fire analysis.
 
-\subsection{Results for precipitation analysis}\label{ebs:results-precip}
+\subsection{Precipitation results} \label{ebs:results-precip}
+
 We use 5-fold cross-validation to assess the predictive performance of a model.
 For each method, we randomly select 80\% of the observations across counties and years to be used as a training set to fit the model.
 The remaining 20\% of sites and years are withheld for testing model predictions.
@@ -468,6 +473,7 @@ There very strong evidence to suggest that most of the eastern U.S. should expec
 Exceptions to this trend appear in southern parts of Alabama and Mississippi and regions on the border between South Carolina and Georgia which will likely experience a decrease in the 10-year return level.
 
 \section{Discussion}\label{ebs:con}
+
 In this paper we have proposed new empirical basis functions for a data-driven low-rank approximation to a max-stable process.
 The basis functions provide researchers with an exploratory data analysis tool to explore maps of extremal dependence over space.
 The functions can also be used as inputs to an MCMC algorithm for inference and predicitons over space.

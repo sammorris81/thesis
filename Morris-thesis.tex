@@ -1,6 +1,6 @@
 \documentclass[11pt,          % font size: 11pt or 12pt
                phd,           % degree:    ms or phd
-               onehalfspacing % spacing: onehalfspacing or doublespacing
+               doublespacing % spacing: onehalfspacing or doublespacing
                ]{ncsuthesis}
 
 %%----------------------------------------------------------------------------%%
@@ -24,6 +24,8 @@
 \usepackage{enumerate}
 % \usepackage{setspace}
 \usepackage{multirow}
+\usepackage[authoryear]{natbib}
+
 
 %%ORTIZ PACKAGES
 
@@ -35,7 +37,7 @@
 
 %use the following line with plainnat
 %\usepackage[super,sort&compress,comma,square,numbers]{natbib} %\cite command %Added by Ortiz
-%\usepackage{natbib}
+%\usepackage[authoryear]{natbib}
 
 %\usepackage[style=alphabetic,natbib=true,backend=bibtex
 %sorting=nyt,firstinits=true,isbn=false,doi=false,url=false]{biblatex} %couldn't get backend=biber to work
@@ -49,71 +51,71 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%% Hack for alphanumeric bibliography
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
-\RequirePackage[
-			style=alphabetic,%numeric-comp,%authoryear-comp,%
-			sorting=nyt,%ynt
-			hyperref=true, %
-			firstinits=true,%
-			backend=bibtex,
-			natbib=true,
-			url=false,
-			isbn=false,
-			maxnames=2, %for et al to be used
-			maxalphanames=1, %to avoid printing a + for every et al in the abbreviation
-			doi=false]{biblatex}
-
-
-%needed to do et al after two names
-%http://tex.stackexchange.com/questions/44048/use-et-al-in-biblatex-custom-style
-\renewcommand*{\finalnamedelim}{\addspace\&\space}
-
-%Simplify abbreviation (the default uses either one or two authors and it indicates et al with a +)
-%The following five lines make it so that only the first author is used in the abbreviation
-%http://tex.stackexchange.com/questions/27956/label-only-from-first-author
-\renewcommand*{\labelalphaothers}{}
-    \renewcommand*{\intitlepunct}{}
-    \DefineBibliographyStrings{german}{in={}}
-    \DefineBibliographyStrings{english}{in={}}
-    \DeclareNameAlias{sortname}{last-first}
-    \DeclareNameAlias{default}{last-first}
-
-%\AtEveryCitekey{\ifciteseen{}{\defcounter{maxnames}{99}}} %authoryear
-\DeclareFieldFormat[article,periodical]{volume}{\mkbibbold{#1}}
-\makeatletter
-
-\newrobustcmd*{\parentexttrack}[1]{%
-  \begingroup
-  \blx@blxinit
-  \blx@setsfcodes
-  \blx@bibopenparen#1\blx@bibcloseparen
-  \endgroup}
-
-\AtEveryCite{%
-  \let\parentext=\parentexttrack%
-  \let\bibopenparen=\bibopenbracket%
-  \let\bibcloseparen=\bibclosebracket}
-
-\makeatother
-\renewcommand{\cite}[1]{\parencite{#1}}
-
-
-\renewbibmacro{in:}{%
-  \ifentrytype{article}{}{%
-  \printtext{\bibstring{in}\intitlepunct}}}
-
-\AtEveryBibitem{\clearfield{month}}
-
-\AtEveryBibitem{\clearfield{language}}
+%\RequirePackage[
+%			style=alphabetic,%numeric-comp,%authoryear-comp,%
+%			sorting=nyt,%ynt
+%			hyperref=true, %
+%			firstinits=true,%
+%			backend=bibtex,
+%			natbib=true,
+%			url=false,
+%			isbn=false,
+%			maxnames=2, %for et al to be used
+%			maxalphanames=1, %to avoid printing a + for every et al in the abbreviation
+%			doi=false]{biblatex}
+%
+%
+%%needed to do et al after two names
+%%http://tex.stackexchange.com/questions/44048/use-et-al-in-biblatex-custom-style
+%\renewcommand*{\finalnamedelim}{\addspace\&\space}
+%
+%%Simplify abbreviation (the default uses either one or two authors and it indicates et al with a +)
+%%The following five lines make it so that only the first author is used in the abbreviation
+%%http://tex.stackexchange.com/questions/27956/label-only-from-first-author
+%\renewcommand*{\labelalphaothers}{}
+%    \renewcommand*{\intitlepunct}{}
+%    \DefineBibliographyStrings{german}{in={}}
+%    \DefineBibliographyStrings{english}{in={}}
+%    \DeclareNameAlias{sortname}{last-first}
+%    \DeclareNameAlias{default}{last-first}
+%
+%%\AtEveryCitekey{\ifciteseen{}{\defcounter{maxnames}{99}}} %authoryear
+%\DeclareFieldFormat[article,periodical]{volume}{\mkbibbold{#1}}
+%\makeatletter
+%
+%\newrobustcmd*{\parentexttrack}[1]{%
+%  \begingroup
+%  \blx@blxinit
+%  \blx@setsfcodes
+%  \blx@bibopenparen#1\blx@bibcloseparen
+%  \endgroup}
+%
+%\AtEveryCite{%
+%  \let\parentext=\parentexttrack%
+%  \let\bibopenparen=\bibopenbracket%
+%  \let\bibcloseparen=\bibclosebracket}
+%
+%\makeatother
+%\renewcommand{\cite}[1]{\parencite{#1}}
+%
+%
+%\renewbibmacro{in:}{%
+%  \ifentrytype{article}{}{%
+%  \printtext{\bibstring{in}\intitlepunct}}}
+%
+%\AtEveryBibitem{\clearfield{month}}
+%
+%\AtEveryBibitem{\clearfield{language}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %\addbibresource{Ortiz-thesis2.bib}
 %\addbibresource{Ortiz-thesisURL.bib}
-\addbibresource{library.bib}
+%\addbibresource{library.bib}
 
- \defbibheading{myheading}[BIBLIOGRAPHY]{
- \chapter*{#1}
- %\centerline{\bf{#1}}
- \markboth{#1}{#1}}
+% \defbibheading{myheading}[BIBLIOGRAPHY]{
+% \chapter*{#1}
+% %\centerline{\bf{#1}}
+% \markboth{#1}{#1}}
 
 %\usepackage{amsmath,amssymb,amsfonts} %amssymb and amsfonts cannot be used in conjunction with mdput
 %\usepackage{graphicx,subfig}% Include figure files
@@ -406,23 +408,23 @@
 %\end{thebibliography}
 
 %% or use BibTeX
-%\bibliography{Ortiz-thesis}{}
-%\bibliographystyle{plain}
+\bibliography{library}{}
+\bibliographystyle{rss}
 %\nociterec{*}
 
 %\bibliographystyle{plainnat}%plainnat is necessary to enable the use of citet. Natbib style file.
 %\bibliography{Ortiz-thesis2}
 %\ensureoddstart
-\begin{spacing}{1}
- \setlength\bibitemsep{11pt} %22pt = 2*11pt, where fontsize is 11pt
- \addcontentsline{toc}{chapter}{{\uppercase{\bibname}}} %\textorpdfstring and \uppercase needed due to hyperref package http://www.latex-community.org/forum/viewtopic.php?f=44&t=16601
- %\vspace{-0.5in}
-\titleformat{\chapter}[display]{\bf\filcenter
-}{\chaptertitlename\ \thechapter}{11pt}{\bf\filcenter}
-\titlespacing*{\chapter}{0pt}{-0.5in-9pt}{22pt}
-
-\printbibliography[heading=myheading]
-\end{spacing}
+%\begin{spacing}{1}
+% \setlength\bibitemsep{11pt} %22pt = 2*11pt, where fontsize is 11pt
+% \addcontentsline{toc}{chapter}{{\uppercase{\bibname}}} %\textorpdfstring and \uppercase needed due to hyperref package http://www.latex-community.org/forum/viewtopic.php?f=44&t=16601
+% %\vspace{-0.5in}
+%\titleformat{\chapter}[display]{\bf\filcenter
+%}{\chaptertitlename\ \thechapter}{11pt}{\bf\filcenter}
+%\titlespacing*{\chapter}{0pt}{-0.5in-9pt}{22pt}
+%
+%\printbibliography[heading=myheading]
+%\end{spacing}
 %\bibliographystyle{apalike}
 
 

@@ -3,6 +3,7 @@
 \label{appendix:c}
 
 \section{Extreme value distributions} \label{eba:GEV}
+
 The cumulative distribution function for the GEV is $F(y) = \exp\{-t(y)\}$ where
 \begin{align} \label{ebeq:gevt}
   t(y) = \begin{cases}
@@ -14,6 +15,7 @@ The cumulative distribution function for the GEV is $F(y) = \exp\{-t(y)\}$ where
 The probability density function for the GEV is given by $f(y) = \displaystyle \frac{1}{\sigma} t(x)^{\xi + 1} \exp\{-t(y)\}$ where $t(y)$ is defined in \eref{ebeq:gevt}.
 
 \section{Grid approximation to PS density} \label{eba:gridapprox}
+
 The PS($\alpha$) density can be challenging to use because it does not have a closed form.
 From Section 2 of \citep{Stephenson2009}, the density can be expressed as
 \begin{align}
@@ -31,6 +33,7 @@ with
 To evaluate the integral, we use 50 evenly spaced quantiles of a Beta$(0.5, 0.5)$ distribution as the midpoints $B_1, \ldots, B_{50}$, and then use the midpoint rule to evaluate $\displaystyle \int_0^1 g_1(A, B) \dd B$.
 
 \section{Standardized Gaussian kernel functions} \label{eba:gskfunctions}
+
 \citet{Reich2012} use standardized Gaussian kernel functions as their spatial basis functions in the low-rank max-stable model.
 Consider a set of $\bk_1, \ldots, \bk_L$ spatial knot locations in $\calD^2$, the region of interest.
 Then
@@ -40,6 +43,7 @@ Then
 where $|| \cdot ||$ is the Euclidean distance between a site and a knot location.
 
 \section{Principal components} \label{eba:pca}
+
 As a comparison to the EBFs, \fref{ebfig:fire-eigpanel} gives the first six principal components for the fire data, and \fref{ebfig:precip-eigpanel} gives the first six principal components for the precipitation data.
 These figures show that the EBFs resemble the EOFs  for the uncersored precipitation data, but are quite different that the EOF from the censored fire data.
 This is not surprising considering that the censoring results in only a small subset of data being used to estimate dependence.
