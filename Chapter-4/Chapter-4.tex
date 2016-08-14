@@ -14,11 +14,12 @@ A natural spatial model for block maximum at several spatial locations is the ma
 Max-stable processes were also used to model spatial exceedances over a high threshold \citep{Thibaud2013,Huser2014}.
 \Citet{deHaan1984} showed that any max-stable process can be represented in terms of a countable number of spatial processes (e.g., stationary log Gaussian processes), and a finite truncation of this representation has been used for conditional simulation \citep{Wang2011}.
 Fully-Bayesian analysis using max-stable processes is cumbersome for large data sets \citep{Wadsworth2014,Thibaud2013a}.
-One option is to use non-max-stable models that retain extremal dependence such as the skew-t process in \citep{Morris2016}.
+One option is to use non-max-stable models that retain extremal dependence such as the \skewt{} process in \citep{Morris2016}.
 Alternatively, \citet{Reich2012} propose a low-rank method based on spatial kernel functions, and others have used pairwise \citep{Padoan2010,Huser2014} and trivariate \citep{Genton2011} likelihood methods for parameter estimation.
 
 In this paper we propose an empirical basis function (EBF) approach that builds on a finite truncation of the spectral representation, and develops a method-of-moments estimator for the underlying spatial processes.
-Unlike PCA/EOFs, but similar to dictionary learning \citep{Mairal2014} and non-negative matrix factorizations \citep{Lee1999}, the EBFs are not orthogonal, nonetheless these spatial functions can be plotted for exploratory analysis to reveal important spatial trends.
+Unlike PCA/EOFs, but similar to dictionary learning \citep{Mairal2014} and non-negative matrix factorizations \citep{Lee1999}, the EBFs are not orthogonal.
+Nonetheless these spatial functions can be plotted for exploratory analysis to reveal important spatial trends.
 In addition to exploratory analysis, we show that the EBFs can be used for Bayesian inference on the marginal parameters at each location, modeling spatial dependence, and to test for covariate effects.
 By basing the spatial dependence on EBFs, the resulting spatial analysis does not require dubious assumptions such as stationarity.
 In addition, a Bayesian analysis for either block-maximum or point above a threshold is computationally feasible for large datsets because the entire spatial process is represented by a small number of basis functions.
@@ -73,7 +74,11 @@ In particular, $\vartheta(\bs,\bs) = 2^{\alpha}$ for all $\bs$.
 
 To estimate the extremal coefficient function, we consider the process at $n_s$ spatial locations $\bs_1,\ldots,\bs_{n_s}$ and $n_t$ times $t=1,\ldots,n_t$.
 The basis functions are fixed over time, but the random effects and errors are independent over time.
-That is $Z_t(\bs) = \theta_t(\bs) \epsilon_t(\bs)$ where $\theta_t(\bs) = \left(\displaystyle \sum_{l=1}^L B_{l}(\bs)^{1/\alpha}A_{lt}\right)^{\alpha}$, $A_{lt} \iid$ PS$(\alpha)$, and $\epsilon_t(\bs) \iid$ GEV$(1, \alpha, \alpha)$.
+That is 
+\begin{align}
+  Z_t(\bs) = \theta_t(\bs) \epsilon_t(\bs) \quad \mathrm{where} \quad \theta_t(\bs) = \left(\displaystyle \sum_{l=1}^L B_{l}(\bs)^{1/\alpha}A_{lt}\right)^{\alpha},
+\end{align}
+$A_{lt} \iid$ PS$(\alpha)$, and $\epsilon_t(\bs) \iid$ GEV$(1, \alpha, \alpha)$.
 Denote $Y_t(\bs_i) = Y_{it}$, $B_l(\bs_i) = B_{il}$, $T(\bs_i)=T_i$, and $\vartheta(\bs_i,\bs_j) = \vartheta_{ij}$.
 
 In this section we develop an algorithm to estimate the spatial dependence parameter $\alpha$ and the $n_s\times L$ matrix $\bB = \{B_{il}\}$.
@@ -104,8 +109,8 @@ Since all large $q$ give valid estimates, we average over a grid of $q$ with $q_
 Assuming the true EC is smooth over space, the initial estimates ${\hat \vartheta}_{ij}$ can be improved by smoothing.
 Let
 \begin{align} \label{ebeq:EChat2}
-  {\tilde \vartheta}_{ij} = \frac{\displaystyle \sum_{u=1}^{n_s}\sum_{v=1}^{n_s} w_{iu}w_{jv}{\hat \vartheta}_{uv}}
-  {\displaystyle \sum_{u=1}^{n_s}\sum_{v=1}^{n_s} w_{iu}w_{jv}},
+  {\tilde \vartheta}_{ij} = \frac{\sum_{u=1}^{n_s}\sum_{v=1}^{n_s} w_{iu}w_{jv}{\hat \vartheta}_{uv}}
+  {\sum_{u=1}^{n_s}\sum_{v=1}^{n_s} w_{iu}w_{jv}},
 \end{align}
 where $w_{iu} = \exp[-(||\bs_i-\bs_u'||/\phi)^2])$ is the Gaussian kernel function with bandwidth $\phi$.
 The elements ${\hat \vartheta}_{ii}$ do not contribute any information as ${\hat \vartheta}_{ii}=1$ for all $i$ by construction.
@@ -264,7 +269,7 @@ As a comparison, we provide the first six principal components of the fire data 
 
 Given the basis function estimates, we run the MCMC for 35,000 iterations using a burnin period of 25,000 iterations.
 We consider models fit with both EBF and GSK, and fit the model using $L = 5, 10, \ldots, 40$.
-Timing for each setting of $L$ for 1,000 iterations is given in \tref{ebtbl:fire-scores}.
+Timings for each setting of $L$ for 1,000 iterations are given in \tref{ebtbl:fire-scores}.
 These timings come from a single core of an Intel Core i7-5820K Haswell-E processor, using the OpenBLAS optimized BLAS library (\url{http://www.openblas.net}).
 
 \subsection{Results for fire analysis}\label{ebs:results-fire}

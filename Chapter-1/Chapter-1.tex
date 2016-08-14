@@ -7,17 +7,17 @@ A natural spatial model for block maximum at several spatial locations is the ma
 Max-stable processes provide a very flexible framework, but they can be computationally challenging to implement.
 This is because the full likelihood exists for only a few trivial situations.
 
-In addition to computational limitations, the use of max-stable processes also necessitates the use of dependence measures other than measures such as covariances and correlations.
-In extremes analysis, using measures like covariance to describe dependence may introduce other problems because they focus on deviations around the mean of the distribution.
+In addition to computational limitations, the use of max-stable processes also necessitates the use of dependence measures other than covariances and correlations.
+In extremes analysis, using measures like covariance to describe dependence is not reliable because they focus on deviations around the mean of the distribution.
 This is problematic because the finite dimensional marginal distributions of a max-stable process follow a generalized extreme value (GEV) distribution which is not guaranteed to have a finite first moment.
 
 In this chapter, we provide a basic overview of our contributions to solving some of the current issues in EVA.
 The first contribution explores the use of the \skewt{} distribution for modeling spatial extremes.
-This distribution has nice properties for modeling extremes, but it requires some modification to address long-range asymptotic dependence and possible misspecification of distribution.
+This distribution has good extremal properties (i.e. it demonstrates dependence in the tails), but it requires some modification to address long-range asymptotic dependence and possible misspecification of distribution.
 The second contribution is the development of a max-stable model for spatial dependence in rare binary data.
-Spatial methods for binary data traditionally use a Gaussian process, but in the case of rare data, the Gaussian process may not be appropriate due to the lack of asymptotic dependence for the Gaussian process.
+Spatial methods for binary data traditionally use a Gaussian process, but in the case of rare data, the Gaussian process may not be appropriate due to its lack of asymptotic dependence.
 The third contribution is a new method to construct empirical basis functions (EBF) as an exploratory technique to examine spatial dependence in the extremes.
-This method is motivated by Principal Components Analysis (PCA), but differs in that the functions are positive and thus not orthogonal to one another.
+This method is motivated by principal components analysis (PCA), but differs in that the functions are positive and thus not orthogonal to one another.
 Together these three contributions provide new solutions for existing challenges in spatial methods for EVA.
 
 \section{A space-time \skewt{} model}
@@ -26,16 +26,17 @@ To assess the compliance of air quality regulations, the Environmental Protectio
 In the case of ozone, compliance is fixed such that the year's 99th quantile should not exceed 75 parts per billion (ppb), which is high, but not extreme at all locations.
 One standard approach in EVA is to consider the yearly maximum at each spatial location.
 However, this approach is not appropriate because compliance is not based on the maximum at each site.
-The other standard approach is to model threshold exceedances, but in this setting, the threshold is usually selected to be extreme in the data as opposed to being fixed in advance by a regulatory agency.
+The other standard approach is to model threshold exceedances, but the threshold is usually selected to be extreme in the data as opposed to being fixed in advance by a regulatory agency.
 Furthermore, the computing required to fit a max-stable process to a large spatiotemporal dataset can be onerous.
 
-In \cref{chap:two}, we propose a new method that shares some asymptotic dependence characteristics of the max-stable process while retaining some of the nice computing properties of a Gaussian process.
-Our method is space-time model for threshold exceedances based on the \skewt{} process.
-Without some modification, the \skewt{} process has some undesirable characteristics such as long-range asymptotic dependence.
-To address this concern, we incorporate a random partition to permit long-distance asymptotic independence while allowing for sites that are near one another to be asymptotically dependent, and we incorporate thresholding to allow the tails of the data to speak for themselves.
+In \cref{chap:two}, we propose a new method that shares some asymptotic dependence characteristics of the max-stable process while retaining some of the desirable computing properties of a Gaussian process.
+Our method is a space-time model for threshold exceedances based on the \skewt{} process of \citet{Azzalini2014}.
+Without modification, the \skewt{} process has some undesirable characteristics such as long-range asymptotic dependence.
+To address this concern, we incorporate a random partition to permit asymptotic independence between sites that are far apart while allowing for asymptotic dependence between sites that are near to one another.
+We also incorporate censoring in the model.
+This censoring is important because it allows the tails of the data to speak for themselves. 
 Finally, many extremal phenomena (e.g. high temperatures, extreme precipitation) exhibit some type of temporal dependence.
 Therefore we introduce a transformed AR(1) time-series to allow for temporal dependence.
-
 In many cases, this method provides results that show improvements over both Gaussian and max-stable methods.
 
 \section{A spatial model for rare binary events}
@@ -44,15 +45,15 @@ Spatial methods for binary data commonly implement a Gaussian process to account
 However, for rare data, the latent variable is typically extreme, so Gaussian processes may not adequately capture the dependence between observations.
 This is due to the fact that Gaussian processes do not demonstrate asymptotic dependence regardless of the strength of the correlation in the bulk of the data \citep{Sibuya1960}.
 
-As a solution to this problem, in \cref{chap:three} we extend the GEV link \citep{Wang2010} function to allow for a max-stable dependence structure based on the low-rank representation of a max-stable process given by \citet{Reich2012}.
-We provide an exact expression for joint distribution for extremely rare events.
+As a solution to this problem, in \cref{chap:three} we extend the GEV link function \citep{Wang2010} to allow for a max-stable dependence structure based on the low-rank representation of a max-stable process given by \citet{Reich2012}.
+We provide an exact expression for the joint distribution of extremely rare events.
 For events that are moderately rare, Bayesian methods can be used to fit the model.
-The results from this simulation study in this chapter give some evidence to suggest that the proposed method improves performance as rareness increases.
+The results from the simulation study in this chapter give some evidence to suggest that the proposed method improves performance as rareness increases.
 This is further supported by the results from the data analysis.
 
 \section{Empirical basis functions}
 
-Large datasets provide a rich source of data, but sometimes they can lead to onerous computing.
+Large datasets provide a rich source of information, but sometimes they can lead to onerous computing.
 This is especially true for max-stable methods which can be computationally burdensome for as few as 20 simultaneously observed variables \citep{Wadsworth2014}.
 Low-rank methods provide an attractive solution to dealing with this problem.
 One such low-rank max-stable model is given by \citet{Reich2012}.
@@ -60,7 +61,7 @@ In this model, a set of spatial knots are placed throughout the domain of intere
 
 \cref{chap:four} presents the development of EBFs to be used in place of the spatial knots.
 As mentioned previously, these basis functions play a similar role to principal components, but they are positive and thus not orthogonal.
-The basis functions can be plotted as a tool for exploratory data to reveal important spatial trends.
+Despite this difference, the basis functions can be plotted as a tool for exploratory data analysis to reveal important spatial trends.
 They can also be used for Bayesian inference on the marginal parameters, modeling spatial dependence, and testing for covariate effects.
 The basis function representation allows for analysis of both block-maxima data and thresholded data.
 
