@@ -27,6 +27,8 @@
 \definecolor{innovation-blue}{RGB}{66,126,147}
 \definecolor{bio-indigo}{RGB}{65,86,161}
 
+\graphicspath{{../Chapter-2/plots/}{../Chapter-3/plots/}{../Chapter-4/plots/}{./plots/}}
+
 % \usepackage[left=1in,top=1in,right=1in]{geometry}
 % \pdfpageheight 11in
 % \pdfpagewidth 8.5in
@@ -56,9 +58,7 @@ In certain cases (e.g. addition of a period) this may be further clarified to he
   \item In Section 3.3, 2nd line from the end: when \textcolor{red}{\st{the}} $n$ is large.
   \item In Section 3.4, Line 1: Assume that $Z$\textcolor{blue}{$(\bs_1)$} and $Z$\textcolor{blue}{$(\bs_2)$} are both \ldots
   \item In Section 3.4, \ldots dependence between binary variables is Cohen's \textcolor{red}{\st{K}}\textcolor{blue}{k}appa
-  \item Caption for Figure 3.2: Smooth of \textcolor{red}{\st{BS(left) and}} AUROC \textcolor{red}{\st{(right)}} by rareness for each sample technique for the GEV link.
-  \item Caption for Figure 3.3: Smooth of \textcolor{red}{\st{BS(left) and}} AUROC \textcolor{red}{\st{(right)}} by rareness for each sample technique for the logistic link.
-  \item Caption for Figure 3.4: Smooth of \textcolor{red}{\st{BS(left) and}} AUROC \textcolor{red}{\st{(right)}} by rareness for each sample technique for the hotspot link.
+  \item The plots and captions in Figures 3.2 -- 3.4 of the dissertation were incorrect. These have been updated (see \fref{rbfig:simsmooth-gev} -- \fref{rbfig:simsmooth-hot} of errata).
   \item Section 3.6, line 3: We generate data \textcolor{red}{\st{assuming three possible types of}} \textcolor{blue}{from three possible} underlying process\textcolor{blue}{es}.
   \item In Section 3.6.3, end of line 3: Changed $s$ to $\bs$ in $\bX(\bs)^\top \bbeta$
   \item In Section 3.6.5, line 3: $P[Y(\bs$\textcolor{red}{\st{)}}$^*_j\textcolor{blue}{)} = 1]$.
@@ -81,5 +81,38 @@ In certain cases (e.g. addition of a period) this may be further clarified to he
   \item Page 65, Line 3 of final paragraph: There \textcolor{blue}{is} very strong evidence \ldots
   \item Page 66, In the final paragraph, the subscript is changed from $A_{kt}$ to $A_{lt}$ to keep a consistent subscript for the knot.
 \end{itemize}
+
+\begin{figure}[htbp]  % code/analysis/simstudy/combine-tables.R
+  \centering
+  \includegraphics[width=0.47\linewidth]{byrareness-1}
+  \includegraphics[width=0.47\linewidth]{byrareness-2}
+
+  \includegraphics[width=0.47\linewidth]{byrareness-3}
+  \includegraphics[width=0.47\linewidth]{byrareness-4}
+  \caption{Smooth of AUROC by rareness for each sample technique for the GEV link.}
+  \label{rbfig:simsmooth-gev}
+\end{figure}
+
+\begin{figure}[htbp]  % code/analysis/simstudy/combine-tables.R
+  \centering
+  \includegraphics[width=0.47\linewidth]{byrareness-5}
+  \includegraphics[width=0.47\linewidth]{byrareness-6}
+
+  \includegraphics[width=0.47\linewidth]{byrareness-7}
+  \includegraphics[width=0.47\linewidth]{byrareness-8}
+  \caption{Smooth of AUROC by rareness for each sample technique for the logistic link.}
+  \label{rbfig:simsmooth-log}
+\end{figure}
+
+\begin{figure}[htbp]  % code/analysis/simstudy/combine-tables.R
+  \centering
+  \includegraphics[width=0.47\linewidth]{byrareness-9}
+  \includegraphics[width=0.47\linewidth]{byrareness-10}
+
+  \includegraphics[width=0.47\linewidth]{byrareness-11}
+  \includegraphics[width=0.47\linewidth]{byrareness-12}
+  \caption{Smooth of AUROC by rareness for each sample technique for the hotspot link.}
+  \label{rbfig:simsmooth-hot}
+\end{figure}
 
 \end{document}

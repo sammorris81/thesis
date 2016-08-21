@@ -72,11 +72,11 @@
 		\item Brief overview of theory for extremes
 		\item Three principal contributions:
 		\begin{enumerate}[1.]\setlength{\itemsep}{0.5em}
-			\item A spatio-temporal model with flexible tails, asymptotic spatial dependence, and computation on the order of Gaussian models for large space-time datasets (Biometrics)
-			\item Modeling spatial rare binary events with a max-stable extension to the GEV link function (JABES)
-			\item Empirical basis functions to explore and model extremal spatial dependence (AOAS)
+			\item A spatio-temporal \skewt{} model for threshold exceedances
+			\item Modeling spatial rare binary events with a max-stable extension to the GEV link function
+			\item Empirical basis functions to explore and model extremal spatial dependence
 		\end{enumerate}
-	\end{itemize}	
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Motivation}
@@ -100,33 +100,33 @@
 %		\end{figure}
 % \end{frame}
 
-%\begin{frame}{Defining extremes}
-%	\begin{columns}[c]
-%		\column{.45 \linewidth}
-%		\begin{itemize} \setlength{\itemsep}{1em}
-%			\item Key in extreme value analysis is to define extremes
-%			\item Typically done in one of two ways
-%			\begin{itemize}
-%				\item Block maxima (red dots)
-%				\item Values over threshold considered extreme
-%			\end{itemize}
-%		\end{itemize}
-%		
-%		\column{.55\linewidth}
-%		\begin{figure}
-%			\includegraphics[width=1\linewidth, trim=0 0.5in 0 1in]{./plots/define_extreme.pdf}
-%			\caption{Hypothetical monthly data}
-%		\end{figure}
-%	\end{columns}
-%\end{frame}
+% \begin{frame}{Defining extremes}
+% 	\begin{columns}[c]
+% 		\column{.45 \linewidth}
+% 		\begin{itemize} \setlength{\itemsep}{1em}
+% 			\item Key in extreme value analysis is to define extremes
+% 			\item Typically done in one of two ways
+% 			\begin{itemize}
+% 				\item Block maxima (red dots)
+% 				\item Values over threshold considered extreme
+% 			\end{itemize}
+% 		\end{itemize}
+
+% 		\column{.55\linewidth}
+% 		\begin{figure}
+% 			\includegraphics[width=1\linewidth, trim=0 0.5in 0 1in]{./plots/define_extreme.pdf}
+% 			\caption{Hypothetical monthly data}
+% 		\end{figure}
+% 	\end{columns}
+% \end{frame}
 
 \begin{frame}{Non-spatial analysis: Block maxima}
 	\begin{adjustwidth}{1em}{0em}
 		Fisher-Tippett-Gnedenko theorem \vspace{1em}
 		\begin{itemize} \setlength{\itemsep}{1em}
-			\item Let $X_1, \ldots, X_n$ be i.i.d.
-			\item Consider the block maximum $M_n = \max(X_1, \ldots, X_n)$
-			\item If there exist normalizing sequences $a_n > 0$ and $b_n \in \calR$ such that $$\frac{ M_n - b_n }{ a_n } \converged G(z)$$ then $G(z)$ follows a generalized extreme value distribution (GEV) (Gnedenko, 1943)
+			\item Let $X_1, \ldots, X_t$ be i.i.d.
+			\item Consider the block maximum $M_t = \max(X_1, \ldots, X_t)$
+			\item If there exist normalizing sequences $a_t > 0$ and $b_t \in \calR$ such that $$\frac{ M_t - b_t }{ a_t } \converged G(z)$$ then $G(z)$ follows a generalized extreme value distribution (GEV) (Gnedenko, 1943)
 			\item This motivates the use of the GEV for block maximum data
 		\end{itemize}
 	\end{adjustwidth}
@@ -153,20 +153,20 @@
 		\end{itemize}
 		\item Challenges:
 		\begin{itemize}
-			\item Lose information by only considering maximum in a block
+			\item Lose information by only considering maximum of a block
 			\item Underlying data may not be i.i.d.
 		\end{itemize}
 	\end{itemize}
 \end{frame}
- 
+
 \begin{frame}{Other approaches: Threshold methods}
 	\begin{itemize} \setlength{\itemsep}{1em}
-		\item Perhaps there exists a $T$ beyond which values are extreme
+		\item Perhaps there exists a threshold $T$ beyond which values are extreme
 		\item $T$ can be selected using a mean residual life plot.
 		\item Two general approaches:
 		\begin{itemize} \setlength{\itemsep}{0.5em}
 			\item Peaks over threshold: Model $Y > T$ using generalized Pareto distribution
-			\item Censored likelihood: $$F(y) = \begin{cases}
+			\item Censored distribution function: $$F(y) = \begin{cases}
 				F(T), & y \le T \\
 				F(y), & y > T
 			\end{cases}$$
@@ -230,11 +230,11 @@
 
 \begin{frame}{Max-stable processes for spatial data}
 	\begin{itemize} \setlength{\itemsep}{1em}
-		\item Consider i.i.d. spatial processes $x_j(\bs)$, $j = 1, \ldots, J$
-		\item Let $M_J(\bs) = \displaystyle\bigvee_{j=1}^J x_j(\bs_i)$ be the block maximum at site $\bs$
-		\item If there exists normalizing sequences $a_J(\bs)$ and $b_J(\bs)$ such that for all sites, $\bs_i, i = 1, \ldots, d$,
+		\item Consider i.i.d. spatial processes $x_j(\bs)$, $j = 1, \ldots, t$
+		\item Let $M_t(\bs) = \displaystyle\bigvee_{j=1}^t x_j(\bs)$ be the block maximum at site $\bs$
+		\item If there exists normalizing sequences $a_t(\bs)$ and $b_t(\bs)$ such that for all sites, $\bs$,
 		\begin{align*}
-			\frac{M_J(\bs) - b_J(\bs)}{a_J(\bs)} \converged G(\bs)
+			\frac{M_t(\bs) - b_t(\bs)}{a_t(\bs)} \converged G(\bs)
 		\end{align*}
 		then $G(\bs)$ is a max-stable process (Smith, 1990)
 		\item Therefore, max-stable processes are the standard model for block maxima
@@ -244,14 +244,14 @@
 \begin{frame}{Multivariate representations}
 	\begin{itemize} \setlength{\itemsep}{1em}
 		\item Marginally at each site, observations follow a GEV distribution
-		\item For a finite collection of sites the representation for the multivariate GEV (mGEV) is
+		\item For a finite collection of $d$ sites the distribution function for the multivariate GEV (mGEV) is
 		\begin{align*}
 			\Pr(\bZ \le \bz)  &= G^*(\bz) = \exp[-V(\bz)]\\
 			V(\bz)    &= d \int_{\Delta_d} \bigvee_{i = 1}^d \frac{w_i}{z_i} H(\ddd w)
 		\end{align*}
 		where
 		\begin{itemize} \setlength{\itemsep}{0.25em}
-			\item $V(\bz)$ is called the exponent measure
+			\item $V(\bz)$ is called the exponent measure (few closed-form expressions exist)
 			\item $\Delta_d = \{ \bw \in \calR^d_+ \mid w_1 + \cdots + w_d = 1\}$
 			\item $H$ is a probability measure on $\Delta_d$
 			\item $\int_{\Delta_d}w_i H(\ddd w) = 1 / d$ for $i = 1, \ldots, d$
@@ -259,23 +259,23 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Multivariate GEV challenges}
-	\begin{itemize} \setlength{\itemsep}{1em}
-		\item Only a few closed-form expressions for $V(\bz)$ exist
-		\item Two common forms for $V(\bz)$
-		\begin{itemize}
-			\item Symmetric logistic (Gumbel, 1960)
-			\begin{align*}
-				V(\bz) = \left[\sum_{i = 1}^n \left( \frac{ 1 }{ z_i } \right)^{1/\alpha}\right]^\alpha
-			\end{align*}
-			\item Asymmetric logistic (Coles and Tawn, 1991)
-			\begin{align*}
-				V(\bz) = \sum_{l = 1}^L \left[\sum_{i = 1}^n \left(\frac{w_{il}}{z_i} \right)^{1 / \alpha_l} \right]^{\alpha_l}
-			\end{align*}
-			where $w_{il} \in [0, 1]$ and $\sum_{l = 1}^L w_{il} = 1$
-		\end{itemize}
-	\end{itemize}
-\end{frame}
+% \begin{frame}{Multivariate GEV challenges}
+% 	\begin{itemize} \setlength{\itemsep}{1em}
+% 		\item Only a few closed-form expressions for $V(\bz)$ exist
+% 		\item Two common forms for $V(\bz)$
+% 		\begin{itemize}
+% 			\item Symmetric logistic (Gumbel, 1960)
+% 			\begin{align*}
+% 				V(\bz) = \left[\sum_{i = 1}^n \left( \frac{ 1 }{ z_i } \right)^{1/\alpha}\right]^\alpha
+% 			\end{align*}
+% 			\item Asymmetric logistic (Coles and Tawn, 1991)
+% 			\begin{align*}
+% 				V(\bz) = \sum_{l = 1}^L \left[\sum_{i = 1}^n \left(\frac{w_{il}}{z_i} \right)^{1 / \alpha_l} \right]^{\alpha_l}
+% 			\end{align*}
+% 			where $w_{il} \in [0, 1]$ and $\sum_{l = 1}^L w_{il} = 1$
+% 		\end{itemize}
+% 	\end{itemize}
+% \end{frame}
 
  %\begin{frame}{Multivariate peaks over threshold}
  %  \begin{itemize} \setlength{\itemsep}{1em}
@@ -293,7 +293,7 @@
 	\begin{itemize}\setlength{\itemsep}{1em}
 		\item \alert{Problem}: Covariance and correlation focuses on deviations around the mean and not the extremes
 		\item Want dependence measure to capture likelihood of seeing values that are jointly extreme
-		\item Two common measures of dependence:
+		\item Two common measures of dependence (bivariate):
 		\begin{itemize}\setlength{\itemsep}{0.5em}
 			\item Extremal coefficient $\vartheta \in (1, 2)$: $$\mbox{Prob}[Z(\bs_1)<c, Z(\bs_2)<c] = \mbox{Prob}[Z(\bs_1)<c]^{\vartheta(\bs_1,\bs_2)}$$
 			\item $\chi \in (0, 1)$ (Coles, 1999): $$\chi(\bs_1,\bs_2) = \lim_{c\rightarrow \infty}\mbox{Prob}[Z(\bs_1)>c|Z(\bs_2)>c]$$
@@ -328,7 +328,7 @@
 		\normalsize
 		Under revision: \\
 		\emph{Biometrics}
-	\end{center}	
+	\end{center}
 \end{frame}
 
 \begin{frame}{Motivation}
@@ -424,18 +424,19 @@ A spatial \skewt{} process (Azzalini and Capitanio, 2014)  resembles a GP but ex
 
 \begin{frame}{Local \skewt{} process}
 	\begin{itemize}\setlength\itemsep{1em}
+    \item Consider a set of spatial knots for day $t$
 		\item Let the knots $\bv_{t1},...,\bv_{tK}$ follow a homogeneous Poisson process over the domain of interest (in practice we fix $K$)
 		\item The knots partition the domain if we assign location $\bs$ to subregion $k=\argmin_{l}||\bs-\bv_{tl}||$
-		\item Associated with each is \vspace{0.5em}
-		\begin{itemize} \setlength{\itemsep}{0.5em}
-			\item $z_{tk}\sim\mbox{Normal}(0,1)$
-			\item $\sigma_{tk}^2\sim\mbox{InvGamma}(a/2,b/2)$
-		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Local \skewt{} process}
 	\begin{itemize}\setlength{\itemsep}{1em}
+    \item Associated with each is \vspace{0.5em}
+    \begin{itemize} \setlength{\itemsep}{0.5em}
+      \item $z_{tk}\sim\mbox{Normal}(0,1)$
+      \item $\sigma_{tk}^2\sim\mbox{InvGamma}(a/2,b/2)$
+    \end{itemize}
 		\item If $\bs$ is in subregion $k$ then $$Y_t(\bs) = \bX(\bs)^T\bbeta +\lambda\sigma_{tk}|z_{tk}| + \sigma_{tk}v_t(\bs)\nonumber$$
 		\item The marginal distribution remains a $t$, but partitioning breaks long-range spatial dependence
 	\end{itemize}
@@ -521,7 +522,7 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
  	\end{itemize}
  \end{frame}
 
- \begin{frame}{Fitted 99$^{th}$ percentile - Gaussian}
+ \begin{frame}{Fitted 99$^{th}$ percentiles}
  	\begin{center}
  		\includegraphics[width=0.45\linewidth]{q99gaus}
  		\includegraphics[width=0.45\linewidth]{q99skewtTS}
@@ -554,8 +555,8 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
 		\vspace{-3em}
 		\includegraphics[width = 0.9\linewidth]{plant-census}
 		\vspace{-1em}
-		
-		1-km$^2$ census of 2 species in PR China
+
+		1-km$^2$ area in PR China.
 	\end{center}
 	\begin{itemize} \setlength{\itemsep}{0.5em}
 		\item \tamarix{} (left) Rareness: $\approx 6\%$
@@ -582,6 +583,7 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
 
 \begin{frame}{Hierarchical max-stable representation}
 	\begin{itemize} \setlength{\itemsep}{1em}
+    \item Representation from Reich and Shaby (2012)
 		\item Consider a set of $L$ knots, $\bv_1, \ldots, \bv_L$
 		\item Standardized Gaussian weights $w_l(\bs_i)$
 		\begin{align*}
@@ -599,9 +601,9 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
 		\end{align*}
 		where
 		\begin{itemize} \setlength{\itemsep}{0.5em}
-			\item $A_l$ are i.i.d. positive stable random effects
-			\item $w_l(\bs)$ are a set of non-negative scaled kernel basis functions, scaled so that $\sum_{l = 1}^L w_l(\bs) = 1$
-			\item $\alpha \in (0, 1)$ is a parameter controlling strength of spatial dependence (0: high, 1: independent)
+			\item $A_l \iid \text{PS}(\alpha)$ are positive stable random effects
+			\item $w_l(\bs)$ are scaled kernel function so that $\sum_{l = 1}^L w_l(\bs) = 1$
+			\item $\alpha \in (0, 1)$ is a parameter controlling strength of spatial dependence in residuals (0: high, 1: independent)
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -609,7 +611,7 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
 \begin{frame}{Hierarchical max-stable representation}
 	\begin{itemize} \setlength{\itemsep}{1em}
 		\item Let $Z(\bs)$ be a max-stable process
-		\item Conditioned on the random effects $A_1, \ldots, A_L$, then 
+		\item Conditioned on the random effects $A_1, \ldots, A_L$, then
 		\begin{align*}
 		Z(\bs_i) \mid A_l &\ind \text{GEV}[\mu^*(\bs_i), \sigma^*(\bs_i), \xi^*] \\
 		A_l &\iid \text{PS}(\alpha)
@@ -631,14 +633,10 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
 		Y(\bs_i) | A_l &\ind \text{Bern}\{\pi(\bs_i)\}\\
 		\pi(\bs_i) &= 1 - \exp\left\{ \sum_{l = 1}^L A_l \left[\frac{ w_l (\bs_i) }{z(\bs_i)} \right]^{1 / \alpha} \right\}\\
 		\end{align*} \vspace{-0.5em}
-		where
-		\begin{align*}
-		z(\bs_i) &= \begin{cases}
+		where $$z(\bs_i) = \begin{cases}
 		(1 - \xi \bX(\bs_i) \bbeta)^{-1 / \xi} & \xi \neq 0 \\
 		\exp(-\bX(\bs_i) \bbeta) & \xi = 0
-		\end{cases}\\
-		A_l &\iid \text{PS}(\alpha)
-		\end{align*}
+		\end{cases}$$
 	\end{itemize}
 \end{frame}
 
@@ -695,24 +693,26 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
 			\item GEV model shows small advantage over others for GEV link with $n = 250$ and cluster sampling
 			\item Probit wins in other settings, but GEV is similar
 		\end{itemize}
-		\item Results provide some evidence of advantage for GEV method as rareness increases	
+		\item Results provide some evidence of advantage for GEV method as rareness increases
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Simulation study: Results}
 	\begin{center}
 		\includegraphics[width=0.33\linewidth]{byrareness-3}
-		\includegraphics[width=0.33\linewidth]{byrareness-4}
-		\includegraphics[width=0.33\linewidth]{byrareness-6}
-		
-		Loess smooth of AUROC by rareness for GEV (left, center) and logistic (right) link
+    \includegraphics[width=0.33\linewidth]{byrareness-4}
+
+    \includegraphics[width=0.33\linewidth]{byrareness-6}
+    \includegraphics[width=0.33\linewidth]{byrareness-7}
+
+		Loess smooth of AUROC by rareness for GEV (top) and logistic (bottom) link functions
 	\end{center}
 \end{frame}
 
 \begin{frame}{Data analysis}
 	\begin{itemize}\setlength{\itemsep}{1em}
 		\item Census data for \tamarix{} ($\approx 6\%$) and \hedysarum{} ($\approx 0.5\%$) in 1-km$^2$ region of PR China
-		\item Analysis similar to simulation study 
+		\item Analysis similar to simulation study
 		\begin{itemize} \setlength{\itemsep}{0.5em}
 			\item Sample types: Cluster, Simple Random Sample
 			\item Sample sizes: $n = 100$, $250$ initial sites
@@ -734,7 +734,7 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
 	\begin{center}
 		\includegraphics[width=0.47\textwidth]{data-perf-species2-100-clu}
 		\includegraphics[width=0.47\textwidth]{data-perf-species2-250-clu}
-		
+
 		ROC curves for \hedysarum{}
 	\end{center}
 \end{frame}
@@ -797,7 +797,7 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
 
 \begin{frame}{Estimating the EBFs, $B_l(\bs)$}
 	\begin{itemize}\setlength\itemsep{1em}
-		\item The objective function to estimate the $B_l$ is 
+		\item The objective function to estimate the $B_l$ is
 		$$ \sum_{i<j}\left[\hat{\vartheta}(\bs_i,\bs_j) - \vartheta(\bs_i,\bs_j)\right]^2$$
 		where $\vartheta(\bs_i,\bs_j)$ is a function of $B_l$
 		\item The EBFs must satisfy $B_l(\bs)>0$ and $\sum_{l}B_l(\bs)=1$ for all $\bs$
@@ -878,7 +878,7 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
 \begin{frame}{GA Fires -- picking the threshold}
 	\begin{center}
 		\includegraphics[width=1\textwidth]{fire-mrl-plots}
-		
+
 		Mean residual life plot for fire data. Vertical line at sample 95th quantile.
 	\end{center}
 \end{frame}
@@ -887,7 +887,7 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
 	\begin{center}
 		\includegraphics[height=0.95\textheight]{fire-spatial-q95}
 		\vspace{-3em}
-		
+
 		Spatially smoothed 95th percentile
 	\end{center}
 \end{frame}
