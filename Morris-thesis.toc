@@ -1,13 +1,13 @@
 \contentsline {chapter}{LIST OF TABLES}{vii}{section*.5}
 \contentsline {chapter}{LIST OF FIGURES}{viii}{section*.6}
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
-\contentsline {section}{\numberline {1.1}A space-time \unhbox \voidb@x \hbox {skew-\emph {t}} {} model}{2}{section.1.1}
+\contentsline {section}{\numberline {1.1}A space-time \unhbox \voidb@x \hbox {skew-\emph {t}}{} model}{2}{section.1.1}
 \contentsline {section}{\numberline {1.2}A spatial model for rare binary events}{3}{section.1.2}
 \contentsline {section}{\numberline {1.3}Empirical basis functions}{4}{section.1.3}
-\contentsline {chapter}{\numberline {2}A Space-time \unhbox \voidb@x \hbox {Skew-\emph {t}} {} Model for Threshold Exceedances}{5}{chapter.2}
+\contentsline {chapter}{\numberline {2}A Space-time \unhbox \voidb@x \hbox {Skew-\emph {t}}{} Model for Threshold Exceedances}{5}{chapter.2}
 \contentsline {section}{\numberline {2.1}Introduction}{5}{section.2.1}
 \contentsline {section}{\numberline {2.2}Spatial skew processes}{8}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}\unhbox \voidb@x \hbox {Skew-\emph {t}} {} process}{9}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.1}\unhbox \voidb@x \hbox {Skew-\emph {t}}{} process}{9}{subsection.2.2.1}
 \contentsline {subsection}{\numberline {2.2.2}Extremal dependence}{10}{subsection.2.2.2}
 \contentsline {section}{\numberline {2.3}Extending the model}{10}{section.2.3}
 \contentsline {subsection}{\numberline {2.3.1}Censoring to focus on the tail}{11}{subsection.2.3.1}
@@ -55,12 +55,12 @@
 \contentsline {chapter}{BIBLIOGRAPHY}{69}{chapter*.33}
 \contentsline {chapter}{APPENDICES}{73}{chapter*.34}
  \renewcommand {\cftchappresnum }{Appendix } \renewcommand {\cftchapnumwidth }{\appendixwidth } \renewcommand {\cftchapfont }{\cftsecfont } \setlength {\cftbeforechapskip }{\cftbeforesecskip } \setlength {\cftchapindent }{\cftsecindent } \renewcommand {\cftchappagefont }{\cftchapfont } \setlength {\cftsecindent }{\cftsubsecindent } \addtolength {\cftsubsecindent }{\cftsecnumwidth } \setcounter {tocdepth}{\c@ncsu@appendixtocdepth } 
-\contentsline {chapter}{\numberline {A}A Space-time \unhbox \voidb@x \hbox {Skew-\emph {t}} {} Model for Threshold Exceedances}{74}{appendix.A}
+\contentsline {chapter}{\numberline {A}A Space-time \unhbox \voidb@x \hbox {Skew-\emph {t}}{} Model for Threshold Exceedances}{74}{appendix.A}
 \contentsline {section}{\numberline {A.1}MCMC details}{74}{section.A.1}
 \contentsline {section}{\numberline {A.2}Posterior distributions}{77}{section.A.2}
 \contentsline {section}{\numberline {A.3}Proof that $\displaystyle \qopname \relax m{lim}_{h \rightarrow \infty } \pi (h) = 0$}{80}{section.A.3}
-\contentsline {section}{\numberline {A.4}\unhbox \voidb@x \hbox {Skew-\emph {t}} {} distribution}{81}{section.A.4}
-\contentsline {section}{\numberline {A.5}Other \unhbox \voidb@x \hbox {skew-\emph {t}} {} parameterizations}{83}{section.A.5}
+\contentsline {section}{\numberline {A.4}\unhbox \voidb@x \hbox {Skew-\emph {t}}{} distribution}{81}{section.A.4}
+\contentsline {section}{\numberline {A.5}Other \unhbox \voidb@x \hbox {skew-\emph {t}}{} parameterizations}{83}{section.A.5}
 \contentsline {section}{\numberline {A.6}Temporal dependence}{84}{section.A.6}
 \contentsline {section}{\numberline {A.7}Brier scores for ozone prediction}{84}{section.A.7}
 \contentsline {section}{\numberline {A.8}Simulation study results}{85}{section.A.8}

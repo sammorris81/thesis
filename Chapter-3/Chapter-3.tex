@@ -18,7 +18,7 @@ Max-stable processes are extremely flexible, but are often challenging to work w
 To address this challenge, methods have been proposed that implement composite likelihood techniques for max-stable processes \citep{Padoan2010,Genton2011,Huser2014}.
 Composite likelihoods have also been used to model binary spatial data \citep{Heagerty1998}, but not using max-stable processes.
 As an alternative to these composite approaches, \citet{Reich2012} present a hierarchical model that implements a low-rank representation for a max-stable process.
-We chose to use this low-rank representation for our rare binary spatial regression model.
+We choose to use this low-rank representation for our rare binary spatial regression model.
 Our model builds on related work by \citet{Wang2010} who use a GEV link for non-spatial binary data.
 The proposed model generalizes this to have spatial dependence.
 
@@ -39,20 +39,20 @@ We set $\sigma = 1$ for identifiability because only the sign and not the scale 
 If $\bX(\bs)^\top \bbeta = \mu$ for all $\bs$, then $P(Y = 1)$ is the same for all observations, and the two parameters $\mu$ and $\xi$ are not individually identifiable.
 So when there are no covariates, we fix $\xi = 0$.
 Although $\bbeta$ and $\xi$ could be permitted to vary across space, we assume that they are constant across $\calD$.
-At spatial location $\bs$, the marginal distribution (over $Z(\bs)$) is 
+At spatial location $\bs$, the marginal distribution (over $Z(\bs)$) is
 \begin{align}
 	P[Y(\bs) = 1] = 1 - \exp\left\{ -\displaystyle\frac{ 1 }{ z(\bs)} \right\}
-\end{align} 
+\end{align}
 where $z(\bs) = \left[1 - \xi \bX(\bs)^\top \bbeta\right]^{1 / \xi}$.
 This is the same as the marginal distribution given by \citet{Wang2010}.
 
-For a finite collection of locations $\bs_1, \ldots, \bs_n,$ we denote by $\bY = [Y(\bs_1), \ldots, Y(\bs_n)]^T$ the vector of observations.
-The spatial dependence of $\bY$ is determined by the joint distribution of the latent variable $\bZ = [Z(\bs_1),\ldots, Z(\bs_n)]^T$.
+For a finite collection of locations $\bs_1, \ldots, \bs_n,$ we denote by $\bY = [Y(\bs_1), \ldots, Y(\bs_n)]^\top$ the vector of observations.
+The spatial dependence of $\bY$ is determined by the joint distribution of the latent variable $\bZ = [Z(\bs_1),\ldots, Z(\bs_n)]^\top$.
 To incorporate spatial dependence, we consider the hierarchical representation of the max-stable process proposed in \citet{Reich2012}.
-Consider a set of positive stable (PS) random effect $A_1, \ldots, A_L \iid \text{PS}(\alpha)$ associated with spatial knots $\bv_1, \ldots, \bv_L \in \mathbb{R}^2$.
+Consider a set of positive stable (PS) random effects $A_1, \ldots, A_L \iid \text{PS}(\alpha)$ associated with spatial knots $\bv_1, \ldots, \bv_L \in \mathbb{R}^2$.
 The hierarchical model is given by
 \begin{align} \label{rbeq:hiermodel}
-\bZ(\bs_i) | A_1, \ldots, A_L \ind \text{GEV}[\bX(\bs_i)^\top \bbeta + \theta(\bs_i), \alpha \theta(\bs_i), \xi \alpha] \quad \text{and} \quad \theta(\bs_i) = \left[\sum_{l = 1}^L A_l w_l (\bs_i)^{1 / \alpha} \right]^\alpha
+Z(\bs_i) | A_1, \ldots, A_L \ind \text{GEV}\left[\bX(\bs_i)^\top \bbeta + \frac{\theta(\bs_i)^\xi - 1}{\xi}, \alpha \theta(\bs_i), \xi \alpha\right] \quad \text{and} \quad \theta(\bs_i) = \left[\sum_{l = 1}^L A_l w_l (\bs_i)^{1 / \alpha} \right]^\alpha
 \end{align}
 where $w_{l}(\bs_i) > 0$ are a set of $L$ weight functions that vary smoothly across space and satisfy the condition \mbox{$\displaystyle \sum_{l = 1}^L w_l(\bs) = 1$} for all $\bs$, and $\alpha\in(0,1)$ determines the strength of dependence, with $\alpha$ near zero giving strong dependence and $\alpha=1$ giving joint independence.
 
@@ -100,7 +100,7 @@ When $n = 2$, the probability mass function is given by
 \end{cases}
 \end{align}
 where $\varphi(\bz) = \exp \left\{ - \displaystyle \sum_{ l = 1 }^{ L } \left[ \left( \displaystyle \frac{ w_{ l }(\bs_i) }{ z(\bs_i) } \right)^{1/\alpha} + \left( \displaystyle \frac{ w_{l }(\bs_j)}{z(\bs_j)} \right)^{1/\alpha} \right]^{\alpha} \right\}$.
-For more than two locations, we are also able to compute the exact likelihood when the $n$ is large but the number of events $K = \displaystyle \sum_{i = 1}^n Y(\bs_i)$ is small, as might be expected for very rare events, see \aref{rba:likelihoodderivation}.
+For more than two locations, we are also able to compute the exact likelihood when $n$ is large but the number of events $K = \displaystyle \sum_{i = 1}^n Y(\bs_i)$ is small, as might be expected for very rare events, see \aref{rba:likelihoodderivation}.
 
 % - Assume Z1 and Z2 are both GEV(\beta,1,1) so that the probability of Yi=1 decreases to zero as beta increases
 % - A common measure of dependence between binary variables is Cohen’s Kappa, K(beta) =
@@ -111,8 +111,8 @@ For more than two locations, we are also able to compute the exact likelihood wh
 
 \section{Quantifying spatial dependence} \label{rbs:spatdep}
 
-Assume that $Z_1$ and $Z_2$ are both GEV$(\beta, 1, 1)$ so that $P(Y_i = 1)$ decreases to zero as $\beta$ increases.
-A common measure of dependence between binary variables is Cohen's Kappa \citep{Cohen1960},
+Assume that $Z(\bs_1)$ and $Z(\bs_2)$ are both GEV$(\beta, 1, 1)$ so that $P(Y_i = 1)$ decreases to zero as $\beta$ increases.
+A common measure of dependence between binary variables is Cohen's kappa \citep{Cohen1960},
 \begin{align}
 \kappa(\beta) = \frac{P_A - P_E}{1 - P_E}
 \end{align}
@@ -153,7 +153,7 @@ The code for this is available online through \url{https://github.com/sammorris8
 \section{Simulation study}\label{rbs:sim}
 
 For our simulation study, we generate $n_m = 50$ datasets under 12 different simulation settings to explore the impact of sample size, sampling technique, and misspecification of link function.
-We generate data assuming three possible types of underlying process.
+We generate data from three possible underlying processes.
 For each of the underlying processes, we generate complete datasets on a $100 \times 100$ rectangular grid of $n = 10,000$ locations.
 If a simulated population is generated and $K < 50$, it is discarded and a new simulated population is generated.
 This is done to guarantee that the rarity for all datasets is no lower than $0.5\%$.
@@ -209,7 +209,7 @@ For the hotspot setting, when $n_s = 100$, there are on average $110$ sites and 
 
 For each dataset, we fit the model using three different models: the proposed spatial GEV model, a spatial probit model, and a spatial logistic model.
 Logistic and probit methods assume the underlying process is Gaussian.
-In this case, we assume that $Z(\bs)$ follows a Gaussian process with mean $\bX(s)^\top \bbeta$ and variance $\tau^2$.
+In this case, we assume that $Z(\bs)$ follows a Gaussian process with mean $\bX(\bs)^\top \bbeta$ and variance $\tau^2$.
 For the simulation study, we use an intercept only model.
 The marginal distributions are given by
 \begin{align}
@@ -241,8 +241,8 @@ For both the spatial probit and logistic models, the prior on the variance term 
 
 For each dataset, we fit the model using the $n_s$ observations as a training set, and validate the model's predictive power at the remaining grid points.
 Let $\bs^*_j$ be the $j$th site in the validation set.
-From the posterior distributions of the parameters we can calculate $P[Y(\bs)^*_j = 1]$.
-To obtain $\hat{P}[Y(\bs^*_j) = 1]$, we take the average of the posterior distribution for each $j$.
+From the posterior distributions of the parameters we can calculate $P[Y(\bs^*_j) = 1]$.
+To obtain $\hat{P}[Y(\bs^*_j) = 1]$, we take the average of the posterior distribution for each $\bs^*_j$.
 We consider a few different metrics for comparing model performance.
 One score is the Brier scores \citep[BS]{Gneiting2007}.
 The Brier score for predicting an occurrence at site $\bs$ is given by $\{I[Y(\bs)=1] - \hat{P}[Y(\bs)=1]\}^2$.
@@ -256,7 +256,7 @@ We then average AUROC across all datasets for each method and setting to obtain 
 
 Overall, we find that the spatial probit model actually performs quite well in all cases.
 \tref{rbtbl:simbsresults} gives the Brier scores and AUROC for each of the methods.
-Looking at Brier scores, we see that our model is outperformed by the probit model in all cases, by the logistic models in many settings.
+Looking at Brier scores, we see that our model is outperformed by the probit model in all cases, and by the logistic models in many settings.
 For AUROC, in a few of the settings, we do demonstrate a small improvement over the probit and logistic models.
 Because these results are somewhat surprising, we also considered the performance metrics by rareness of the data.
 We plot the AUROC for each link function with all sampling settings in \fref{rbfig:simsmooth-gev} -- \fref{rbfig:simsmooth-hot} using a Loess smoother.
@@ -266,10 +266,10 @@ These plots give evidence to suggest that as rareness increases, the spatial GEV
 	\centering
 	\includegraphics[width=0.47\linewidth]{plots/byrareness-1}
 	\includegraphics[width=0.47\linewidth]{plots/byrareness-2}
-	
+
 	\includegraphics[width=0.47\linewidth]{plots/byrareness-3}
-	\includegraphics[width=0.47\linewidth]{plots/byrareness-4}	
-	\caption{Smooth of BS (left) and AUROC (right) by rareness for each sample technique for the GEV link.}
+	\includegraphics[width=0.47\linewidth]{plots/byrareness-4}
+	\caption{Smooth of AUROC by rareness for each sample technique for the GEV link.}
 	\label{rbfig:simsmooth-gev}
 \end{figure}
 
@@ -277,10 +277,10 @@ These plots give evidence to suggest that as rareness increases, the spatial GEV
 	\centering
 	\includegraphics[width=0.47\linewidth]{plots/byrareness-5}
 	\includegraphics[width=0.47\linewidth]{plots/byrareness-6}
-	
+
 	\includegraphics[width=0.47\linewidth]{plots/byrareness-7}
-	\includegraphics[width=0.47\linewidth]{plots/byrareness-8}	
-	\caption{Smooth of BS (left) and AUROC (right) by rareness for each sample technique for the logistic link.}
+	\includegraphics[width=0.47\linewidth]{plots/byrareness-8}
+	\caption{Smooth of AUROC by rareness for each sample technique for the logistic link.}
 	\label{rbfig:simsmooth-log}
 \end{figure}
 
@@ -288,10 +288,10 @@ These plots give evidence to suggest that as rareness increases, the spatial GEV
 	\centering
 	\includegraphics[width=0.47\linewidth]{plots/byrareness-9}
 	\includegraphics[width=0.47\linewidth]{plots/byrareness-10}
-	
+
 	\includegraphics[width=0.47\linewidth]{plots/byrareness-11}
-	\includegraphics[width=0.47\linewidth]{plots/byrareness-12}	
-	\caption{Smooth of BS (left) and AUROC (right) by rareness for each sample technique for the hotspot link.}
+	\includegraphics[width=0.47\linewidth]{plots/byrareness-12}
+	\caption{Smooth of AUROC by rareness for each sample technique for the hotspot link.}
 	\label{rbfig:simsmooth-hot}
 \end{figure}
 
@@ -455,14 +455,14 @@ Therefore, it may be useful to conduct more research on rare datasets or through
 \begin{figure}
 	% code/analysis/swd/combine-tables.R
 	\includegraphics[width=\linewidth]{plots/data-perf-species1}
-	\caption{Vertically averaged ROC curves for \emph{Tamarix ramosissima}.}
+	\caption{Vertically averaged ROC curves for \tamarix{}.}
 	\label{rbfig:data1roc}
 \end{figure}
 
 \begin{figure}
 	% code/analysis/swd/combine-tables.R
 	\includegraphics[width=\linewidth]{plots/data-perf-species2}
-	\caption{Vertically averaged ROC curves for \emph{Hedysarum scoparium}.}
+	\caption{Vertically averaged ROC curves for \hedysarum{}.}
 	\label{rbfig:data2roc}
 \end{figure}
 
@@ -494,7 +494,7 @@ Therefore, it may be useful to conduct more research on rare datasets or through
 				\bottomrule
 			\end{tabular}
 		}
-		
+
 		\subfloat[\hedysarum]{
 			\begin{tabular}{c c ccc c ccc c rrr}
 				\toprule

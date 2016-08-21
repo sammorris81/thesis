@@ -1,12 +1,12 @@
-\chapter{Empirical Basis Functions for Max-Stable Spatial Dependence} 
+\chapter{Empirical Basis Functions for Max-Stable Spatial Dependence}
 \chaptermark{Empirical Basis Functions}
 \label{chap:four}
 
 \section{Introduction}\label{ebs:intro}
 
-The spatial Extreme Value Analysis (EVA) literature is expanding rapidly \citep{Davison2012} to meet the demands of researchers to improve estimates of rare-event probabilities by borrowing information across space and to estimate the probability of extreme events occurring simultaneously at multiple locations.
+The spatial extreme value analysis (EVA) literature is expanding rapidly \citep{Davison2012} to meet the demands of researchers to improve estimates of rare-event probabilities by borrowing information across space and to estimate the probability of extreme events occurring simultaneously at multiple locations.
 Environmental datasets commonly include observations from hundreds or thousands of locations, and advanced tools are required to explore and analyze these data.
-For Gaussian data, Principle Components Analysis \citep[PCA]{Everitt2008}, also known as Empirically Orthogonal Functions \citep[EOF]{Toggweiler2001}, has proven to be a powerful tool to study correlation between spatial locations; understand the most important large-scale spatial features; and reduce the dimension of the problem to allow for simple computation even for massive datasets.
+For Gaussian data, principle components analysis \citep[PCA]{Everitt2008}, also known as empirically orthogonal functions \citep[EOF]{Toggweiler2001}, has proven to be a powerful tool to study correlation between spatial locations; understand the most important large-scale spatial features; and reduce the dimension of the problem to allow for simple computation even for massive datasets.
 Computation and exploration are arguably more difficult for EVA than Gaussian data, yet to our knowledge no tool analogous to spatial PCA has been developed for EVA.
 
 In EVA, extremes are separated from the bulk of the distribution by either analyzing only points above a threshold or block maximums \citep{Coles2001}, e.g., the annual maximum of the daily precipitation.
@@ -22,7 +22,7 @@ Unlike PCA/EOFs, but similar to dictionary learning \citep{Mairal2014} and non-n
 Nonetheless these spatial functions can be plotted for exploratory analysis to reveal important spatial trends.
 In addition to exploratory analysis, we show that the EBFs can be used for Bayesian inference on the marginal parameters at each location, modeling spatial dependence, and to test for covariate effects.
 By basing the spatial dependence on EBFs, the resulting spatial analysis does not require dubious assumptions such as stationarity.
-In addition, a Bayesian analysis for either block-maximum or point above a threshold is computationally feasible for large datsets because the entire spatial process is represented by a small number of basis functions.
+In addition, a Bayesian analysis for either block-maximum or point above a threshold is computationally feasible for large datasets because the entire spatial process is represented by a small number of basis functions.
 
 The paper proceeds as follows. In \sref{ebs:model} we present the low-rank model. \sref{ebs:estimation} describes the algorithm used to estimate the spatial basis functions, and \sref{ebs:MCMC} describes the model fit using Markov chain Monte Carlo (MCMC) methods. In \sref{ebs:analysis} we demonstrate the use of the EBFs for an analysis of wildfire data in Georgia and precipitation data in the eastern U.S. Lastly in \sref{ebs:con} we give some summary conclusions and a brief discussion of the findings.
 
@@ -34,7 +34,7 @@ We begin by specifying a spatial model for the complete data $Y(\bs)$ and then u
 Although the model presented implements a censored likelihood, the model also can fit uncensored data (such as block-maxima) by setting $T(\bs) = -\infty$.
 
 Spatial dependence is captured by modeling $Y(\bs)$ as a max-stable process \citep{deHaan2006}.
-Max-stable processes have generalized extreme value (GEV; see \aref{eba:GEV}) marginal distribution.
+Max-stable processes have generalized extreme value (GEV; see \aref{eba:GEV}) marginal distributions.
 The GEV has three parameters: location $\mu(\bs)$; scale $\sigma(\bs)$; and shape $\xi(\bs)$.
 Spatial dependence is present both in the GEV parameters but also the standardized residual process
 \begin{align} \label{ebeq:Y2Z}
@@ -43,12 +43,13 @@ Spatial dependence is present both in the GEV parameters but also the standardiz
 which has unit $\Frechet$ (i.e., GEV with location, scale, and shape all equal one) marginal distribution for all $\bs$.
 
 Our objective is to identify a low-rank model for the spatial dependence of $Z(\bs)$.
-\Citet[Chapter 9]{deHaan1984} show that any max-stable process can be written as
+\Citet[Chapter 9]{deHaan2006} show that any max-stable process can be written as
 \begin{align} \label{ebeq:spectral}
   Z(\bs) = \bigvee_{l = 1}^{\infty} B(\bs, \bk_l)A_{l}
 \end{align}
 where the functions $B(\bs, \bk_l)$ satisfy $B(\bs, \bk_l) > 0$ for all $\bs$ and $\int B(\bs, \bk_l) \dd \bk_l = 1$ for all $\bs$, and $(\bk_l, A_l)$ for $l=1,\ldots,\infty$ are a Poisson process with intensity measure $\dd A \dd \bk/A^2$.
-In many representations of max-stable process, such as \citet{Smith1990} and \citet{Reich2012}, the $\bk_l$ are spatial locations that represent the center of process $l$; however, in our proposed method the basis functions are not associated with one particular location and so to simplify notation we let $B_l(\bs) = B(\bs; \bk_l)$
+In many representations of max-stable process, such as \citet{Smith1990} and \citet{Reich2012}, the $\bk_l$ are spatial locations that represent the center of process $l$; however, in our proposed method the basis functions are not associated with one particular location.
+So to simplify notation we let $B_l(\bs) = B(\bs; \bk_l)$.
 
 To arrive at a low-rank model, we assume there are a finite and known number of spatial basis functions $B_1(\bs), \ldots, B_L(\bs)$ that explain the important spatial variation in the process.
 As in de Haan's expansion, the basis functions are restricted so that $B_l(\bs) > 0$ and $\displaystyle \sum_{l = 1}^L B_l(\bs) = 1$ for all $\bs$.
@@ -58,7 +59,7 @@ The spatial component is
 \begin{align} \label{ebeq:theta}
   \theta(\bs) = \left(\sum_{l=1}^LB_{l}(\bs)^{1/\alpha}A_{l}\right)^{\alpha}.
 \end{align}
-If $B_{l}(\bs)>0$, $\displaystyle \sum_{l=1}^LB_{l}(\bs)=1$ for all $\bs$, and the $A_{l}$ have positive stable (PS; \aref{eba:gridapprox}) distribution \mbox{$A_{l}\iid$ PS$(\alpha)$}, then $Z(\bs)$ is max-stable and has unit $\Frechet$ marginal distributions.
+If $B_{l}(\bs)>0$, $\displaystyle \sum_{l=1}^LB_{l}(\bs)=1$ for all $\bs$, and the $A_{l}$ have positive stable (PS; \aref{eba:gridapprox}) distribution \mbox{$A_{l}\iid$ PS$(\alpha)$}, then $Z(\bs)$ is max-stable and has unit \Frechet marginal distributions.
 
 Extremal spatial dependence for max-stable processes can be summarized by the extremal coefficient \citep[EC]{Schlather2003} $\vartheta(\bs_1, \bs_2)\in[1,2]$, where
 \begin{align} \label{ebeq:ECdev}
@@ -74,7 +75,7 @@ In particular, $\vartheta(\bs,\bs) = 2^{\alpha}$ for all $\bs$.
 
 To estimate the extremal coefficient function, we consider the process at $n_s$ spatial locations $\bs_1,\ldots,\bs_{n_s}$ and $n_t$ times $t=1,\ldots,n_t$.
 The basis functions are fixed over time, but the random effects and errors are independent over time.
-That is 
+That is
 \begin{align}
   Z_t(\bs) = \theta_t(\bs) \epsilon_t(\bs) \quad \mathrm{where} \quad \theta_t(\bs) = \left(\displaystyle \sum_{l=1}^L B_{l}(\bs)^{1/\alpha}A_{lt}\right)^{\alpha},
 \end{align}
@@ -128,12 +129,12 @@ Similarly to \citet{Smith1990} for a stationary max-stable process, we use squar
 \end{align}
 under the restrictions that $B_{il}\ge 0$ for all $i$ and $l$ and $\displaystyle \sum_{l=1}^LB_{il}=1$ for all $i$.
 Since the minimizer of \eref{ebeq:Bhat} does not have a closed form, we use block coordinate descent to obtain ${\hat \bB}$.
-We cycle through spatial locations and update the vectors $\left(\hat{B}_{i1},\ldots,\hat{B}_{iL}\right)$ conditioned on the values for the other location and repeat until convergence.
+We cycle through spatial locations and update the vectors $\left(\hat{B}_{i1},\ldots,\hat{B}_{iL}\right)$ conditioned on the values for the other locations and repeat until convergence.
 At each step, we use the restricted optimization routine in the \texttt{R} function \texttt{optim}.
 This algorithm gives estimates of the $B_{il}$ at the $n_s$ data locations, but is easily extended to all $\bs$ for spatial prediction.
 The kernel smoothing step ensures that the estimates for $\hat{B}_{il}$ are spatially smooth, and thus interpolation of the $\hat{B}_{il}$ gives spatial functions $\hat{B}_l(\bs)$.
 
-These functions provide useful exploratory data analysis techniques.
+These functions are a useful tool for exploratory data analysis.
 Maps of $\hat{B}_l(\bs)$ show important spatial features in the extremal dependence.
 Furthermore, they allow for a non-stationary spatial dependence structure.
 The relative contribution of each term can be measured by
@@ -373,7 +374,7 @@ We first compute
   \log\left(\sigma_{i, t}^{(j)}\right) &= \beta_{2, \text{int}, i}^{(j)} + \beta_{2, \text{time}, i}^{(j)} t. \nonumber
 \end{align}
 Let $Q90_{i, t}^{(j)} = \mu_{i, t}^{(j)} + \sigma_{i, t}^{(j)} F^{-1}\left(0.90, \xi^{(j)}\right)$ where $F^{-1}(q, \xi)$ is the inverse distribution function of the GEV$(1, 1, \xi)$ distribution evaluated at the $q$th quantile.
-Finally, let $Q90_{i, t}$ be posterior mean of $Q90_{i, t}^{(j)}$.
+Finally, let $Q90_{i, t}$ be the posterior mean of $Q90_{i, t}^{(j)}$.
 To obtain the posterior probability of seeing an increase over time, we take the posterior distributions of each parameter of interest at the two time points.
 Consider two time points $t_1 < t_2$.
 Let $\varphi_t^{(j)}$ be the parameter of interest at iteration $j$ and time $t$.
@@ -454,7 +455,7 @@ The first six EBFs for the combined data along with the cumulative sum of the co
 As a comparison, we provide the first six principal components of the fire data along with the cumulative sum of the first 25 eigenvalues in \aref{eba:pca}.
 For the precipitation data, we run the MCMC for 25,000 iterations using a burnin period of 15,000 iterations.
 We consider models fit with both EBF and GSK, and fit the model using $L = 5, 10, \ldots, 40$.
-Timing for each setting of $L$ is given in \tref{ebtbl:precip-scores} for 1,000.
+Timing for each setting of $L$ is given in \tref{ebtbl:precip-scores} for 1,000 iterations.
 The timings are obtained using the same machine as for the fire analysis.
 
 \subsection{Precipitation results} \label{ebs:results-precip}
@@ -471,23 +472,23 @@ When using the EBFs, the estimate of residual dependence for the precipitation d
 Based on the cross-validation results, we run a full analysis using all of the data with $L = 25$ and EBF.
 \fref{ebfig:precip-ebf-postpanel} gives posterior summaries for three quantities of interest.
 Because we have two separate time periods, current and future, we look at the differences between the estimates for $\hat{\mu}$, $\log(\hat{\sigma})$, and $\hat{q}(0.90)$ between $t_1 = 2000$ and $t_2 = 2070$ where $\hat{\mu}$, $\log(\hat{\sigma})$, and $\hat{q}(0.90)$ are calculated as described in \sref{ebs:results-fire}.
-We plot \mbox{$\Delta \mu = \hat{\mu}_{2070} - \hat{\mu}_{2000}$}, \mbox{$\Delta \log(\hat{\sigma}) = \log(\hat{\sigma})_{2070} - \log(\hat{\sigma})_{2000}$}, and \mbox{$\Delta Q90 = \hat{q}(0.90)_{2070} - \hat{q}(0.90)_{2000}$}, and the estimated probabilites that each are positive.
+We plot \mbox{$\Delta \mu = \hat{\mu}_{2070} - \hat{\mu}_{2000}$}, \mbox{$\Delta \log(\hat{\sigma}) = \log(\hat{\sigma})_{2070} - \log(\hat{\sigma})_{2000}$}, and \mbox{$\Delta Q90 = \hat{q}(0.90)_{2070} - \hat{q}(0.90)_{2000}$}, and the estimated probabilities that each are positive.
 
 The results seem to suggest that the strength of extreme rain events will increases between 2000 and 2070 as well as greater variability in the northeast region of the U.S. as well as Ohio and parts of the south.
-There very strong evidence to suggest that most of the eastern U.S. should expect to see an increase in the 10-year return level between 2000 and 2070.
+There is very strong evidence to suggest that most of the eastern U.S. should expect to see an increase in the 10-year return level between 2000 and 2070.
 Exceptions to this trend appear in southern parts of Alabama and Mississippi and regions on the border between South Carolina and Georgia which will likely experience a decrease in the 10-year return level.
 
 \section{Discussion}\label{ebs:con}
 
 In this paper we have proposed new empirical basis functions for a data-driven low-rank approximation to a max-stable process.
 The basis functions provide researchers with an exploratory data analysis tool to explore maps of extremal dependence over space.
-The functions can also be used as inputs to an MCMC algorithm for inference and predicitons over space.
+The functions can also be used as inputs to an MCMC algorithm for inference and predictions over space.
 The results from the data analysis provide evidence to suggest that in the presence of strong spatial dependence as with the precipitation data, the empirical basis functions show an improvement in quantile scores over using knots and standardized Gaussian kernel functions without an increase in the amount of time for computing.
 
 We have used the EBF for exploratory analysis and Bayesian inference.
-Another possibility is to use the methods to reduce the data under consideration from the actual responses to loadings $A_{kt}$.
-That is, given the EBF, one could obtain estimates of the $A_{kt}$ using a separate maximum likelihood estimation for each time point.
-Time series of the estimated $A_{kt}$ may be used as a fast and simple method to study large-scale spatiotemporal trends.
+Another possibility is to use the methods to reduce the data under consideration from the actual responses to loadings $A_{lt}$.
+That is, given the EBF, one could obtain estimates of the $A_{lt}$ using a separate maximum likelihood estimation for each time point.
+Time series of the estimated $A_{lt}$ may be used as a fast and simple method to study large-scale spatiotemporal trends.
 
 \begin{landscape}
 \begin{table}[htbp]

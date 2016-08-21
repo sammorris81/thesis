@@ -1,0 +1,85 @@
+\documentclass[11pt]{article}
+\usepackage[letterpaper, margin=1in]{geometry}
+% \documentclass[useAMS,usenatbib,referee]{biomweb}
+\usepackage{amssymb, amsthm, amsmath}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage[authoryear]{natbib}
+\usepackage{bm}
+\usepackage{verbatim}
+\usepackage{lineno}
+\usepackage{soul}
+\usepackage[usenames, dvipsnames]{color}
+% \usepackage{enumitem}
+\usepackage{enumerate}
+\usepackage{setspace}
+\usepackage{appendix}
+% \usepackage{caption}
+% \captionsetup[table]{name=Web Table}
+
+% cross-referencing appendices
+\definecolor{wp-red}{RGB}{204,0,0}
+\definecolor{wp-gray}{RGB}{51,51,51}
+\definecolor{reynolds-red}{RGB}{153,0,0}
+\definecolor{pyroman-flame}{RGB}{209,81,34}
+\definecolor{hunt-yellow}{RGB}{253,215,38}
+\definecolor{genomic-green}{RGB}{125,140,31}
+\definecolor{innovation-blue}{RGB}{66,126,147}
+\definecolor{bio-indigo}{RGB}{65,86,161}
+
+% \usepackage[left=1in,top=1in,right=1in]{geometry}
+% \pdfpageheight 11in
+% \pdfpagewidth 8.5in
+% \linespread{2.0}
+\input{../mycommands.tex}
+\begin{document}
+
+\begin{center}
+Errata list for \emph{Spatial Methods for Modeling Extreme and Rare Events} by Samuel Morris
+
+August 22, 2016
+\end{center}
+
+The following list of edits correct typographical and minor grammatical errors. Edits are indicated as follows:
+\begin{itemize}
+  \item \textcolor{blue}{Additions}
+  \item \textcolor{red}{\st{Deletions}}
+\end{itemize}
+In certain cases (e.g. addition of a period) this may be further clarified to help distinguish between the font colors of blue and black.
+
+\section*{Chapter 3}
+\begin{itemize}
+  \item In Section 3.1, 3 lines before end of paragraph 2: We \textcolor{red}{\st{chose}} \textcolor{blue}{choose} to use this low-rank \ldots.
+  \item In Section 3.2, the symbol $^T$ and $^\top$ are used to indicate transpose. This has been changed to $^\top$ to be consistent with the rest of the dissertation.
+  \item In Section 3.2, 2 lines above equation (3.2) positive stable (PS) random effect\textcolor{blue}{s}.
+  \item In Section 3.2, Equation 3.2: $Z(\bs_i)$ instead of $\bZ(\bs_i)$, and the first parameter of the GEV is $\bX(\bs_i)^\top\bbeta + \displaystyle \frac{\theta(\bs_i)^\xi - 1}{\xi}$
+  \item In Section 3.3, 2nd line from the end: when \textcolor{red}{\st{the}} $n$ is large.
+  \item In Section 3.4, Line 1: Assume that $Z$\textcolor{blue}{$(\bs_1)$} and $Z$\textcolor{blue}{$(\bs_2)$} are both \ldots
+  \item In Section 3.4, \ldots dependence between binary variables is Cohen's \textcolor{red}{\st{K}}\textcolor{blue}{k}appa
+  \item Caption for Figure 3.2: Smooth of \textcolor{red}{\st{BS(left) and}} AUROC \textcolor{red}{\st{(right)}} by rareness for each sample technique for the GEV link.
+  \item Caption for Figure 3.3: Smooth of \textcolor{red}{\st{BS(left) and}} AUROC \textcolor{red}{\st{(right)}} by rareness for each sample technique for the logistic link.
+  \item Caption for Figure 3.4: Smooth of \textcolor{red}{\st{BS(left) and}} AUROC \textcolor{red}{\st{(right)}} by rareness for each sample technique for the hotspot link.
+  \item Section 3.6, line 3: We generate data \textcolor{red}{\st{assuming three possible types of}} \textcolor{blue}{from three possible} underlying process\textcolor{blue}{es}.
+  \item In Section 3.6.3, end of line 3: Changed $s$ to $\bs$ in $\bX(\bs)^\top \bbeta$
+  \item In Section 3.6.5, line 3: $P[Y(\bs$\textcolor{red}{\st{)}}$^*_j\textcolor{blue}{)} = 1]$.
+  \item In Section 3.6.5, line 4: \ldots for each \textcolor{red}{\st{$j$}} \textcolor{blue}{$\bs^*_j$}.
+  \item In Section 3.6.6, line 3: \ldots probit model in all cases \textcolor{red}{\st{,}} \textcolor{blue}{and} by the logistic \ldots
+\end{itemize}
+
+\section*{Chapter 4}
+\begin{itemize}
+  \item In Section 4.1, Line 1: The spatial \textcolor{red}{\st{E}}\textcolor{blue}{e}xtreme \textcolor{red}{\st{V}}\textcolor{blue}{v}alue \textcolor{red}{\st{A}}\textcolor{blue}{a}nalysis literature \ldots.
+  \item In Section 4.1, 2 lines from bottom: Gaussian data, \textcolor{red}{\st{P}}\textcolor{blue}{p}rinciple \textcolor{red}{\st{C}}\textcolor{blue}{c}omponents \textcolor{red}{\st{A}}\textcolor{blue}{a}nalysis.
+  \item In Section 4.1, last line: \textcolor{red}{\st{E}}\textcolor{blue}{e}mpirically \textcolor{red}{\st{O}}\textcolor{blue}{o}rthogonal \textcolor{red}{\st{F}}\textcolor{blue}{f}unctions.
+  \item In Section 4.2, 2 lines above equation (4.1): marginal distribution\textcolor{blue}{s}.
+  \item Page 59, last line: De Haan \textcolor{blue}{and Ferreira} (\textcolor{red}{\st{1984}} \textcolor{blue}{2006})
+  \item On page 50, last line of the 1st paragraph: associated with one particular location\textcolor{blue}{.} \textcolor{red}{\st{and s}} \textcolor{blue}{S}o to simplify notation we let $B_l(\bs) = B(\bs; \bk_l)$\textcolor{blue}{.} (both periods are added.)
+  \item On page 53, Line 3: conditioned on the values for the other location\textcolor{blue}{s} and
+  \item On page 53, Line 1 of Paragraph 2: These function \textcolor{red}{\st{provide}} \textcolor{blue}{are a} useful \textcolor{blue}{tool for} exploratory data analysis \textcolor{red}{\st{technique}}.
+  \item On page 61, 2nd line below equation (4.18): Finally, let $Q90_{i, t}$ be \textcolor{blue}{the} posterior mean \ldots
+  \item On page 65, Line 2: of $L$ is given in Table 4.2 for 1,000 \textcolor{blue}{iterations}.
+  \item Page 65, Line 3 of final paragraph: There \textcolor{blue}{is} very strong evidence \ldots
+  \item Page 66, In the final paragraph, the subscript is changed from $A_{kt}$ to $A_{lt}$ to keep a consistent subscript for the knot.
+\end{itemize}
+
+\end{document}
