@@ -7,6 +7,8 @@
 \usepackage{lineno, hyperref}
 \usepackage{stackrel}
 \usepackage{changepage}
+\usepackage{bm}
+\usepackage{booktabs}
 
 \usepackage{amssymb,latexsym,amsmath,amsthm,bbm}
 \usepackage{hyperref}
@@ -58,23 +60,23 @@
 
 \begin{document}
 
-\begin{frame}\frametitle{\ }
+\begin{frame}{\ }
 \begin{center}
   \maketitle
 \end{center}
 \end{frame}
 
 
-\begin{frame}{Outline}
-\begin{itemize} \setlength{\itemsep}{1em}
-	\item Brief overview of theory for extremes
-	\item Three principal contributions:
-	\begin{enumerate}[1.]\setlength{\itemsep}{0.5em}
-		\item A spatio-temporal model with flexible tails, asymptotic spatial dependence, and computation on the order of Gaussian models for large space-time datasets (Biometrics)
-		\item Modeling spatial rare binary events with a max-stable extension to the GEV link function (JABES)
-		\item Empirical basis functions to explore and model extremal spatial dependence (AOAS)
-	\end{enumerate}
-\end{itemize}	
+\begin{frame}{Overview}
+	\begin{itemize} \setlength{\itemsep}{1em}
+		\item Brief overview of theory for extremes
+		\item Three principal contributions:
+		\begin{enumerate}[1.]\setlength{\itemsep}{0.5em}
+			\item A spatio-temporal model with flexible tails, asymptotic spatial dependence, and computation on the order of Gaussian models for large space-time datasets (Biometrics)
+			\item Modeling spatial rare binary events with a max-stable extension to the GEV link function (JABES)
+			\item Empirical basis functions to explore and model extremal spatial dependence (AOAS)
+		\end{enumerate}
+	\end{itemize}	
 \end{frame}
 
 \begin{frame}{Motivation}
@@ -86,194 +88,194 @@
     \end{itemize}
     \item Estimating the probability of rare events is challenging because these events are, by definition, rare
     \item Spatial extremes is promising because it borrows information across space
-    \item Spatial extremes is also useful for estimating probability of extremes at sites without data
+    \item Spatial extremes are also useful for estimating probability of extremes at sites without data
   \end{itemize}
 \end{frame}
 
- \begin{frame}{Motivation}
-   \centering
-   \begin{figure}
-     \includegraphics[width=\linewidth, trim=0 1in 0 1in ]{ozone-10jul-us}
-     \caption{Max 8-hour ozone measurements on July 10, 2005}
-    \end{figure}
- \end{frame}
+%\begin{frame}{Motivation}
+%	\centering
+%	\begin{figure}
+%		\includegraphics[width=\linewidth, trim=0 1in 0 1in ]{ozone-10jul-us}
+%		\caption{Max 8-hour ozone measurements on July 10, 2005}
+%		\end{figure}
+% \end{frame}
 
- \begin{frame}{Motivation}
- \begin{adjustwidth}{1em}{0em}
-   Ozone compliance for Clean Air Act (EPA) \vspace{1em}
-   \begin{itemize} \setlength{\itemsep}{1em}
-     \item Annual fourth-highest daily maximum 8-hour concentration, averaged over 3 years, not to exceed 75 ppb
-     \item Annual fourth-highest is the 99th percentile for the year
-     \item Common objectives are \vspace{0.5em}
-     \begin{itemize} \setlength{\itemsep}{0.5em}
-       \item To interpolate to unmonitored sites
-       \item Detect changes in extremes over time
-       \item Study meteorological conditions that lead to extreme events
-     \end{itemize}
-   \end{itemize}
- \end{adjustwidth}
- \end{frame}
+%\begin{frame}{Defining extremes}
+%	\begin{columns}[c]
+%		\column{.45 \linewidth}
+%		\begin{itemize} \setlength{\itemsep}{1em}
+%			\item Key in extreme value analysis is to define extremes
+%			\item Typically done in one of two ways
+%			\begin{itemize}
+%				\item Block maxima (red dots)
+%				\item Values over threshold considered extreme
+%			\end{itemize}
+%		\end{itemize}
+%		
+%		\column{.55\linewidth}
+%		\begin{figure}
+%			\includegraphics[width=1\linewidth, trim=0 0.5in 0 1in]{./plots/define_extreme.pdf}
+%			\caption{Hypothetical monthly data}
+%		\end{figure}
+%	\end{columns}
+%\end{frame}
 
- \begin{frame}{Defining extremes}
- \begin{columns}[c]
- \column{.45 \linewidth}
-   \begin{itemize} \setlength{\itemsep}{1em}
-     \item Key in extreme value analysis is to define extremes
-     \item Typically done in one of two ways
-     \begin{itemize}
-       \item Block maxima (red dots)
-       \item Values over threshold considered extreme
-     \end{itemize}
-   \end{itemize}
+\begin{frame}{Non-spatial analysis: Block maxima}
+	\begin{adjustwidth}{1em}{0em}
+		Fisher-Tippett-Gnedenko theorem \vspace{1em}
+		\begin{itemize} \setlength{\itemsep}{1em}
+			\item Let $X_1, \ldots, X_n$ be i.i.d.
+			\item Consider the block maximum $M_n = \max(X_1, \ldots, X_n)$
+			\item If there exist normalizing sequences $a_n > 0$ and $b_n \in \calR$ such that $$\frac{ M_n - b_n }{ a_n } \converged G(z)$$ then $G(z)$ follows a generalized extreme value distribution (GEV) (Gnedenko, 1943)
+			\item This motivates the use of the GEV for block maximum data
+		\end{itemize}
+	\end{adjustwidth}
+\end{frame}
 
-   \column{.55\linewidth}
-   \begin{figure}
-     \includegraphics[width=1\linewidth, trim=0 0.5in 0 1in]{./plots/define_extreme.pdf}
-     \caption{Hypothetical monthly data}
-     \end{figure}
- \end{columns}
- \end{frame}
+\begin{frame}{Non-spatial analysis: Block maxima}
+	\begin{itemize} \setlength{\itemsep}{1em}
+		\item GEV distribution
+		\begin{align*}
+			G(y) = \Pr(Y < y) = \begin{cases}
+			\exp\left\{ -\left[ 1 + \xi \left( \frac{ y - \mu }{ \sigma } \right) \right]^{ -1 / \xi} \right\} & \quad \xi \neq 0 \\[0.5em]
+			\exp \left\{ -\exp \left( - \frac{ y - \mu }{ \sigma} \right) \right\} & \quad \xi = 0
+			\end{cases}
+		\end{align*}
+		where
+		\begin{itemize} \setlength{\itemsep}{0.25em}
+			\item $\mu \in \calR$ is a location parameter
+			\item $\sigma > 0$ is a scale parameter
+			\item $\xi \in \calR$ is a shape parameter
+			\begin{itemize}
+				\item Unbounded above if $\xi \ge 0$
+				\item Bounded above by $(\mu - \sigma) / \xi$ when $\xi < 0$
+			\end{itemize}
+		\end{itemize}
+		\item Challenges:
+		\begin{itemize}
+			\item Lose information by only considering maximum in a block
+			\item Underlying data may not be i.i.d.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+ 
+\begin{frame}{Other approaches: Threshold methods}
+	\begin{itemize} \setlength{\itemsep}{1em}
+		\item Perhaps there exists a $T$ beyond which values are extreme
+		\item $T$ can be selected using a mean residual life plot.
+		\item Two general approaches:
+		\begin{itemize} \setlength{\itemsep}{0.5em}
+			\item Peaks over threshold: Model $Y > T$ using generalized Pareto distribution
+			\item Censored likelihood: $$F(y) = \begin{cases}
+				F(T), & y \le T \\
+				F(y), & y > T
+			\end{cases}$$
+		\end{itemize}
+		\item Challenges: \vspace{0.5em}
+		\begin{itemize} \setlength{\itemsep}{0.5em}
+			\item Sensitive to threshold selection
+			\item Temporal dependence
+		\end{itemize}
+	\end{itemize}
+\end{frame}
 
- \begin{frame}{Non-spatial analysis: Block maxima}
- \begin{adjustwidth}{1em}{0em}
-   Fisher-Tippett-Gnedenko theorem \vspace{1em}
-   \begin{itemize} \setlength{\itemsep}{1em}
-     \item Let $X_1, \ldots, X_n$ be i.i.d.
-     \item Consider the block maximum $M_n = \max(X_1, \ldots, X_n)$
-     \item If there exist normalizing sequences $a_n > 0$ and $b_n \in \calR$ such that
-     \begin{align*}
-       \frac{ M_n - b_n }{ a_n } \converged G(z)
-     \end{align*}
-     then $G(z)$ follows a generalized extreme value distribution (GEV) (Gnedenko, 1943)
-     \item This motivates the use of the GEV for block maximum data
-   \end{itemize}
- \end{adjustwidth}
- \end{frame}
+% \begin{frame}{Non-spatial analysis: Peaks over threshold}
+% \begin{adjustwidth}{1em}{0em}
+%   Pickands-Balkema-de Haan theorem \vspace{1em}
+%   \begin{itemize} \setlength{\itemsep}{1em}
+%     \item Let $X_1, \ldots, X_n \iid F$
+%     \item If there exist normalizing sequences $a_T > 0$ and $b_T \in \calR$ such that for any $x \ge 0$, as $T \rightarrow \infty$
+%     \begin{align*}
+%       \Pr\left(\frac{X - b_T}{a_T} > x \mid X > T\right) \converged H(x),
+%     \end{align*}
+%     where $T$ is a thresholding value, then $H(x)$ follows a generalized Pareto distribution (GPD) (Balkema and de Haan, 1974)
+%   \end{itemize}
+% \end{adjustwidth}
+% \end{frame}
 
- \begin{frame}{Non-spatial analysis: Block maxima}
-   \begin{itemize} \setlength{\itemsep}{1em}
-     \item GEV distribution
-     \begin{align*}
-       G(y) = \Pr(Y < y) = \left\{  \begin{array}{ll}
-         \exp\left\{ -\left[ 1 + \xi \left( \frac{ y - \mu }{ \sigma } \right) \right]^{ -1 / \xi} \right\} & \quad \xi \neq 0 \\[0.5em]
-         \exp \left\{ -\exp \left( - \frac{ y - \mu }{ \sigma} \right) \right\} & \quad \xi = 0
-       \end{array}\right.
-     \end{align*}
-     where
-     \begin{itemize} \setlength{\itemsep}{0.25em}
-       \item $\mu \in \calR$ is a location parameter
-       \item $\sigma > 0$ is a scale parameter
-       \item $\xi \in \calR$ is a shape parameter
-       \begin{itemize}
-         \item Unbounded above if $\xi \ge 0$
-         \item Bounded above by $(\mu - \sigma) / \xi$ when $\xi < 0$
-       \end{itemize}
-     \end{itemize}
-     \item Challenges:
-     \begin{itemize}
-       \item Lose information by only considering maximum in a block
-       \item Underlying data may not be i.i.d.
-     \end{itemize}
-   \end{itemize}
- \end{frame}
+% \begin{frame}{Non-spatial analysis: Peaks over threshold}
+% \begin{adjustwidth}{1em}{0em}
+%   Select a threshold, $T$, and use the GPD to model the exceedances
+%   \begin{align*}
+%     H(y) = P(Y < y) = \left\{ \begin{array}{ll}
+%       1 - \left[1 - \xi \left( \frac{ y - T }{ \sigma } \right) \right]^{-1 / \xi} & \quad \xi \neq 0 \\[0.5em]
+%       1 - \exp \left\{ \frac{ y - T }{ \sigma} \right\} & \quad \xi = 0
+%     \end{array}\right.
+%   \end{align*}
+%   where
+%   \begin{itemize} \setlength{\itemsep}{0.25em}
+%     \item $\sigma > 0$ is a scale parameter
+%     \item $\xi \in \calR$ is a shape parameter
+%     \begin{itemize}
+%       \item Unbounded above if $\xi \ge 0$
+%       \item Bounded above by $(T - \sigma) / \xi$ when $\xi < 0$
+%     \end{itemize}
+%   \end{itemize}
+% \end{adjustwidth}
+% \end{frame}
 
- \begin{frame}{Non-spatial analysis: Peaks over threshold}
- \begin{adjustwidth}{1em}{0em}
-   Pickands-Balkema-de Haan theorem \vspace{1em}
-   \begin{itemize} \setlength{\itemsep}{1em}
-     \item Let $X_1, \ldots, X_n \iid F$
-     \item If there exist normalizing sequences $a_T > 0$ and $b_T \in \calR$ such that for any $x \ge 0$, as $T \rightarrow \infty$
-     \begin{align*}
-       \Pr\left(\frac{X - b_T}{a_T} > x \mid X > T\right) \converged H(x),
-     \end{align*}
-     where $T$ is a thresholding value, then $H(x)$ follows a generalized Pareto distribution (GPD) (Balkema and de Haan, 1974)
-   \end{itemize}
- \end{adjustwidth}
- \end{frame}
+% \begin{frame}{Non-spatial analysis: Peaks over threshold}
+%   \begin{itemize} \setlength{\itemsep}{1em}
+%     \item The GPD is related to GEV distribution through
+%     \begin{align*}
+%       H(y) = 1 + \log[G(y)], \quad y \ge T
+%     \end{align*}
+%     \item Challenges: \vspace{0.5em}
+%     \begin{itemize} \setlength{\itemsep}{0.5em}
+%       \item Sensitive to threshold selection
+%       \item Temporal dependence between observations (e.g. flood levels don't dissipate overnight)
+%     \end{itemize}
+%   \end{itemize}
+% \end{frame}
 
- \begin{frame}{Non-spatial analysis: Peaks over threshold}
- \begin{adjustwidth}{1em}{0em}
-   Select a threshold, $T$, and use the GPD to model the exceedances
-   \begin{align*}
-     H(y) = P(Y < y) = \left\{ \begin{array}{ll}
-       1 - \left[1 - \xi \left( \frac{ y - T }{ \sigma } \right) \right]^{-1 / \xi} & \quad \xi \neq 0 \\[0.5em]
-       1 - \exp \left\{ \frac{ y - T }{ \sigma} \right\} & \quad \xi = 0
-     \end{array}\right.
-   \end{align*}
-   where
-   \begin{itemize} \setlength{\itemsep}{0.25em}
-     \item $\sigma > 0$ is a scale parameter
-     \item $\xi \in \calR$ is a shape parameter
-     \begin{itemize}
-       \item Unbounded above if $\xi \ge 0$
-       \item Bounded above by $(T - \sigma) / \xi$ when $\xi < 0$
-     \end{itemize}
-   \end{itemize}
- \end{adjustwidth}
- \end{frame}
+\begin{frame}{Max-stable processes for spatial data}
+	\begin{itemize} \setlength{\itemsep}{1em}
+		\item Consider i.i.d. spatial processes $x_j(\bs)$, $j = 1, \ldots, J$
+		\item Let $M_J(\bs) = \displaystyle\bigvee_{j=1}^J x_j(\bs_i)$ be the block maximum at site $\bs$
+		\item If there exists normalizing sequences $a_J(\bs)$ and $b_J(\bs)$ such that for all sites, $\bs_i, i = 1, \ldots, d$,
+		\begin{align*}
+			\frac{M_J(\bs) - b_J(\bs)}{a_J(\bs)} \converged G(\bs)
+		\end{align*}
+		then $G(\bs)$ is a max-stable process (Smith, 1990)
+		\item Therefore, max-stable processes are the standard model for block maxima
+	\end{itemize}
+\end{frame}
 
- \begin{frame}{Non-spatial analysis: Peaks over threshold}
-   \begin{itemize} \setlength{\itemsep}{1em}
-     \item The GPD is related to GEV distribution through
-     \begin{align*}
-       H(y) = 1 + \log[G(y)], \quad y \ge T
-     \end{align*}
-     \item Challenges: \vspace{0.5em}
-     \begin{itemize} \setlength{\itemsep}{0.5em}
-       \item Sensitive to threshold selection
-       \item Temporal dependence between observations (e.g. flood levels don't dissipate overnight)
-     \end{itemize}
-   \end{itemize}
- \end{frame}
+\begin{frame}{Multivariate representations}
+	\begin{itemize} \setlength{\itemsep}{1em}
+		\item Marginally at each site, observations follow a GEV distribution
+		\item For a finite collection of sites the representation for the multivariate GEV (mGEV) is
+		\begin{align*}
+			\Pr(\bZ \le \bz)  &= G^*(\bz) = \exp[-V(\bz)]\\
+			V(\bz)    &= d \int_{\Delta_d} \bigvee_{i = 1}^d \frac{w_i}{z_i} H(\ddd w)
+		\end{align*}
+		where
+		\begin{itemize} \setlength{\itemsep}{0.25em}
+			\item $V(\bz)$ is called the exponent measure
+			\item $\Delta_d = \{ \bw \in \calR^d_+ \mid w_1 + \cdots + w_d = 1\}$
+			\item $H$ is a probability measure on $\Delta_d$
+			\item $\int_{\Delta_d}w_i H(\ddd w) = 1 / d$ for $i = 1, \ldots, d$
+		\end{itemize}
+	\end{itemize}
+\end{frame}
 
- \begin{frame}{Max-stable processes for spatial data}
-   \begin{itemize} \setlength{\itemsep}{1em}
-     \item Consider i.i.d. spatial processes $x_j(\bs)$, $j = 1, \ldots, J$
-     \item Let $M_J(\bs) = \bigvee_{j=1}^J x_j(\bs_i)$ be the block maximum at site $\bs$
-     \item If there exists normalizing sequences $a_J(\bs)$ and $b_J(\bs)$ such that for all sites, $\bs_i, i = 1, \ldots, d$,
-     \begin{align*}
-       \frac{M_J(\bs) - b_J(\bs)}{a_J(\bs)} \converged G(\bs)
-     \end{align*}
-     then $G(\bs)$ is a max-stable process (Smith, 1990)
-     \item Therefore, max-stable processes are the standard model for block maxima
-   \end{itemize}
- \end{frame}
-
- \begin{frame}{Multivariate representations}
-   \begin{itemize} \setlength{\itemsep}{1em}
-     \item Marginally at each site, observations follow a GEV distribution
-     \item For a finite collection of sites the representation for the multivariate GEV (mGEV) is
-     \begin{align*}
-       \Pr(\bZ \le \bz)  &= G^*(\bz) = \exp[-V(\bz)]\\
-             V(\bz)    &= d \int_{\Delta_d} \bigvee_{i = 1}^d \frac{w_i}{z_i} H(\ddd w)
-     \end{align*}
-     where
-     \begin{itemize} \setlength{\itemsep}{0.25em}
-       \item $V(\bz)$ is called the exponent measure
-       \item $\Delta_d = \{ \bw \in \calR^d_+ \mid w_1 + \cdots + w_d = 1\}$
-       \item $H$ is a probability measure on $\Delta_d$
-       \item $\int_{\Delta_d}w_i H(\ddd w) = 1 / d$ for $i = 1, \ldots, d$
-     \end{itemize}
-   \end{itemize}
- \end{frame}
-
- \begin{frame}{Multivariate GEV challenges}
-   \begin{itemize} \setlength{\itemsep}{1em}
-     \item Only a few closed-form expressions for $V(\bz)$ exist
-     \item Two common forms for $V(\bz)$
-     \begin{itemize}
-       \item Symmetric logistic (Gumbel, 1960)
-       \begin{align*}
-         V(\bz) = \left[\sum_{i = 1}^n \left( \frac{ 1 }{ z_i } \right)^{1/\alpha}\right]^\alpha
-       \end{align*}
-       \item Asymmetric logistic (Coles and Tawn, 1991)
-       \begin{align*}
-         V(\bz) = \sum_{l = 1}^L \left[\sum_{i = 1}^n \left(\frac{w_{il}}{z_i} \right)^{1 / \alpha_l} \right]^{\alpha_l}
-       \end{align*}
-       where $w_{il} \in [0, 1]$ and $\sum_{l = 1}^L w_{il} = 1$
-     \end{itemize}
-   \end{itemize}
- \end{frame}
+\begin{frame}{Multivariate GEV challenges}
+	\begin{itemize} \setlength{\itemsep}{1em}
+		\item Only a few closed-form expressions for $V(\bz)$ exist
+		\item Two common forms for $V(\bz)$
+		\begin{itemize}
+			\item Symmetric logistic (Gumbel, 1960)
+			\begin{align*}
+				V(\bz) = \left[\sum_{i = 1}^n \left( \frac{ 1 }{ z_i } \right)^{1/\alpha}\right]^\alpha
+			\end{align*}
+			\item Asymmetric logistic (Coles and Tawn, 1991)
+			\begin{align*}
+				V(\bz) = \sum_{l = 1}^L \left[\sum_{i = 1}^n \left(\frac{w_{il}}{z_i} \right)^{1 / \alpha_l} \right]^{\alpha_l}
+			\end{align*}
+			where $w_{il} \in [0, 1]$ and $\sum_{l = 1}^L w_{il} = 1$
+		\end{itemize}
+	\end{itemize}
+\end{frame}
 
  %\begin{frame}{Multivariate peaks over threshold}
  %  \begin{itemize} \setlength{\itemsep}{1em}
@@ -287,62 +289,90 @@
  %  \end{itemize}
  %\end{frame}
 
- \begin{frame}{Extremal dependence: $\chi$ statistic}
-   \begin{itemize} \setlength{\itemsep}{1em}
-     \item Correlation is the most common measure of dependence
-     \begin{itemize}
-       \item Focuses on the center and not tails
-       \item This makes it irrelevant for extreme value analysis
-     \end{itemize}
-     \item Extreme value analysis focuses on the $\chi$ statistic (Coles et al., 1999), a measure of extremal dependence given by
-     \begin{align*}
-       \chi(h) = \lim_{c \rightarrow \infty}\Pr[Y(\bs) > c \mid Y(\bt) > c]
-     \end{align*}
-     where $h = ||\bs - \bt||$
-     \item If $ \chi(h) = 0$, then observations are asymptotically independent at distance $h$
-   \end{itemize}
- \end{frame}
-
- \begin{frame}{Existing challenges}
-   \begin{itemize} \setlength{\itemsep}{1em}
-     \item Multivariate max-stable models have nice features, but they are
-     \begin{itemize}
-       \item Computationally challenging (e.g,  the asymmetric logistic has $2^{n-1}(n + 2) - (2n + 1)$ free parameters)
-       \item Joint density only available in low dimensions
-     \end{itemize}
-     \item Some recent approaches
-     \begin{itemize}
-       \item Bayesian hierarchical model (Reich and Shaby, 2012)
-       \item Pairwise likelihood approach (Huser and Davison, 2014)
-     \end{itemize}
-     \item Many opportunities to explore new methods
-   \end{itemize}
- \end{frame}
+\begin{frame}{Quantifying dependence}
+	\begin{itemize}\setlength{\itemsep}{1em}
+		\item \alert{Problem}: Covariance and correlation focuses on deviations around the mean and not the extremes
+		\item Want dependence measure to capture likelihood of seeing values that are jointly extreme
+		\item Two common measures of dependence:
+		\begin{itemize}\setlength{\itemsep}{0.5em}
+			\item Extremal coefficient $\vartheta \in (1, 2)$: $$\mbox{Prob}[Z(\bs_1)<c, Z(\bs_2)<c] = \mbox{Prob}[Z(\bs_1)<c]^{\vartheta(\bs_1,\bs_2)}$$
+			\item $\chi \in (0, 1)$ (Coles, 1999): $$\chi(\bs_1,\bs_2) = \lim_{c\rightarrow \infty}\mbox{Prob}[Z(\bs_1)>c|Z(\bs_2)>c]$$
+		\end{itemize}
+	\end{itemize}
+\end{frame}
 
 
- \begin{frame}\frametitle{Back to a Gaussian process model}
- 	\begin{itemize}\setlength\itemsep{\fill}
- 	\item The max-stable process is an elegant approach, but does that mean it's the right model?
- 	\item In reality, it is only an approximation
- 	\item There are less complicated approximations
- 	\item For example, we could model daily data as a Gaussian process (GP)
- 	\item If the goal is spatial interpolation, perhaps this is competitive
- 	\end{itemize}
- \end{frame}
+\begin{frame}{Existing challenges}
+	\begin{itemize} \setlength{\itemsep}{1em}
+		\item Multivariate max-stable models have nice features, but they are
+		\begin{itemize} \setlength{\itemsep}{0.5em}
+			\item Computationally challenging (e.g,  the asymmetric logistic has $2^{n-1}(n + 2) - (2n + 1)$ free parameters)
+			\item Joint density only available in low dimensions (Wadsworth and Tawn, 2014; Thibaud and Opitz, 2015)
+		\end{itemize}
+		\item Some recent approaches
+		\begin{itemize} \setlength{\itemsep}{0.5em}
+			\item Bayesian hierarchical model (Reich and Shaby, 2012)
+			\item Pairwise likelihood (Padoan, 2010; Huser and Davison, 2014)
+			\item Trivariate likelihood (Genton et al, 2011)
+		\end{itemize}
+		\item Many opportunities to explore new methods
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Project 1: \Skewt{} for Threshold Exceedances}
+	\begin{center}
+		\LARGE
+		\textbf{Project 1:}\\ [1em]
+		A Space-time \Skewt{} Model for \\
+		Threshold Exceedances\\ [2em]
+		\normalsize
+		Under revision: \\
+		\emph{Biometrics}
+	\end{center}	
+\end{frame}
+
+\begin{frame}{Motivation}
+	\begin{adjustwidth}{1em}{0em}
+		Ozone compliance for Clean Air Act (EPA) \vspace{1em}
+		\begin{itemize} \setlength{\itemsep}{1em}
+			\item Annual fourth-highest daily maximum 8-hour concentration, averaged over 3 years, not to exceed 75 ppb
+			\item Annual fourth-highest is the 99th percentile for the year
+			\item Common objectives are \vspace{0.5em}
+			\begin{itemize} \setlength{\itemsep}{0.5em}
+				\item To interpolate to unmonitored sites
+				\item Detect changes in extremes over time
+				\item Study meteorological conditions that lead to extreme events
+			\end{itemize}
+		\end{itemize}
+	\end{adjustwidth}
+\end{frame}
+
+\begin{frame}{Is max-stable the panacea?}
+	\begin{itemize}\setlength{\itemsep}{1em}
+		\item Max-stable process is an elegant approach, but does that mean it's correct? \vspace{0.5em}
+		\begin{itemize} \setlength{\itemsep}{0.5em}
+			\item It is only an approximation
+			\item There are less complicated approximations (e.g. we could model daily data as a Gaussian process (GP))
+		\end{itemize}
+		\item If the goal is spatial interpolation, perhaps this is competitive
+	\end{itemize}
+\end{frame}
 
 
- \begin{frame}\frametitle{GP - asymptotic independence}
- 	\begin{itemize}\setlength\itemsep{\fill}
- 	\item A GP leads to simple interpretation and computing, but asymptotic independence
- 	\item If $Y(\bs_1)$ and $Y(\bs_2)$ are bivariate normal then $\chi(\bs_1,\bs_2)=0$, i.e., asymptotic independence
- 	\item This suggests Kriging will not capture extremes
- 	\item But so much is known for the Gaussian case: nonstationarity, multivariate, numerical approximations, \ldots
- 	\item Rather than toss it out, can we patch it up?
- 	\end{itemize}
- \end{frame}
+\begin{frame}{GP - Asymptotic Independence}
+	\begin{itemize}\setlength\itemsep{1em}
+		\item A GP leads to simple interpretation and computing, but asymptotic independence \vspace{0.5em}
+		\begin{itemize} \setlength{\itemsep}{0.5em}
+			\item If $Y(\bs_1)$ and $Y(\bs_2)$ are bivariate normal then $\chi(\bs_1,\bs_2)=0$ (asymptotic independence)
+		\end{itemize}
+		\item This suggests Kriging will not capture extremes
+		\item So much is known for the Gaussian case: nonstationarity, multivariate, numerical approximations, \ldots
+		\item Rather than toss it out, can we patch it up?
+	\end{itemize}
+\end{frame}
 
 
-\begin{frame}\frametitle{Spatial \skewt{} process}
+\begin{frame}{Spatial \skewt{} process}
 A spatial \skewt{} process (Azzalini and Capitanio, 2014)  resembles a GP but exhibits asymptotic dependence
 	\begin{eqnarray}
 	 	Y_t(\bs) &=& \bX(\bs)^\top\bbeta +\lambda\sigma_t|z_t| + \sigma_tv_t(\bs)\nonumber\\
@@ -350,7 +380,7 @@ A spatial \skewt{} process (Azzalini and Capitanio, 2014)  resembles a GP but ex
 	 	\sigma_t^2&\sim& \mbox{InvGamma}(a/2,b/2)\nonumber\\
 	 	v_t&\sim& \mbox{Spatial GP}\nonumber
  	\end{eqnarray}
- 	\begin{itemize}\setlength\itemsep{\fill}
+ 	\begin{itemize}\setlength{\itemsep}{0.5em}
 	 	\item Location: $\bX(\bs)^\top\bbeta$
 	 	\item Scale: $b>0$
 	 	\item Skewness: $\lambda\in{\cal R}$
@@ -358,67 +388,70 @@ A spatial \skewt{} process (Azzalini and Capitanio, 2014)  resembles a GP but ex
 	\end{itemize}
 \end{frame}
 
-
-
- \begin{frame}\frametitle{Good properties}
- 	\begin{itemize}\setlength\itemsep{\fill}
- 	\item Flexible $t$ marginal distribution with four parameters including the degrees of freedom which allows for heavy tails ($a=1$ gives a Cauchy)
- 	\item Computation on the order of a GP; the only extra steps are $z_t$ and $\sigma_t$ which have conjugate full conditionals
- 	\item Asymptotic dependence: $\chi(\bs_1,\bs_2)>0$ for all $\bs_1$ and $\bs_2$
+\begin{frame}{Good properties}
+ 	\begin{itemize}\setlength{\itemsep}{1em}
+ 		\item Flexible $t$ marginal distribution with four parameters including the degrees of freedom which allows for heavy tails ($a=1$ gives a Cauchy)
+ 		\item Computation on the order of a GP; the only extra steps are $z_t$ and $\sigma_t$ which have conjugate full conditionals
+ 		\item Asymptotic dependence: $\chi(\bs_1,\bs_2)>0$ for all $\bs_1$ and $\bs_2$
  	\end{itemize}
- \end{frame}
+\end{frame}
 
- \begin{frame}\frametitle{Bad properties and remedies}
- 	\begin{itemize}\setlength\itemsep{1em}
- 	\item Modeling all the data (bulk and extreme) can lead to poor tail probability estimates if the model is misspecified
- 	\item Long-range dependence: $\chi(\bs_1,\bs_2)>0$ for all $\bs_1$ and $\bs_2$ even if $\bs_1$ and $\bs_2$ are far apart
- 	\item This occurs because all sites share $z_t$ and $\sigma_t$
- 	\item Remedies:
- 	\begin{itemize}
- 	\item We use a censored likelihood to focus on the tails
- 	\item We propose a local \skewt{} process
- 	\end{itemize}
- 	\end{itemize}
- \end{frame}
+\begin{frame}{Bad properties and remedies}
+	\begin{itemize}\setlength{\itemsep}{1em}
+	 	\item Modeling all the data (bulk and extreme) can lead to poor tail probability estimates if the model is misspecified
+	 	\item Long-range dependence: $\chi(\bs_1,\bs_2)>0$ for all $\bs_1$ and $\bs_2$ even if $\bs_1$ and $\bs_2$ are far apart
+	 	\item This occurs because all sites share $z_t$ and $\sigma_t$
+	 	\item Remedies: \vspace{0.5em}
+	 	\begin{itemize}\setlength{\itemsep}{0.5em}
+		 	\item We use a censored likelihood to focus on the tails
+		 	\item We propose a local \skewt{} process
+		 \end{itemize}
+	\end{itemize}
+\end{frame}
 
- \begin{frame}\frametitle{Censored likelihood}
- 	\begin{itemize}\setlength\itemsep{\fill}
- 	\item Censored likelihood: We censor the data
- 	$${\tilde Y}_t(\bs) =\left\{\begin{array}{ll}
- 	T & \text{for } Y_t(\bs)\le T\\
- 	Y_t(\bs) & \text{for } Y_t(\bs)>T
- 	\end{array}\right.$$
- 	\item Censoring is handled using standard Bayesian imputation methods
- 	\item The threshold $T$ is chosen by cross-validation
- 	\item If $T$ is moderately extreme in the distribution (e.g. $q(0.75)$), set $\lambda = 0$
- 	\end{itemize}
- \end{frame}
+\begin{frame}{Censored likelihood}
+	\begin{itemize}\setlength{\itemsep}{1em}
+		\item Censored likelihood: We censor the data
+		$${\tilde Y}_t(\bs) =\begin{cases}
+			T 		 & \text{for } Y_t(\bs)\le T\\
+		 	Y_t(\bs) & \text{for } Y_t(\bs)>T
+		\end{cases}$$
+		\item Censoring is handled using standard Bayesian imputation methods
+		\item The threshold $T$ is chosen by cross-validation
+		\item If $T$ is moderately extreme in the distribution (e.g. $q(0.75)$), set $\lambda = 0$
+	\end{itemize}
+\end{frame}
 
- \begin{frame}\frametitle{Local \skewt{} process}
- 	\begin{itemize}\setlength\itemsep{\fill}
- 	\item Let the knots $\bv_{t1},...,\bv_{tK}$ follow a homogeneous Poisson process over the domain of interest (in practice we fix $K$)
- 	\item Associated with each is
- 	\begin{itemize}
- 		\item $z_{tk}\sim\mbox{Normal}(0,1)$
- 		\item $\sigma_{tk}^2\sim\mbox{InvGamma}(a/2,b/2)$
- 	\end{itemize}
- 	\item The knots partition the domain if we assign location $\bs$ to subregion $k=\argmin_{l}||\bs-\bv_{tl}||$
- 	\item If $\bs$ is in subregion $k$ then $$Y_t(\bs) = \bX(\bs)^T\bbeta +\lambda\sigma_{tk}|z_{tk}| + \sigma_{tk}v_t(\bs)\nonumber$$
- 	\item The marginal distribution remains a $t$, but partitioning breaks long-range spatial dependence
- 	\end{itemize}
- \end{frame}
+\begin{frame}{Local \skewt{} process}
+	\begin{itemize}\setlength\itemsep{1em}
+		\item Let the knots $\bv_{t1},...,\bv_{tK}$ follow a homogeneous Poisson process over the domain of interest (in practice we fix $K$)
+		\item The knots partition the domain if we assign location $\bs$ to subregion $k=\argmin_{l}||\bs-\bv_{tl}||$
+		\item Associated with each is \vspace{0.5em}
+		\begin{itemize} \setlength{\itemsep}{0.5em}
+			\item $z_{tk}\sim\mbox{Normal}(0,1)$
+			\item $\sigma_{tk}^2\sim\mbox{InvGamma}(a/2,b/2)$
+		\end{itemize}
+	\end{itemize}
+\end{frame}
 
- \begin{frame}\frametitle{$\chi$-statistic by $h=||\bs_1-\bs_2||$}
+\begin{frame}{Local \skewt{} process}
+	\begin{itemize}\setlength{\itemsep}{1em}
+		\item If $\bs$ is in subregion $k$ then $$Y_t(\bs) = \bX(\bs)^T\bbeta +\lambda\sigma_{tk}|z_{tk}| + \sigma_{tk}v_t(\bs)\nonumber$$
+		\item The marginal distribution remains a $t$, but partitioning breaks long-range spatial dependence
+	\end{itemize}
+\end{frame}
+
+ \begin{frame}{$\chi$-statistic by $h=||\bs_1-\bs_2||$}
  	\begin{center}
  		\includegraphics[height=0.8\textheight]{plots/chi-h}
  	\end{center}
  \end{frame}
 
- \begin{frame}\frametitle{Temporal dependence}
+ \begin{frame}{Temporal dependence}
  	\begin{itemize}\setlength\itemsep{1em}
  	\item It may not be reasonable to assume that observations are temporally independent (e.g. flooding, high temperatures)
  	\item Temporal dependence is handled through the $z_{tk}$, $\sigma_{tk}$ and $\bv_{tl}$
- 	\item Method:
+ 	\item Method: \vspace{0.5em}
  	\begin{itemize}\setlength\itemsep{0.5em}
  	\item Use a copula to transform parameters to \emph{nice} space (i.e. $\mathcal{R}$)
  	\item AR(1) structure imposed on parameters in transformed space
@@ -428,7 +461,7 @@ A spatial \skewt{} process (Azzalini and Capitanio, 2014)  resembles a GP but ex
  \end{frame}
 
 
-\begin{frame}\frametitle{Results of a simulation study}
+\begin{frame}{Results of a simulation study}
 In terms of Brier scores for spatial prediction:\vspace{1em}
 \begin{itemize}\setlength\itemsep{1em}
 	\item Data generated as a GP:
@@ -455,8 +488,8 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
 \end{frame}
 
 
- \begin{frame}\frametitle{Application to ozone}
- 	\begin{itemize}\setlength\itemsep{\fill}
+ \begin{frame}{Application to ozone}
+ 	\begin{itemize}\setlength\itemsep{1em}
  	\item The USEPA has an extensive network of ozone monitors throughout the US
  	\item We will analyze ozone for 31 days in July, 2005 at $n=1,089$ stations
  	\item Currently the EPA regulates the annual 99$^{th}$ percentile
@@ -464,13 +497,13 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
  	\end{itemize}
  \end{frame}
 
- \begin{frame}\frametitle{Ozone on July 10}
+ \begin{frame}{Ozone on July 10}
  	\begin{center}
  		\includegraphics[width=1.2\textheight]{ozone-10jul-us}
  	\end{center}
  \end{frame}
 
- \begin{frame}\frametitle{Q-Q plots}
+ \begin{frame}{Q-Q plots}
  	\begin{center}
  		\includegraphics[width=0.9\textheight]{qq-res}
 
@@ -478,8 +511,8 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
  	\end{center}
  \end{frame}
 
- \begin{frame}\frametitle{Cross-validation}
- 	\begin{itemize}\setlength\itemsep{\fill}
+ \begin{frame}{Cross-validation}
+ 	\begin{itemize}\setlength\itemsep{1em}
  	\item We split the sites into training and testing
  	\item We found that $K=15$ knots and censoring at $T$ equal to the median with no time series gave the best results
  	\item Results were not sensitive to these tuning parameters
@@ -488,7 +521,7 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
  	\end{itemize}
  \end{frame}
 
- \begin{frame}\frametitle{Fitted 99$^{th}$ percentile - Gaussian}
+ \begin{frame}{Fitted 99$^{th}$ percentile - Gaussian}
  	\begin{center}
  		\includegraphics[width=0.45\linewidth]{q99gaus}
  		\includegraphics[width=0.45\linewidth]{q99skewtTS}
@@ -497,21 +530,482 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
  	\end{center}
  \end{frame}
 
- \begin{frame}\frametitle{Difference (Thresholded $t$ - Gaussian)}
+ \begin{frame}{Difference (Thresholded $t$ - Gaussian)}
  	\begin{center}
- 		\includegraphics[width=0.55\linewidth]{q99diffgausskewt}
+ 		\includegraphics[width=0.45\linewidth]{q99diffgausskewt}
 
  		Difference between Symmetric-$t$, 10 knots, T = 75 and Gaussian
  	\end{center}
  \end{frame}
 
+\begin{frame}{Project 2: Rare spatial binary}
+	\begin{center}
+		\LARGE
+		\textbf{Project 2:}\\ [1em]
+		Rare Spatial Binary Regression\\[2em]
+		\normalsize
+		To be submitted:\\
+		\emph{Journal of Agricultural, Biological, and Environmental Statistics}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Motivation}
+	\begin{center}
+		\vspace{-3em}
+		\includegraphics[width = 0.9\linewidth]{plant-census}
+		\vspace{-1em}
+		
+		1-km$^2$ census of 2 species in PR China
+	\end{center}
+	\begin{itemize} \setlength{\itemsep}{0.5em}
+		\item \tamarix{} (left) Rareness: $\approx 6\%$
+		\item \hedysarum{} (right) Rareness: $\approx 0.5\%$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Motivation}
+	\begin{itemize} \setlength{\itemsep}{1em}
+		\item For rare species, occupancy modeling can be challenging \vspace{0.5em}
+		\begin{itemize} \setlength{\itemsep}{0.5em}
+			\item \alert{Rare}: to mean not occurring often (e.g. 5\% or less)
+		\end{itemize}
+		\item Binary regression is based on thresholding: $$Y(\bs) = I[Z(\bs) > c]$$
+		\item GP traditionally used for $Z(\bs)$, but theory suggests that GP will not capture dependence  \vspace{0.5em}
+		\begin{itemize} \setlength{\itemsep}{0.5em}
+			\item $c$ is in the tail of the distribution
+			\item Asymptotic dependence does not exist for GP
+			\item Therefore for large $c$ this is virtually a non-spatial analysis
+		\end{itemize}
+		\item Propose max-stable extension to GEV link (Wang and Dey, 2010)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Hierarchical max-stable representation}
+	\begin{itemize} \setlength{\itemsep}{1em}
+		\item Consider a set of $L$ knots, $\bv_1, \ldots, \bv_L$
+		\item Standardized Gaussian weights $w_l(\bs_i)$
+		\begin{align*}
+		w_l(\bs_i) = \frac{ \exp\left[ -0.5 \left( \frac{ || \bs_i - \bv_l || }{ \rho} \right)^2 \right]}{ \displaystyle \sum_{l = 1}^L \exp\left[ -0.5 \left( \frac{ || \bs_i - \bv_l || }{ \rho} \right)^2 \right] }
+		\end{align*}
+		\item Is a valid a low-rank approximation if $L < n$, but in this application we place knots at all data points
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Hierarchical max-stable representation}
+	\begin{itemize} \setlength{\itemsep}{1em}
+		\item Model the spatial dependence using
+		\begin{align*}
+		\theta(\bs) = \left[\sum_{l = 1}^L A_l w_l(\bs)^{1 / \alpha}\right]^\alpha
+		\end{align*}
+		where
+		\begin{itemize} \setlength{\itemsep}{0.5em}
+			\item $A_l$ are i.i.d. positive stable random effects
+			\item $w_l(\bs)$ are a set of non-negative scaled kernel basis functions, scaled so that $\sum_{l = 1}^L w_l(\bs) = 1$
+			\item $\alpha \in (0, 1)$ is a parameter controlling strength of spatial dependence (0: high, 1: independent)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Hierarchical max-stable representation}
+	\begin{itemize} \setlength{\itemsep}{1em}
+		\item Let $Z(\bs)$ be a max-stable process
+		\item Conditioned on the random effects $A_1, \ldots, A_L$, then 
+		\begin{align*}
+		Z(\bs_i) \mid A_l &\ind \text{GEV}[\mu^*(\bs_i), \sigma^*(\bs_i), \xi^*] \\
+		A_l &\iid \text{PS}(\alpha)
+		\end{align*}
+		where
+		\begin{align*}
+			\mu^*(\bs_i) &= \bX(\bs_i)^\top \bbeta +  \frac{\theta(\bs_i)^{\xi} - 1}{\xi}\\
+			\sigma^*(\bs_i) &= \alpha \theta(\bs_i)^{\xi}\\
+			\xi^* &= \alpha \xi
+		\end{align*}
+		\item The marginal distribution at site $\bs_i$ is GEV$[\bX(\bs_i)^\top \bbeta, 1, \xi]$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Hierarchical model}
+	\begin{itemize} \setlength{\itemsep}{1em}
+		\item Hierarchical model:
+		\begin{align*}
+		Y(\bs_i) | A_l &\ind \text{Bern}\{\pi(\bs_i)\}\\
+		\pi(\bs_i) &= 1 - \exp\left\{ \sum_{l = 1}^L A_l \left[\frac{ w_l (\bs_i) }{z(\bs_i)} \right]^{1 / \alpha} \right\}\\
+		\end{align*} \vspace{-0.5em}
+		where
+		\begin{align*}
+		z(\bs_i) &= \begin{cases}
+		(1 - \xi \bX(\bs_i) \bbeta)^{-1 / \xi} & \xi \neq 0 \\
+		\exp(-\bX(\bs_i) \bbeta) & \xi = 0
+		\end{cases}\\
+		A_l &\iid \text{PS}(\alpha)
+		\end{align*}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Spatial dependence}
+	\begin{itemize} \setlength{\itemsep}{1em}
+		\item Cohen's kappa: $$\kappa(\beta) = \frac{P_A - P_E}{1 - P_E}$$
+		where
+		\begin{itemize} \setlength{\itemsep}{0.5em}
+			\item $P_A$: Joint probability of agreement
+			\item $P_E$: Joint probability of agreement under assumption of independence
+		\end{itemize}
+		\item Consider $Z(\bs_1)$ and $Z(\bs_2)$ both GEV$(\beta, 1, 1)$ then $$\kappa = \lim_{\beta \rightarrow \infty} \kappa(\beta) = 2 - \vartheta(\bs_1, \bs_2) = \chi$$
+		\item When $Z(\bs)$ is Gaussian, $\kappa = 0$
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Simulation study}
+	\begin{itemize} \setlength{\itemsep}{1em}
+		\item Simulated populations: \vspace{0.5em}
+		\begin{itemize} \setlength{\itemsep}{0.5em}
+			\item Link: GEV, Logistic, Hotspot
+			\item Data generated on $100 \times 100$ grid
+		\end{itemize}
+		\item Sample datasets:
+		\begin{center}
+		\includegraphics[width=\linewidth]{simulateddata.pdf}
+		\end{center}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Simulation study:}
+	\begin{itemize} \setlength{\itemsep}{1em}
+		\item Sampling strategies: \vspace{0.5em}
+		\begin{itemize} \setlength{\itemsep}{0.5em}
+			\item Sample type: Cluster, SRS
+			\item Sample size: $n = 100$, $250$
+		\end{itemize}
+		\item Models fit: \vspace{0.5em}
+		\begin{itemize} \setlength{\itemsep}{0.5em}
+			\item Spatial GEV ($\xi = 0$)
+			\item Spatial probit
+			\item Spatial logistic (\texttt{spBayes::spGLM})
+		\end{itemize}
+		\item Consider Brier score and area under receiver operating characteristic (AUROC) curve
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Simulation study: Results}
+	\begin{itemize} \setlength{\itemsep}{1em}
+		\item Results: \vspace{0.5em}
+		\begin{itemize} \setlength{\itemsep}{0.5em}
+			\item GEV model shows small advantage over others for GEV link with $n = 250$ and cluster sampling
+			\item Probit wins in other settings, but GEV is similar
+		\end{itemize}
+		\item Results provide some evidence of advantage for GEV method as rareness increases	
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Simulation study: Results}
+	\begin{center}
+		\includegraphics[width=0.33\linewidth]{byrareness-3}
+		\includegraphics[width=0.33\linewidth]{byrareness-4}
+		\includegraphics[width=0.33\linewidth]{byrareness-6}
+		
+		Loess smooth of AUROC by rareness for GEV (left, center) and logistic (right) link
+	\end{center}
+\end{frame}
+
+\begin{frame}{Data analysis}
+	\begin{itemize}\setlength{\itemsep}{1em}
+		\item Census data for \tamarix{} ($\approx 6\%$) and \hedysarum{} ($\approx 0.5\%$) in 1-km$^2$ region of PR China
+		\item Analysis similar to simulation study 
+		\begin{itemize} \setlength{\itemsep}{0.5em}
+			\item Sample types: Cluster, Simple Random Sample
+			\item Sample sizes: $n = 100$, $250$ initial sites
+			\item Models fit: Spatial GEV, probit, logit
+		\end{itemize}
+		\item 50 samples taken from each species for each sample type and sample size
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Data analysis: Results}
+	\begin{itemize} \setlength{\itemsep}{1em}
+		\item Support simulation finding about rareness and GEV
+		\item For \hedysarum{}, probit generally performs better
+		\item For \tamarix{}, with smaller sample sizes, GEV model generally performs better
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Data analysis: Results}
+	\begin{center}
+		\includegraphics[width=0.47\textwidth]{data-perf-species2-100-clu}
+		\includegraphics[width=0.47\textwidth]{data-perf-species2-250-clu}
+		
+		ROC curves for \hedysarum{}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Project 3: Empirical Basis Functions}
+	\begin{center}
+		\LARGE
+		\textbf{Project 3:}\\ [1em]
+		Empirical Basis Functions for \\
+		Max-stable Dependence\\ [2em]
+		\normalsize
+		To be submitted:\\
+		\emph{Annals of Applied Statistics}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Motivation}
+	\begin{itemize} \setlength{\itemsep}{1em}
+		\item Want fit max-stable models on high dimensional data
+		\item When $n$ is large, computing is onerous
+		\item Possible dimension reduction by placing $L << n$ spatial knots and using standardized Gaussian kernel functions as in Reich and Shaby (2012) \vspace{0.5em}
+		\item This works, but can we improve performance with a different set of basis functions \vspace{0.5em}
+		\begin{itemize} \setlength{\itemsep}{0.5em}
+			\item Exploratory data analysis like principal components (PC)
+			\item Useful for inference and predictions
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Low-rank positive-stable representation}
+	\begin{itemize} \setlength{\itemsep}{1em}
+		\item Any max-stable process can be written as pointwise maximum of infinitely many processes (deHaan, 2006)
+		\item Wang and Stoev (2011) truncate at $L$ processes
+		\item Unlikely that a realization is equal to the point-wise maximum of $L$ processes, so we follow Reich and Shaby (2012) and set $$Z_t(\bs) = \theta_t(\bs) \varepsilon_t(\bs)$$ where $\theta_t(\bs)$ is a spatial process and $\varepsilon_t(\bs) \iid$ GEV$(1, \alpha, \alpha)$
+		\item Spatial process is $$\theta_t(\bs) = \left( \sum_{l = 1}^L B_l(\bs)^{1 / \alpha} A_{tl} \right)^\alpha$$ where $A_{tl} \sim$ PS$(\alpha)$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Low-rank positive-stable representation}
+	\begin{itemize}\setlength{\itemsep}{1em}
+		\item $Z_t$ is max-stable marginally over the random effects $A_{tl}$
+		\item The joint is GEV - asymmetric logistic
+		\item Dependence is measured by the extremal coefficient $\vartheta$, defined via $$\mbox{Prob}[Z_t(\bs_1)<c, Z_t(\bs_2)<c] = \mbox{Prob}[Z_t(\bs_1)<c]^{\vartheta(\bs_1,\bs_2)}$$
+		\item For the low-rank PS model $$\vartheta(\bs_1,\bs_2) = \sum_{l=1}^L\left[B_l(\bs_1)^{1/\alpha}+B_l(\bs_2)^{1/\alpha}\right]^{\alpha}\in[1,2] $$
+		\item Propose to use empirical basis functions for $B_l(\bs)$ (instead of $w_l(\bs)$ from rare binary)
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Estimating the EBFs, $B_l(\bs)$}
+	\begin{enumerate}[1.]\setlength\itemsep{1em}
+		\item Use a rank transformation to standardize data for each $\bs$
+		\item Estimate the extremal dependence between each pair of sites (using $\chi$ or madogram), ${\hat \vartheta}(\bs_i,\bs_j)$
+		\item Spatially (4D) smooth the sample dependence measures
+		\item Constrained least squares (next slide) to minimize the distance between sample (${\hat \vartheta}$) and model ($\vartheta$ as a function of the $B$) spatial dependence
+		\item Order the terms by $v_l = \sum_{\bs}B_l(\bs)$
+	\end{enumerate}
+\end{frame}
+
+
+\begin{frame}{Estimating the EBFs, $B_l(\bs)$}
+	\begin{itemize}\setlength\itemsep{1em}
+		\item The objective function to estimate the $B_l$ is 
+		$$ \sum_{i<j}\left[\hat{\vartheta}(\bs_i,\bs_j) - \vartheta(\bs_i,\bs_j)\right]^2$$
+		where $\vartheta(\bs_i,\bs_j)$ is a function of $B_l$
+		\item The EBFs must satisfy $B_l(\bs)>0$ and $\sum_{l}B_l(\bs)=1$ for all $\bs$
+		\item The solution is approximated by cycling through the sites and solving a series of constrained optimization problems
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Comparison with PCA}
+	\begin{itemize} \setlength{\itemsep}{1em}
+		\item Similarities to PCA: \vspace{0.5em}
+		\begin{itemize} \setlength{\itemsep}{0.5em}
+			\item Reduces dimension
+			\item Maps of $B_l(\bs)$ tell us about the most important spatial patterns
+			\item Captures a non-stationary spatial dependence structure
+		\end{itemize}
+		\item Differences from PCA: \vspace{0.5em}
+		\begin{itemize} \setlength{\itemsep}{0.5em}
+			\item Basis functions are not orthonormal
+			\item Loadings are positive stable, not Gaussian
+			\item Loadings $A_{lt}$ may not be independent
+			\item Computing $A$ and $B$ is not as simple as a few matrix operations
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+%\begin{frame}{Contrasts with PCA}
+%	\begin{itemize}\setlength{\itemsep}{1em}
+%		\item Basis functions are not orthonormal
+%		\item Loadings are positive stable, not Gaussian
+%		\item Loadings $A_{lt}$ may not be independent
+%		\item Computing $A$ and $B$ is not as simple as a few matrix operations
+%	\end{itemize}
+%\end{frame}
+%
+%\begin{frame}{Analogy with PCA}
+%	\begin{itemize}\setlength{\itemsep}{1em}
+%		\item Reduces the dimension from $n$ to $L$
+%		\item Maps of $B_l(\bs)$ tell us about the most important spatial patterns
+%		\item Captures a non-stationary spatial dependence structure
+%		\item The $v_l$ tell us how many important features are present
+%		\item Loadings $A_{lt}$ can be estimated and fed into future analyses
+%	\end{itemize}
+%\end{frame}
+
+
+\begin{frame}{Bayesian implementation}
+	\begin{itemize}\setlength{\itemsep}{1em}
+		\item Given the basis function $B_l(\bs)$ and $\hat{\alpha}$ we can proceed with MCMC to estimate the remaining parameters
+		\begin{align*}
+		  \mu_t(\bs) &= \beta_{1,int}(\bs) + \beta_{1,time}(\bs)t\\
+		  \log[\sigma_t(\bs)] &= \beta_{2,int}(\bs) + \beta_{2,time}(\bs)t\\
+		  \xi_t(\bs) &= \xi
+		\end{align*}
+		\item The $\beta$ have Gaussian process priors
+		\item We use cross-validation (quantile and Bries scores) to select $L$
+		\item Alternative: select $L$ so that $\sum_{l=1}^Lv_l = 0.8$
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Application 1 - forest fires in GA}
+	\begin{itemize}\setlength{\itemsep}{1em}
+		\item The data are the number of acres burned by forest fires each year (1965--2014) in each county of Georgia
+		\item We censor the data at the local 95$^{th}$ percentile, $T(\bs)$
+		\item The censored data are modeled as GEV with spatially-varying location and scale
+		\item The objectives are to map fire risk and determine if it is changing with time
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{GA Fires -- time series for each county }
+	\begin{center}
+		\includegraphics[width=1.0\textwidth]{fire-spag-rand-25}
+	\end{center}
+\end{frame}
+
+
+\begin{frame}{GA Fires -- picking the threshold}
+	\begin{center}
+		\includegraphics[width=1\textwidth]{fire-mrl-plots}
+		
+		Mean residual life plot for fire data. Vertical line at sample 95th quantile.
+	\end{center}
+\end{frame}
+
+\begin{frame}{GA Fires -- 95th percentile by county, $T(\bs)$}\vspace{-35pt}
+	\begin{center}
+		\includegraphics[height=0.95\textheight]{fire-spatial-q95}
+		\vspace{-3em}
+		
+		Spatially smoothed 95th percentile
+	\end{center}
+\end{frame}
+
+%\begin{frame}{Model comparisons - TODO}
+%	\begin{center}
+%		\begin{tabular}{rcc}
+%			\toprule
+%			$L$ & Brier Score & Quantile score\\
+%			\midrule
+%			5   & 5.64 & 135.7 \\
+%			10  & 5.33 & 127.3 \\
+%			15  & 5.00 & 128.3 \\
+%			20  & 4.93 & 122.4 \\
+%			{\bf 25}  & {\bf 4.78} & {\bf 116.9} \\
+%			40  & 4.72 & 115.7\\
+%			\bottomrule
+%		\end{tabular}
+%	\end{center}
+%\end{frame}
+
+\begin{frame}{Fire: EBF weights, $v_l$}
+	\begin{center}
+		\includegraphics[height=0.9\textheight]{firev-25}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Fire: EBF's $B_l(\bs)$}
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{fire-ebf-panel}
+	\end{center}
+\end{frame}
+
+%\begin{frame}{GA Fires -- Ecoregions}
+%	\begin{center}
+%		\includegraphics[height=0.9\textheight]{ga_eco_regions}
+%	\end{center}
+%\end{frame}
+
+\begin{frame}{Fire: Posterior summaries}
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{fire-ebf-postpanel-slides}
+	\end{center}
+\end{frame}
+
+%\begin{frame}{Fire: Time trend for $\log[\sigma(\bs)]$}
+%	\begin{center}
+%		\includegraphics[width=\textwidth]{fire-ebf-post-beta2time}
+%	\end{center}
+%\end{frame}
+%
+%\begin{frame}{Fire: Time trend for $Q(90)$}
+%	\begin{center}
+%		\includegraphics[width=\textwidth]{fire-ebf-post-q90diff}
+%	\end{center}
+%\end{frame}
+
+\begin{frame}{Application 2: NARCCAP climate model output}
+	\begin{itemize}\setlength{\itemsep}{1em}
+		\item Data consist of annual maximum precipitation at 697 grid cells in the Eastern US
+		\item Model is run separately for 1969--2000 and 2039--2077
+		\item The objective is to compare the extremes in the two climate periods
+		\item We fit the same model as for the fire data except without censoring
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Climate model output for 1969}
+	\begin{center}
+		\includegraphics[width=\textwidth]{precip-ts}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Precip: EBF weights, $v_l$}
+	\begin{center}
+		\includegraphics[height=0.9\textheight]{precipv-25}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Precip: EBFs $B_l(\bs)$}
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{precip-ebf-panel}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Precip: Posterior summaries}
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{precip-ebf-postpanel-slides}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Results}
+	\begin{itemize} \setlength{\itemsep}{1em}
+		\item EBFs and PCAs are different for fire data due to censoring
+		\item For precipitation data, EBFs and PCAs generally capture similar features
+		\item EBF performs better than standardized Gaussian kernel functions when there is spatial dependence in the data
+	\end{itemize}
+\end{frame}
+
+%\begin{frame}{Precip: Time trend for $\log[\sigma(\bs)]$}
+%	\begin{center}
+%		\includegraphics[width=\textwidth]{precip-ebf-post-beta2time}
+%	\end{center}
+%\end{frame}
+%
+%\begin{frame}{Precip: Time trend for $Q(90)$}
+%	\begin{center}
+%		\includegraphics[width=\textwidth]{precip-ebf-post-q90diff}
+%	\end{center}
+%\end{frame}
+
 
 \begin{frame}{Questions}
-  \begin{itemize} \setlength{\itemsep}{1em}
-    \item Questions?
-    \item Thank you for your attention.
-    \item Acknowledgment: This work was funded by EPA STAR award R835228
-  \end{itemize}
+	\begin{itemize} \setlength{\itemsep}{1em}
+		\item Questions?
+		\item Thank you for your attention.
+		\item Acknowledgment: This work was funded by EPA STAR award R835228
+	\end{itemize}
 \end{frame}
 %
 %\begin{frame}[allowframebreaks]{References}
