@@ -295,8 +295,8 @@
 		\item Want dependence measure to capture likelihood of seeing values that are jointly extreme
 		\item Two common measures of dependence (bivariate):
 		\begin{itemize}\setlength{\itemsep}{0.5em}
-			\item Extremal coefficient $\vartheta \in (1, 2)$: $$\mbox{Prob}[Z(\bs_1)<c, Z(\bs_2)<c] = \mbox{Prob}[Z(\bs_1)<c]^{\vartheta(\bs_1,\bs_2)}$$
-			\item $\chi \in (0, 1)$ (Coles, 1999): $$\chi(\bs_1,\bs_2) = \lim_{c\rightarrow \infty}\mbox{Prob}[Z(\bs_1)>c|Z(\bs_2)>c]$$
+			\item Extremal coefficient $\vartheta \in (1, 2)$: $$P[Z(\bs_1)<c, Z(\bs_2)<c] = P[Z(\bs_1)<c]^{\vartheta(\bs_1,\bs_2)}$$
+			\item $\chi \in (0, 1)$ (Coles, 1999): $$\chi(\bs_1,\bs_2) = \lim_{c\rightarrow \infty}P[Z(\bs_1)>c|Z(\bs_2)>c]$$
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -637,6 +637,7 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
 		(1 - \xi \bX(\bs_i) \bbeta)^{-1 / \xi} & \xi \neq 0 \\
 		\exp(-\bX(\bs_i) \bbeta) & \xi = 0
 		\end{cases}$$
+    \item Fix $\xi = 0$ when no covariates
 	\end{itemize}
 \end{frame}
 
@@ -654,26 +655,26 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
 \end{frame}
 
 
-\begin{frame}{Simulation study}
+\begin{frame}{Simulation study: Settings}
 	\begin{itemize} \setlength{\itemsep}{1em}
-		\item Simulated populations: \vspace{0.5em}
+		\item 50 simulated populations: \vspace{0.5em}
 		\begin{itemize} \setlength{\itemsep}{0.5em}
 			\item Link: GEV, Logistic, Hotspot
 			\item Data generated on $100 \times 100$ grid
 		\end{itemize}
 		\item Sample datasets:
-		\begin{center}
+  \end{itemize}
+	\begin{center}
 		\includegraphics[width=\linewidth]{simulateddata.pdf}
-		\end{center}
-	\end{itemize}
+	\end{center}
 \end{frame}
 
-\begin{frame}{Simulation study:}
+\begin{frame}{Simulation study: Settings}
 	\begin{itemize} \setlength{\itemsep}{1em}
 		\item Sampling strategies: \vspace{0.5em}
 		\begin{itemize} \setlength{\itemsep}{0.5em}
-			\item Sample type: Cluster, SRS
-			\item Sample size: $n = 100$, $250$
+			\item Sample type: Cluster, Simple Random Sample
+			\item Sample size: $n = 100$, $250$ initial sites
 		\end{itemize}
 		\item Models fit: \vspace{0.5em}
 		\begin{itemize} \setlength{\itemsep}{0.5em}
@@ -699,14 +700,20 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
 
 \begin{frame}{Simulation study: Results}
 	\begin{center}
-		\includegraphics[width=0.33\linewidth]{byrareness-3}
-    \includegraphics[width=0.33\linewidth]{byrareness-4}
+		\includegraphics[width=0.49\linewidth]{byrareness-3}
+    \includegraphics[width=0.49\linewidth]{byrareness-4}
 
-    \includegraphics[width=0.33\linewidth]{byrareness-6}
-    \includegraphics[width=0.33\linewidth]{byrareness-7}
-
-		Loess smooth of AUROC by rareness for GEV (top) and logistic (bottom) link functions
+		Loess smooth of AUROC by rareness for GEV link functions
 	\end{center}
+\end{frame}
+
+\begin{frame}{Simulation study: Results}
+  \begin{center}
+    \includegraphics[width=0.49\linewidth]{byrareness-6}
+    \includegraphics[width=0.49\linewidth]{byrareness-7}
+
+    Loess smooth of AUROC by rareness for logistic link functions
+  \end{center}
 \end{frame}
 
 \begin{frame}{Data analysis}
@@ -716,7 +723,7 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
 		\begin{itemize} \setlength{\itemsep}{0.5em}
 			\item Sample types: Cluster, Simple Random Sample
 			\item Sample sizes: $n = 100$, $250$ initial sites
-			\item Models fit: Spatial GEV, probit, logit
+			\item Models fit: Spatial GEV ($\xi = 0$), probit, logit
 		\end{itemize}
 		\item 50 samples taken from each species for each sample type and sample size
 	\end{itemize}
@@ -724,9 +731,9 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
 
 \begin{frame}{Data analysis: Results}
 	\begin{itemize} \setlength{\itemsep}{1em}
-		\item Support simulation finding about rareness and GEV
-		\item For \hedysarum{}, probit generally performs better
-		\item For \tamarix{}, with smaller sample sizes, GEV model generally performs better
+		\item Support simulation finding about GEV performance with respect to rareness
+		\item For \tamarix{}, probit generally performs better
+		\item For \hedysarum{}, with cluster sampling and for smaller sample sizes, GEV model generally performs better
 	\end{itemize}
 \end{frame}
 
@@ -755,7 +762,7 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
 	\begin{itemize} \setlength{\itemsep}{1em}
 		\item Want fit max-stable models on high dimensional data
 		\item When $n$ is large, computing is onerous
-		\item Possible dimension reduction by placing $L << n$ spatial knots and using standardized Gaussian kernel functions as in Reich and Shaby (2012) \vspace{0.5em}
+		\item Dimension reduction by placing $L < n$ spatial knots and using standardized Gaussian kernel functions as in Reich and Shaby (2012) and Project 2
 		\item This works, but can we improve performance with a different set of basis functions \vspace{0.5em}
 		\begin{itemize} \setlength{\itemsep}{0.5em}
 			\item Exploratory data analysis like principal components (PC)
@@ -769,27 +776,31 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
 		\item Any max-stable process can be written as pointwise maximum of infinitely many processes (deHaan, 2006)
 		\item Wang and Stoev (2011) truncate at $L$ processes
 		\item Unlikely that a realization is equal to the point-wise maximum of $L$ processes, so we follow Reich and Shaby (2012) and set $$Z_t(\bs) = \theta_t(\bs) \varepsilon_t(\bs)$$ where $\theta_t(\bs)$ is a spatial process and $\varepsilon_t(\bs) \iid$ GEV$(1, \alpha, \alpha)$
-		\item Spatial process is $$\theta_t(\bs) = \left( \sum_{l = 1}^L B_l(\bs)^{1 / \alpha} A_{tl} \right)^\alpha$$ where $A_{tl} \sim$ PS$(\alpha)$
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Low-rank positive-stable representation}
 	\begin{itemize}\setlength{\itemsep}{1em}
+    \item Spatial process is $$\theta_t(\bs) = \left( \sum_{l = 1}^L A_{tl} B_l(\bs)^{1 / \alpha} \right)^\alpha$$ where $A_{tl} \sim$ PS$(\alpha)$
 		\item $Z_t$ is max-stable marginally over the random effects $A_{tl}$
-		\item The joint is GEV - asymmetric logistic
-		\item Dependence is measured by the extremal coefficient $\vartheta$, defined via $$\mbox{Prob}[Z_t(\bs_1)<c, Z_t(\bs_2)<c] = \mbox{Prob}[Z_t(\bs_1)<c]^{\vartheta(\bs_1,\bs_2)}$$
-		\item For the low-rank PS model $$\vartheta(\bs_1,\bs_2) = \sum_{l=1}^L\left[B_l(\bs_1)^{1/\alpha}+B_l(\bs_2)^{1/\alpha}\right]^{\alpha}\in[1,2] $$
-		\item Propose to use empirical basis functions for $B_l(\bs)$ (instead of $w_l(\bs)$ from rare binary)
+		\item The joint distribution is mGEV with asymmetric logistic dependence function
 	\end{itemize}
 \end{frame}
 
+\begin{frame}{Low-rank positive-stable representation}
+  \begin{itemize}\setlength{\itemsep}{1em}
+    \item Dependence is measured by the extremal coefficient $\vartheta$, defined via $$P[Z_t(\bs_1)<c, Z_t(\bs_2)<c] = P[Z_t(\bs_1)<c]^{\vartheta(\bs_1,\bs_2)}$$
+    \item For the low-rank PS model $$\vartheta(\bs_1,\bs_2) = \sum_{l=1}^L\left[B_l(\bs_1)^{1/\alpha}+B_l(\bs_2)^{1/\alpha}\right]^{\alpha}\in[1,2] $$
+    \item Propose to use empirical basis functions for $B_l(\bs)$ (instead of $w_l(\bs)$ from rare binary)
+  \end{itemize}
+\end{frame}
 
 \begin{frame}{Estimating the EBFs, $B_l(\bs)$}
 	\begin{enumerate}[1.]\setlength\itemsep{1em}
 		\item Use a rank transformation to standardize data for each $\bs$
 		\item Estimate the extremal dependence between each pair of sites (using $\chi$ or madogram), ${\hat \vartheta}(\bs_i,\bs_j)$
-		\item Spatially (4D) smooth the sample dependence measures
-		\item Constrained least squares (next slide) to minimize the distance between sample (${\hat \vartheta}$) and model ($\vartheta$ as a function of the $B$) spatial dependence
+		\item Spatially (4D) smooth the sample dependence measures for $\tilde{\vartheta}(\bs_i, \bs_j)$
+		\item Constrained least squares (next slide) to minimize the distance between sample ($\tilde{\vartheta}$) and model ($\vartheta$ as a function of the $B$) spatial dependence
 		\item Order the terms by $v_l = \sum_{\bs}B_l(\bs)$
 	\end{enumerate}
 \end{frame}
@@ -798,10 +809,11 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
 \begin{frame}{Estimating the EBFs, $B_l(\bs)$}
 	\begin{itemize}\setlength\itemsep{1em}
 		\item The objective function to estimate the $B_l$ is
-		$$ \sum_{i<j}\left[\hat{\vartheta}(\bs_i,\bs_j) - \vartheta(\bs_i,\bs_j)\right]^2$$
+		$$ \sum_{i<j}\left[\tilde{\vartheta}(\bs_i,\bs_j) - \vartheta(\bs_i,\bs_j)\right]^2$$
 		where $\vartheta(\bs_i,\bs_j)$ is a function of $B_l$
 		\item The EBFs must satisfy $B_l(\bs)>0$ and $\sum_{l}B_l(\bs)=1$ for all $\bs$
 		\item The solution is approximated by cycling through the sites and solving a series of constrained optimization problems
+    \item Also gives estimate of $\hat{\alpha}$
 	\end{itemize}
 \end{frame}
 
@@ -851,31 +863,32 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
 		  \log[\sigma_t(\bs)] &= \beta_{2,int}(\bs) + \beta_{2,time}(\bs)t\\
 		  \xi_t(\bs) &= \xi
 		\end{align*}
-		\item The $\beta$ have Gaussian process priors
+		\item Gaussian process priors on $\beta(\bs)$ terms
 		\item We use cross-validation (quantile and Bries scores) to select $L$
 		\item Alternative: select $L$ so that $\sum_{l=1}^Lv_l = 0.8$
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Application 1 - forest fires in GA}
+\begin{frame}{Application 1: Wildfires in GA}
 	\begin{itemize}\setlength{\itemsep}{1em}
-		\item The data are the number of acres burned by forest fires each year (1965--2014) in each county of Georgia
+		\item The data are the number of acres burned by forest fires (wildfire) each year (1965--2014) in each county of Georgia
 		\item We censor the data at the local 95$^{th}$ percentile, $T(\bs)$
-		\item The censored data are modeled as GEV with spatially-varying location and scale
 		\item The objectives are to map fire risk and determine if it is changing with time
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{GA Fires -- time series for each county }
+\begin{frame}{Fire: Time series for each county }
 	\begin{center}
-		\includegraphics[width=1.0\textwidth]{fire-spag-rand-25}
+		\includegraphics[width=0.8\textwidth]{fire-spag-rand-25}
+
+    Time series of $\log(\text{acres burned})$ color-coded by region.
 	\end{center}
 \end{frame}
 
 
-\begin{frame}{GA Fires -- picking the threshold}
+\begin{frame}{Fire: Picking the threshold}
 	\begin{center}
 		\includegraphics[width=1\textwidth]{fire-mrl-plots}
 
@@ -883,12 +896,12 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
 	\end{center}
 \end{frame}
 
-\begin{frame}{GA Fires -- 95th percentile by county, $T(\bs)$}\vspace{-35pt}
+\begin{frame}{Fire: 95th percentile by county, $T(\bs)$}\vspace{-35pt}
 	\begin{center}
 		\includegraphics[height=0.95\textheight]{fire-spatial-q95}
 		\vspace{-3em}
 
-		Spatially smoothed 95th percentile
+		Spatially smoothed 95th percentile.
 	\end{center}
 \end{frame}
 
@@ -927,7 +940,7 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
 %	\end{center}
 %\end{frame}
 
-\begin{frame}{Fire: Posterior summaries}
+\begin{frame}{Fire: Posterior summaries ($L = 25$)}
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{fire-ebf-postpanel-slides}
 	\end{center}
@@ -963,7 +976,7 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
 
 \begin{frame}{Precip: EBF weights, $v_l$}
 	\begin{center}
-		\includegraphics[height=0.9\textheight]{precipv-25}
+		\includegraphics[height=0.85\textheight]{precipv-25}
 	\end{center}
 \end{frame}
 
@@ -973,7 +986,7 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
 	\end{center}
 \end{frame}
 
-\begin{frame}{Precip: Posterior summaries}
+\begin{frame}{Precip: Posterior summaries ($L = 25$)}
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{precip-ebf-postpanel-slides}
 	\end{center}
@@ -981,9 +994,16 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
 
 \begin{frame}{Results}
 	\begin{itemize} \setlength{\itemsep}{1em}
-		\item EBFs and PCAs are different for fire data due to censoring
-		\item For precipitation data, EBFs and PCAs generally capture similar features
-		\item EBF performs better than standardized Gaussian kernel functions when there is spatial dependence in the data
+    \item Comparison to principal components: \vspace{0.5em}
+    \begin{itemize} \setlength{\itemsep}{0.5em}
+		  \item For fire data, EBFs and PCAs are different due to censoring
+		  \item For precipitation data, EBFs and PCAs generally capture similar features
+    \end{itemize}
+		\item EBF performs better than standardized Gaussian kernel functions when there is spatial dependence in the data \vspace{0.5em}
+    \begin{itemize} \setlength{\itemsep}{0.5em}
+      \item Fire: $\hat{\alpha} = 0.86$
+      \item Precipitation: $\hat{\alpha} = 0.28$
+    \end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -1002,8 +1022,8 @@ In terms of Brier scores for spatial prediction:\vspace{1em}
 
 \begin{frame}{Questions}
 	\begin{itemize} \setlength{\itemsep}{1em}
-		\item Questions?
 		\item Thank you for your attention.
+    \item Questions?
 		\item Acknowledgment: This work was funded by EPA STAR award R835228
 	\end{itemize}
 \end{frame}
