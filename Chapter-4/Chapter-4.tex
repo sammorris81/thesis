@@ -17,7 +17,7 @@ Fully-Bayesian analysis using max-stable processes is cumbersome for large data 
 One option is to use non-max-stable models that retain extremal dependence such as the \skewt{} process in \citep{Morris2016}.
 Alternatively, \citet{Reich2012} propose a low-rank method based on spatial kernel functions, and others have used pairwise \citep{Padoan2010,Huser2014} and trivariate \citep{Genton2011} likelihood methods for parameter estimation.
 
-In this paper we propose an empirical basis function (EBF) approach that builds on a finite truncation of the spectral representation, and develops a method-of-moments estimator for the underlying spatial processes.
+In this paper we propose an empirical basis function (EBF) approach to model spatially dependence extreme events that builds on a finite truncation of the spectral representation, and develops a method-of-moments estimator for the underlying spatial processes.
 Unlike PCA/EOFs, but similar to dictionary learning \citep{Mairal2014} and non-negative matrix factorizations \citep{Lee1999}, the EBFs are not orthogonal.
 Nonetheless these spatial functions can be plotted for exploratory analysis to reveal important spatial trends.
 In addition to exploratory analysis, we show that the EBFs can be used for Bayesian inference on the marginal parameters at each location, modeling spatial dependence, and to test for covariate effects.
@@ -265,6 +265,7 @@ The first six EBFs for the wildfire data along with the cumulative sum of the co
   \label{ebfig:fire-ebfpanel}
 \end{figure}
 The first EBF roughly separates the Southeastern Plains (blue) from the coastal region in the southeast and mountains regions in the northeast (red).
+The higher order EBFs appear to pick up different national forest units and managed longleaf pine areas.  
 The remaining EBFs further partition the plains.
 As a comparison, we provide the first six principal components of the fire data along with the cumulative sum of the first 25 eigenvalues in \aref{eba:pca}.
 
@@ -384,7 +385,7 @@ These results suggest that there has been a slight increase in the amount of acr
 When looking at the variability of the acres burned over time, we see some patterns that generally correspond to landcover in Georgia (see \url{http://narsal.uga.edu/} for landcover maps).
 In the high intensity urban areas (e.g. the Piedmont region) and croplands, we see a decrease in variability as well as very low P$[\Delta Q90 > 0]$.
 However, in the more forested areas (e.g. Blue Ridge mountains, Okefenokee Swamp), we see increased variability over time as well as a high P$[\Delta Q90 > 0]$.
-This suggests that the 10-year return level for wildfires in regions with larger tree cover is increasing over time which corresponds with increased drought and higher temperatures.
+This suggests that the 10-year return level for wildfires in regions with larger tree cover is increasing over time.
 
 \begin{figure}[htbp]  % markdown/fire-analysis/posterior_map.R
   \centering
@@ -432,14 +433,15 @@ This suggests that the 10-year return level for wildfires in regions with larger
 \subsection{Analysis of annual precipitation}\label{ebs:precip}
 
 We also conduct an analysis of the precipitation data presented in \citet{Reich2012}.
-The data are climate model output from the North American Regional Climate Change Assessment Program (NARCCAP).
-This data consists of $n_s = 697$ grid cells at a 50km resolution in the eastern US, and includes historical data (1969 -- 2000) as well as future conditions (2039 -- 2070).
+The data are yearly maximum of the daily precipitation totals (mm/h) of climate model output from the North American Regional Climate Change Assessment Program (NARCCAP).
+This data consists of $n_s = 697$ grid cells at a 50km resolution in the eastern US, and includes simulated data under current conditions (1969 -- 2000) as well as future conditions (2039 -- 2070).
 Because the data are block maxima, we set $T = -\infty$.
+Plots of the time series for the current and future conditions are given in \fref{ebfig:tsprecip}
 
 \begin{figure}[htbp]  % markdown/precipitation/cv-setup.R
   \centering
   \includegraphics[width=\linewidth]{plots/precip-ts}
-  \caption{Time series of yearly max precipitation for current (1969 -- 2000) (left). Time series of yearly max precipitation for future (2039 -- 2070) (right).}
+  \caption{Time series of yearly max precipitation (mm/h) for current (1969 -- 2000) (left) and future (2039 -- 2070) (right) for 50 randomly selected grid cells.}
   \label{ebfig:tsprecip}
 \end{figure}
 
@@ -452,7 +454,7 @@ The first six EBFs for the combined data along with the cumulative sum of the co
   \caption{First six EBFs for the combined precipitation data and the cumulative sum of contributions $v_1, \ldots, v_{25}$.}
   \label{ebfig:precip-ebfpanel}
 \end{figure}
-As a comparison, we provide the first six principal components of the fire data along with the cumulative sum of the first 25 eigenvalues in \aref{eba:pca}.
+As a comparison, we provide the first six principal components of the precipitation data along with the cumulative sum of the first 25 eigenvalues in \aref{eba:pca}.
 For the precipitation data, we run the MCMC for 25,000 iterations using a burnin period of 15,000 iterations.
 We consider models fit with both EBF and GSK, and fit the model using $L = 5, 10, \ldots, 40$.
 Timing for each setting of $L$ is given in \tref{ebtbl:precip-scores} for 1,000 iterations.
@@ -466,7 +468,7 @@ The remaining 20\% of sites and years are withheld for testing model predictions
 As with the fire analysis, we use Brier scores and quantile scores to compare model performance.
 The Brier and quantile scores for the current and future precipitation data analysis are given in \tref{ebtbl:precip-scores}.
 For these data, we observe more variation in the scores across the number of basis functions and generally an advantage in using EBF over GSK.
-This is in contrast to the fire analysis, and is likely due to the fact that the spatial dependence is estimated to be much stronger than for the fire analysis.
+This is in contrast to the fire analysis, and is likely due to the fact that the spatial dependence is estimated to be approximately three times stronger than for the fire analysis.
 When using the EBFs, the estimate of residual dependence for the precipitation data is $\hat{\alpha} = 0.280$ ($\alpha = 1$ is residual independence).
 
 Based on the cross-validation results, we run a full analysis using all of the data with $L = 25$ and EBF.
@@ -474,7 +476,7 @@ Based on the cross-validation results, we run a full analysis using all of the d
 Because we have two separate time periods, current and future, we look at the differences between the estimates for $\hat{\mu}$, $\log(\hat{\sigma})$, and $\hat{q}(0.90)$ between $t_1 = 2000$ and $t_2 = 2070$ where $\hat{\mu}$, $\log(\hat{\sigma})$, and $\hat{q}(0.90)$ are calculated as described in \sref{ebs:results-fire}.
 We plot \mbox{$\Delta \mu = \hat{\mu}_{2070} - \hat{\mu}_{2000}$}, \mbox{$\Delta \log(\hat{\sigma}) = \log(\hat{\sigma})_{2070} - \log(\hat{\sigma})_{2000}$}, and \mbox{$\Delta Q90 = \hat{q}(0.90)_{2070} - \hat{q}(0.90)_{2000}$}, and the estimated probabilities that each are positive.
 
-The results seem to suggest that the strength of extreme rain events will increases between 2000 and 2070 as well as greater variability in the northeast region of the U.S. as well as Ohio and parts of the south.
+The results seem to suggest that the strength of extreme rain events will increase between 2000 and 2070 as well as greater variability in the northeast region of the U.S. as well as Ohio and parts of the south.
 There is very strong evidence to suggest that most of the eastern U.S. should expect to see an increase in the 10-year return level between 2000 and 2070.
 Exceptions to this trend appear in southern parts of Alabama and Mississippi and regions on the border between South Carolina and Georgia which will likely experience a decrease in the 10-year return level.
 
@@ -491,7 +493,8 @@ That is, given the EBF, one could obtain estimates of the $A_{lt}$ using a separ
 Time series of the estimated $A_{lt}$ may be used as a fast and simple method to study large-scale spatiotemporal trends.
 
 \begin{landscape}
-\begin{table}[htbp]
+	\thispagestyle{lscapedplain}
+\begin{table}
 \caption{Average Brier scores ($\times 100$), average quantile scores for $q(0.95)$ and $q(0.99)$, and time (in minutes) for 1,000 iterations for precipitation analysis.}
 \label{ebtbl:precip-scores}
 \footnotesize
